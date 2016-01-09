@@ -1,19 +1,19 @@
 import requests
 import json
 
-cords = input("Do you want to input coordinates? If not, I'll use defaults. y or n?")
+cords = input("Do you want to input coordinates? If not, I'll use defaults. 0 or 1?")
 
 slat = ""
 slong = ""
 elat = ""
 elong = ""
 
-if cords == y:
+if cords == 1:
 	slat = input("start lat")
 	slong = input("start long")
 	elat = input("end lat")
 	elong = input("end long")
-if cords == n:
+if cords == 0:
 	slat = 37.775818
 	slong = -122.418028
 	elat = 37.791948

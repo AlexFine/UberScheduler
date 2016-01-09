@@ -2,12 +2,11 @@ import requests
 import json
 import time
 
+cords = input("Do you want to input coordinates? If not, I'll use defaults. 0 or 1?")
+slat = ""
+slong = ""
+
 def gettime():
-	cords = input("Do you want to input coordinates? If not, I'll use defaults. 0 or 1?")
-
-	slat = ""
-	slong = ""
-
 	if cords == 1:
 		print("You need at least 6 decimal places for this to be accurate")
 		slat = input("start lat")

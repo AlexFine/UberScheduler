@@ -1,5 +1,8 @@
 <ion-view view-title="Call Ride">
   <ion-content>
-    <h1>Call Ride</h1>
+      <div id="map" data-tap-disabled="true"></div>
+      <ion-footer-bar class="bar-dark">
+      <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>
+    </ion-footer-bar>
   </ion-content>
 </ion-view>

@@ -57,7 +57,7 @@ angular.module('starter.controllers', [])
 
 .controller('callRideCtrl', function($scope, $stateParams, $compile, $ionicLoading){
     function initialize() {
-        var myLatlng = new google.maps.LatLng(43.07493,-89.381388);
+        var myLatlng = new google.maps.LatLng(34.07636433,-118.4290661);
         
         var mapOptions = {
           center: myLatlng,
@@ -68,7 +68,7 @@ angular.module('starter.controllers', [])
             mapOptions);
         
         //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Click me!</a></div>";
+        var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
         var compiled = $compile(contentString)($scope);
 
         var infowindow = new google.maps.InfoWindow({
@@ -108,7 +108,7 @@ angular.module('starter.controllers', [])
       };
       
       $scope.clickTest = function() {
-        alert('Example of infowindow with ng-click')
+        alert('Will Launch Call Uber Window From here')
       };
 })
 

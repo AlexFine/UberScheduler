@@ -1,17 +1,16 @@
-<head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-    <script src="../js/timeestimate.js"></script>
-</head>
+
 <ion-view view-title="Call Ride">
   <ion-content>
       <div>
-                <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a ng-click="estimate()" class="button button-icon icon ion-navigate">Find Me</a>
-
+                <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a onclick="testimate((lat).childNodes[0].innerHTML, (long).childNodes[0].innerHTML)" class="button button-icon icon ion-clock">Time Estimate</a>
+   
 
       </div>
       <div id="map" data-tap-disabled="true"  ng-init="initialize(); centerOnMe()"></div>
         <div id="estimate">Estimate Here</div>
-      
+      <div id="lat">lat</div>
+               <div id="long">long</div> <!--We will make this transparent soon, please leave for debugging-->
+
 
 
     </ion-content>

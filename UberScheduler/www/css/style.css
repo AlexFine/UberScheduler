@@ -7,3 +7,9 @@
 .scroll {
   height: 100%;
 }
+#lat{
+    opacity: 0;
+}
+#long{
+    opacity: 0;
+}

@@ -114,8 +114,9 @@ angular.module('starter.controllers', [])
       $scope.clickTest = function() {
         alert('Will Launch Call Uber Window From here')
       };
+    
 })
 
-.controller('settingsCtrl', function($scope, $stateParams){
+.controller('settingsCtrl', function($scope, $stateParams,  $cordovaOauth){
     
 });

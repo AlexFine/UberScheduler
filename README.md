@@ -3,10 +3,15 @@
 down for development
 </br>
 <hr>
-Notes
+To Do List
 <ul>
   <li>You need to use CORS to call from javascript. See timeestimate.js as an example. Before we deploy we have to figure out this: http://blog.ionic.io/handling-cors-issues-in-ionic/</li>
   <li>In order to login we need to install http://ngcordova.com/docs/plugins/oauth/</li>
+</ul>
+Post-MVP Features
+<ul>
+  <li>Pricing</li>
+  <li>Rewards</li>
 </ul>
 <hr>
 

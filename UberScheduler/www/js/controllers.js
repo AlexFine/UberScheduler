@@ -117,6 +117,26 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('settingsCtrl', function($scope, $stateParams,  $cordovaOauth){
+.controller('settingsCtrl', function($scope, $stateParams){
+     $scope.editAddress = function() {
+      console.log("Testing");
+    }
     
+    $scope.number = 1;
+    $scope.savedLocations = [
+      {
+        name: "Home",
+        iconClass: "ion-android-home",
+        address: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024", "USA"],
+        LatLng: ["34.07636433", "-118.4290661"]
+      },
+      {
+        name: "Work",
+        iconClass: "ion-briefcase",
+        address: ["755 Ocean Ave", "San Francisco", "CA", "94112", "USA"],
+        latLng: ["37.722352", "-122.448918"]
+      }
+    ];
+
+
 });

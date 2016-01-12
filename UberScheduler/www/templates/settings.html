@@ -1,6 +1,16 @@
 <ion-view view-title="Browse">
   <ion-content>
       <a onclick="login()" class="button button-icon icon ion-unlocked"><h2>Login</h2></a>
-    
+
+      {{number}}
+
+      <h2>Saved Location</h2>
+      <div ng-repeat="location in savedLocations" class="list">
+        <a class="item item-icon-left" ng-onclick="editAddress()">
+          <i class="icon {{location.iconClass}}"></i>
+          {{location.name}}
+        </a>
+      </div>
+
   </ion-content>
 </ion-view>

@@ -120,7 +120,7 @@ angular.module('starter.controllers', [])
 .controller('settingsCtrl', function($scope, $stateParams){
      $scope.editAddress = function() {
       console.log("Testing");
-    }
+     }
     
     $scope.number = 1;
     $scope.savedLocations = [

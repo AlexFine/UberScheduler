@@ -117,6 +117,6 @@ angular.module('starter.controllers', [])
     
 })
 
-.controller('settingsCtrl', function($scope, $stateParams,  $cordovaOauth){
+.controller('settingsCtrl', function($scope, $stateParams){
     
 });

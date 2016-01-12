@@ -15,6 +15,7 @@
 # limitations under the License.
 #
 import webapp2
+import requests
 def getTime():
 	slat = 37.775818
 	slong = -122.418028

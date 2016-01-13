@@ -2,13 +2,22 @@
   <ion-content>
       <a onclick="login()" class="button button-icon icon ion-unlocked"><h2>Login</h2></a>
 
-      {{number}}
-
-      <h2>Saved Location</h2>
+      <h3>Saved Location</h3>
       <div ng-repeat="location in savedLocations" class="list">
-        <a class="item item-icon-left" ng-onclick="editAddress()">
+        <a class="item item-icon-left" ng-click="editAddress()">
           <i class="icon {{location.iconClass}}"></i>
-          {{location.name}}
+          <b>{{location.name}}</b>
+          <i>{{location.address}}</i>
+        </a>
+      </div>
+
+
+      <h3>Connected Accounts</h3>
+      <div ng-repeat="account in connectedAccounts" class="list">
+        <a class="item item-icon-left">
+          <i class="icon {{account.iconClass}}"></i>
+          <b>{{account.name}}</b>
+          <i>{{account.state}}</i>
         </a>
       </div>
 

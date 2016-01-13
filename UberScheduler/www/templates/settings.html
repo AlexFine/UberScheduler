@@ -14,11 +14,11 @@
 
       <h3>Connected Accounts</h3>
       <div ng-repeat="account in connectedAccounts" class="list">
-        <a class="item item-icon-left">
+        <div class="item item-icon-left">
           <i class="icon {{account.iconClass}}"></i>
           <b>{{account.name}}</b>
-          <i>{{account.state}}</i>
-        </a>
+          <a ng-hide="account.state">Connect</a>
+        </div>
       </div>
 
   </ion-content>

@@ -140,18 +140,23 @@ angular.module('starter.controllers', [])
     $scope.connectedAccounts = [
       {
         name: "Spotify",
-        state: false
+        iconClass: "ion-earth",
+        state: true
       },
       {
         name: "Facebook",
+        iconClass: "ion-earth",
         state: false
       },
       {
         name: "Twitter",
+        iconClass: "ion-earth",
         state: false
       }
 
     ]
 
+})
 
+.controller('helpCtrl', function($scope, $stateParams) {
 });

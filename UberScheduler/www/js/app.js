@@ -43,23 +43,34 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.settings', {
-      url: '/settings',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/settings.html',
-          controller: 'settingsCtrl'
-        }
+    url: '/settings',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/settings.html',
+        controller: 'settingsCtrl'
       }
-    })
-    .state('app.rides', {
-      url: '/rides',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/rides.html',
-          controller: 'ridesCtrl'
-        }
+    }
+  })
+
+  .state('app.help', {
+    url: '/help',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/help.html',
+        controller: 'helpCtrl'
       }
-    })
+    }
+  })
+
+  .state('app.rides', {
+    url: '/rides',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/rides.html',
+        controller: 'ridesCtrl'
+      }
+    }
+  })
 
   .state('app.ride-details', {
     url: '/playlists/:rideId',

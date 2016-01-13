@@ -5,7 +5,7 @@ function testimate() {
 
 var slat = alat;
 var slong = along;
-var url = "http://uberscheduler-1184.appspot.com/main.py";
+var url = "http://adambn.com/uberrequest/uberapitest.py:8081";
     
 //xhr.open('GET', url);
 //xhr.setRequestHeader("Authorization", "Token ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd");

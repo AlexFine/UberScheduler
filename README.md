@@ -24,5 +24,5 @@ Small shit that needs to get done
 
 >>>>>>> f8c075e065ca3ee19b0fd694a5cf52c9c7ef4547
 <hr>
-
+Backend, http://falconframework.org/ looks excellent</br>
 I know we wanted to do node.js for the backend but uber provides all kinds of extra help in python so it actually might be easier to use that - we have to jump through some hoops like cors if we use javascript.

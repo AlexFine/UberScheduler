@@ -6,6 +6,7 @@ down for development
 To Do List
 <ul>
   <li>You need to use CORS to call from javascript. See timeestimate.js as an example. Before we deploy we have to figure out this: http://blog.ionic.io/handling-cors-issues-in-ionic/</li>
+  <li>Finish total UI and layout and have flow functional </li>
 </ul>
 
 Post-MVP Features

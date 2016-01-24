@@ -121,6 +121,34 @@ angular.module('starter.controllers', [])
      $scope.editAddress = function() {
       console.log("Testing");
      }
+		 
+		 $scope.updatePrefered = function(id) {
+			 //Update prefered Uber type
+			 console.log("Updating prefered Uber to " + $scope.uberTypes[id].name);
+		 }
+		 
+		 $scope.uberTypes = [
+			 {
+				 name: "uberX",
+				 id: 0,
+				 prefered: true
+			 },
+			 {
+				 name: "uberXL",
+				 id: 1,
+				 prefered: false
+			 },
+			 {
+				 name: "UberBLACK",
+				 id: 2,
+				 prefered: false
+			 },
+			 {
+				 name: "ACCESS",
+				 id: 3,
+				 prefered: false
+			 },
+		 ]
     
     $scope.savedLocations = [
       {

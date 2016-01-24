@@ -1,25 +1,33 @@
-<ion-view view-title="Browse">
+<ion-view view-title="Settings">
   <ion-content>
-      <a onclick="login()" class="button button-icon icon ion-unlocked"><h2>Login</h2></a>
+		<a onclick="login()" class="button button-icon icon ion-unlocked"><h2>Login</h2></a>
 
-      <h3>Saved Location</h3>
-      <div ng-repeat="location in savedLocations" class="list">
-        <a class="item item-icon-left" ng-click="editAddress()">
-          <i class="icon {{location.iconClass}}"></i>
-          <b>{{location.name}}</b>
-          <i>{{location.address}}</i>
-        </a>
-      </div>
+		<h3>Saved Location</h3>
+		<div ng-repeat="location in savedLocations" class="list">
+			<a class="item item-icon-left" ng-click="editAddress()">
+				<i class="icon {{location.iconClass}}"></i>
+				<b>{{location.name}}</b>
+				<i>{{location.address}}</i>
+			</a>
+		</div>
 
+		<a onclick="testUber('37.7759792', '-122.41823')" class="button">Test</a>
 
-      <h3>Connected Accounts</h3>
-      <div ng-repeat="account in connectedAccounts" class="list">
-        <div class="item item-icon-left">
-          <i class="icon {{account.iconClass}}"></i>
-          <b>{{account.name}}</b>
-          <a ng-hide="account.state">Connect</a>
-        </div>
-      </div>
+		<h3>Prefered Uber</h3>
+		<div class="button-bar">
+			<a class="button"
+				 ng-repeat="type in uberTypes"
+				 ng-class="{ 'button-positive' : type.prefered == true }"
+				 ng-click="updatePrefered({{$index}})">{{type.name}}</a>
+		</div>
 
-  </ion-content>
+		<h3>Connected Accounts</h3>
+		<div ng-repeat="account in connectedAccounts" class="list">
+			<div class="item item-icon-left">
+				<i class="icon {{account.iconClass}}"></i>
+				<b>{{account.name}}</b>
+				<a ng-hide="account.state">Connect</a>
+			</div>
+		</div>
+	</ion-content>
 </ion-view>

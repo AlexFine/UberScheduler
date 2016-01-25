@@ -125,6 +125,10 @@ angular.module('starter.controllers', [])
 		 $scope.updatePrefered = function(id) {
 			 //Update prefered Uber type
 			 console.log("Updating prefered Uber to " + $scope.uberTypes[id].name);
+			 for (var i = 0; i < $scope.uberTypes.length; i++) {
+				 $scope.uberTypes[i].prefered = false; //Reset all to false
+			 }
+			 $scope.uberTypes[id].prefered = true; //Set to true
 		 }
 		 
 		 $scope.uberTypes = [

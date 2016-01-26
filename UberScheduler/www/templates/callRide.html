@@ -1,15 +1,46 @@
-
 <ion-view view-title="Call Ride">
-  <ion-content>
-      <div>
-                <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a onclick="testimate((lat).childNodes[0].innerHTML, (long).childNodes[0].innerHTML)" class="button button-icon icon ion-clock">Time Estimate</a>
-   
+    <ion-content>
+        <!--                <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a onclick="testimate((lat).childNodes[0].innerHTML, (long).childNodes[0].innerHTML)" class="button button-icon icon ion-clock">Time Estimate</a>-->
 
-      </div>
-      <div id="map" data-tap-disabled="true"  ng-init="initialize(); centerOnMe()"></div>
+
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="Email">
+            </label>
+
+            <button class="button button-small">
+                Submit
+            </button>
+        </div>
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="Email">
+            </label>
+
+            <button class="button button-small">
+                Submit
+            </button>
+        </div>
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="Email">
+            </label>
+
+            <button class="button button-small">
+                Submit
+            </button>
+        </div>
+
+        <div style="width:98%; margin:1%; border:2px solid #ADD8E6; border-radius:5px;">
+            <!--ADD SHIT HERE -->
+        </div>
+
+
+        <div id="map" data-tap-disabled="true" ng-init="initialize(); centerOnMe()"></div>
         <div id="estimate">Estimate Here</div>
-      <div id="lat">lat</div>
-               <div id="long">long</div> <!--This is transparent, but here for debugging-->
+        <div id="lat">lat</div>
+        <div id="long">long</div>
+        <!--This is transparent, but here for debugging-->
 
 
 

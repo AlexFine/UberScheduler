@@ -2,6 +2,7 @@
 
 # Import the Flask Framework
 from flask import Flask
+from flask import requests
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.

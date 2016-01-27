@@ -42,16 +42,91 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ridesCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+	$scope.toggleShow = function(index) {
+		for (var i = 0; i < $scope.scheduledRides.length; i++) {
+			if (i == index) {
+				var previous = $scope.scheduledRides[i].showOptions;
+				$scope.scheduledRides[i].showOptions = !previous;
+				console.log("Toggling to:", !previous); //Feedback
+			}
+		}
+	};
+	
+	$scope.updateRepeatedDay = function(parent, child) {
+		console.log("Updating days of week of schedule", parent)
+		var previous = $scope.scheduledRides[parent].repeatedDays;
+		for (var i = 0; i < previous.length; i++) {
+			if (i == child) {
+				$scope.scheduledRides[parent].repeatedDays[i] = !previous[i]; //Flip value
+				console.log("Day", i, "now", !previous[i]);
+			}
+		}
+	};
+	
+	$scope.reverseGeocode = function(lat, lng) {
+		var geocoder = new google.maps.Geocoder;
+		var latlng = {
+			lat: parseFloat(lat),
+			lng: parseFloat(lng)
+		}
+		console.log("Geocode lookup started")
+		geocoder.geocode({'location': latlng}, function(results, status) {
+			console.log("Lookup finished")
+			debugger
+			if (status === google.maps.GeocoderStatus.OK) {
+				if (results[1]) {
+					var address = results[1].formatted_address;	
+					return address
+				} else {
+					console.log("No results found");
+					return "No address found"
+				}
+			} else {
+				console.log("Geocoder failed due to:", status);
+				return "Address lookup failed"
+			}
+		});
+	};
+	
+	$scope.UberTypes = ["UberX", "UberBlack", "UberBlack", "ACCESS"];
+	$scope.daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	$scope.scheduledRides = [
+		{
+			time: '7:10',
+			pickupLocation: [34.07636433,-118.4290661],
+			dropLocation: [34.07636433,-118.4290661],
+			repeatedDays: [false,
+									true,
+									false,
+									true,
+									false,
+									true,
+									false],
+			startDate: new Date(2016,01,01), //Months indexed from 0
+			endDate: new Date(2016,2,01),
+			product: 1,
+			showOptions: true //Default false
+		},
+		{
+			time: '18:45',
+			pickupLocation: [34.07636433,-118.4290661],
+			dropLocation: [34.07636433,-118.4290661],
+			repeatedDays: [false,
+									true,
+									false,
+									true,
+									false,
+									true,
+									false],
+			startDate: new Date(2016,01,01),
+			endDate: new Date(2016,4,01),
+			product: 2,
+			showOptions: true //Default false
+		}
+	];
 })
 
+//You shouldnt leave your computer open!!!! ;)
 .controller('rideCtrl', function($scope, $stateParams) {
 })
 

@@ -1,9 +1,32 @@
 <ion-view view-title="Playlists">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/rides/{{playlist.id}}">
-<!--        {{ride.title}}-->
-        {{playlist.title}}
+      <ion-item ng-repeat="ride in scheduledRides">
+				{{ride.time}}
+				<a ng-click="toggleShow({{$index}})">
+					<spam ng-hide="ride.showOptions">Show Options</spam>
+					<spam ng-show="ride.showOptions">Hide Options</spam>
+					<i class="icon ion-android-arrow-dropdown"></i>
+				</a>
+				<div ng-show="ride.showOptions" class="scheduled-options-card">
+					<h1>{{$scope.reverseGeocode(34.07636433,-118.4290661)}}</h1>
+					<h3>Pickup Location: {{ride.pickupLocation}}</h3>
+					<h3>Dropoff Location: {{ride.dropLocation}}</h3>
+					<table>
+						<tr>
+							<td ng-repeat="day in ride.repeatedDays track by $index">
+								<button class="button button-light repeated-day-picker"
+												ng-class="{ 'selected-day-picker' : day == true }"
+												ng-click="updateRepeatedDay({{$parent.$index}}, {{$index}})">
+									<h2>{{daysOfWeek[$index].substr(0, 3)}}</h2>
+								</button>
+							</td>
+						</tr>
+					</table>
+					<h3>Start Date: {{ride.startDate | date : 'fullDate'}}</h3>
+					<h3>End Date: {{ride.endDate | date : 'fullDate'}}</h3>
+					<h3>Uber Type: {{UberTypes[ride.product]}}</h3>
+				</div>
       </ion-item>
     </ion-list>
   </ion-content>

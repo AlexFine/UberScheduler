@@ -16,8 +16,13 @@
 
 /*Styling for scheduling dropdown*/
 .scheduled-options-card {
-	border: 1px solid black;
+  margin-top: 12px;
+	border: 1px solid gray;
   padding: 6px;
+}
+
+.show-options {
+  float: right;
 }
 
 .repeated-day-picker {
@@ -27,8 +32,7 @@
 }
 
 .repeated-day-button {
-	min-height: 24px;
-  width: 35px;
+	height: 35px;
   padding: 0px;
   font-size: 12px;
   line-height: 24px;
@@ -42,5 +46,13 @@
   overflow: initial;
   white-space: initial; /*For word wrap*/
   margin: 4px;
-  border: 1px solid black;
+  border: 1px solid #ddd;
+}
+
+.scheduled-rides-configure {
+  font-size: 32px;
+}
+
+.scheduled-rides-save {
+  font-size: 32px;
 }

@@ -92,7 +92,7 @@ angular.module('starter.controllers', [])
 	$scope.daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	$scope.scheduledRides = [
 		{
-			time: '7:10',
+			time: new Date(2016, 0, 1, 2, 3, 4, 567),
 			pickupLocation: [34.07636433,-118.4290661],
       pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
 			dropLocation: [34.07636433,-118.4290661],
@@ -107,10 +107,10 @@ angular.module('starter.controllers', [])
 			startDate: new Date(2016,01,01), //Months indexed from 0
 			endDate: new Date(2016,2,01),
 			product: 1,
-			showOptions: true //Default false
+			showOptions: false //Default false
 		},
 		{
-			time: '18:45',
+			time: new Date(2016, 0, 1, 18, 32, 5, 567),
 			pickupLocation: [34.07636433,-118.4290661],
       pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
 			dropLocation: [34.07636433,-118.4290661],
@@ -125,7 +125,7 @@ angular.module('starter.controllers', [])
 			startDate: new Date(2016,01,01),
 			endDate: new Date(2016,4,01),
 			product: 2,
-			showOptions: true //Default false
+			showOptions: false //Default false
 		}
 	];
 })

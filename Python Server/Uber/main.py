@@ -33,29 +33,23 @@ def compare(pickuptime,pickupdate):
 def gettime(cords):
     # slat = ""
     # slong = ""
-    # if cords == 1:
-    #     print("You need at least 6 decimal places for this to be accurate")
-    #     slat = input("start lat")
-    #     slong = input("start long")
-    #     elat = input("end lat")
-    #     elong = input("end long")
-    # if cords == 0:
-    #     slat = 37.775818
-    #     slong = -122.418028
-    #     elat = 37.791948
-    #     elong = -122.446480
-    # else:
-    #     print("restart and enter a 0 or 1")
-    #     exit(0)
-    # url = "https://api.uber.com/v1/estimates/time"
 
-    # parameters = {
-    #    'server_token': 'ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd',
-    #    'start_latitude': slat,
-    #    'start_longitude': slong,
-    # }
+    slat = 37.775818
+    slong = -122.418028
+    elat = 37.791948
+    elong = -122.446480
 
-    url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
+    baseurl = "https://sandbox-api.uber.com/v1/estimates/time"
+
+    parameters = {
+       'server_token': 'ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd',
+       'start_latitude': str(slat),
+       'start_longitude': str(slong),
+    }
+
+    url = baseurl + "?" + "server_token=" + parameters['server_token'] + "&start_latitude=" + parameters['start_latitude'] + "&start_longitude=" parameters['start_longitude']
+
+    #url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
     result = urlfetch.fetch(url)
     if result.status_code == 200:
         print result.content

@@ -4,7 +4,8 @@
 from flask import Flask
 import time
 
-import requests
+from google.appengine.api import urlfetch
+
 from datetime import timedelta
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
@@ -30,38 +31,44 @@ def compare(pickuptime,pickupdate):
 
         diff = dtmins - tmins
 def gettime(cords):
-    slat = ""
-    slong = ""
-    if cords == 1:
-        print("You need at least 6 decimal places for this to be accurate")
-        slat = input("start lat")
-        slong = input("start long")
-        elat = input("end lat")
-        elong = input("end long")
-    if cords == 0:
-        slat = 37.775818
-        slong = -122.418028
-        elat = 37.791948
-        elong = -122.446480
+    # slat = ""
+    # slong = ""
+    # if cords == 1:
+    #     print("You need at least 6 decimal places for this to be accurate")
+    #     slat = input("start lat")
+    #     slong = input("start long")
+    #     elat = input("end lat")
+    #     elong = input("end long")
+    # if cords == 0:
+    #     slat = 37.775818
+    #     slong = -122.418028
+    #     elat = 37.791948
+    #     elong = -122.446480
+    # else:
+    #     print("restart and enter a 0 or 1")
+    #     exit(0)
+    # url = "https://api.uber.com/v1/estimates/time"
+
+    # parameters = {
+    #    'server_token': 'ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd',
+    #    'start_latitude': slat,
+    #    'start_longitude': slong,
+    # }
+
+    url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
+    result = urlfetch.fetch(url)
+    if result.status_code == 200:
+        print result.content
+        return result.content
     else:
-        print("restart and enter a 0 or 1")
-        exit(0)
-    url = "https://api.uber.com/v1/estimates/time"
-
-    parameters = {
-       'server_token': 'ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd',
-       'start_latitude': slat,
-       'start_longitude': slong,
-    }
-
-    response = requests.get(url, params=parameters)
-    data = str(response.json())
-    ux = data.split("uberX")
-    uxe = ux[1].split(":")
-    uxef = uxe[1].split(",")
-    estimate = float(uxef[0])
-    print(estimate) #estimate in seconds
-    return estimate
+        return null
+    # data = str(response.json())
+    # ux = data.split("uberX")
+    # uxe = ux[1].split(":")
+    # uxef = uxe[1].split(",")
+    # estimate = float(uxef[0])
+    # print(estimate) #estimate in seconds
+    # return estimate
 
 @app.route('/')
 def hello():
@@ -71,20 +78,11 @@ def hello():
 
 
     estamate = gettime(0)
-    diff = compare('6:50', '1/27/16')
+    return estamate
+    # diff = compare('6:50', '1/27/16')
 
 
-
-
-
-
-
-
-
-
-
-
-    return diff
+    # return diff
 
 
 @app.errorhandler(404)

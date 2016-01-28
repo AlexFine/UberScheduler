@@ -13,13 +13,13 @@ class UserID(ndb.Model):
     email = ndb.StringProperty(indexed=False) #We will never need to sort by email, thus indexed=false
     passwd = ndb.StringProperty(indexed=False)
 
-pickupLocation = [34.07636433,-118.4290661];
-dropLocation = [34.07636433,-118.4290661];
+pickupLocation = [34.07636433,-118.4290661]
+dropLocation = [34.07636433,-118.4290661]
 
-slat = pickupLocation[0];
-slong = pickupLocation[1];
-elat = dropLocation[0];
-elong = dropLocation[1];
+slat = pickupLocation[0]
+slong = pickupLocation[1]
+elat = dropLocation[0]
+elong = dropLocation[1]
 
 class Ride(ndb.Model):
     """A main model for representing an individual Guestbook entry."""
@@ -36,3 +36,4 @@ class Ride(ndb.Model):
 user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
 user_key = user.put();
 
+#YEAH THATS FUCKING RIGHT THIS WORKS

@@ -64,7 +64,7 @@ def gettime(cords):
     # print(estimate) #estimate in seconds
     # return estimate
 
-@app.route('/estamate')
+@app.route('/estimate')
 def hello():
     """Return a friendly HTTP greeting."""
 

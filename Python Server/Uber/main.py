@@ -47,7 +47,7 @@ def gettime(cords):
        'start_longitude': str(slong),
     }
 
-    url = baseurl + "?" + "server_token=" + parameters['server_token'] + "&start_latitude=" + parameters['start_latitude'] + "&start_longitude=" parameters['start_longitude']
+    url = baseurl + "?" + "server_token=" + parameters['server_token'] + "&start_latitude=" + parameters['start_latitude'] + "&start_longitude="+ parameters['start_longitude']
 
     #url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
     result = urlfetch.fetch(url)
@@ -55,7 +55,7 @@ def gettime(cords):
         print result.content
         return result.content
     else:
-        return null
+        return None
     # data = str(response.json())
     # ux = data.split("uberX")
     # uxe = ux[1].split(":")
@@ -64,7 +64,7 @@ def gettime(cords):
     # print(estimate) #estimate in seconds
     # return estimate
 
-@app.route('/')
+@app.route('/estamate')
 def hello():
     """Return a friendly HTTP greeting."""
 

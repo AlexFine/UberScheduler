@@ -51,7 +51,7 @@ angular.module('starter.controllers', [])
 			}
 		}
 	};
-	
+
 	$scope.updateRepeatedDay = function(parent, child) {
 		console.log("Updating days of week of schedule", parent)
 		var previous = $scope.scheduledRides[parent].repeatedDays;
@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
 			}
 		}
 	};
-	
+
 	$scope.reverseGeocode = function(lat, lng) {
 		var geocoder = new google.maps.Geocoder;
 		var latlng = {
@@ -75,7 +75,7 @@ angular.module('starter.controllers', [])
 			debugger
 			if (status === google.maps.GeocoderStatus.OK) {
 				if (results[1]) {
-					var address = results[1].formatted_address;	
+					var address = results[1].formatted_address;
 					return address
 				} else {
 					console.log("No results found");
@@ -87,14 +87,16 @@ angular.module('starter.controllers', [])
 			}
 		});
 	};
-	
+
 	$scope.UberTypes = ["UberX", "UberBlack", "UberBlack", "ACCESS"];
 	$scope.daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 	$scope.scheduledRides = [
 		{
 			time: '7:10',
 			pickupLocation: [34.07636433,-118.4290661],
+      pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
 			dropLocation: [34.07636433,-118.4290661],
+      dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
 			repeatedDays: [false,
 									true,
 									false,
@@ -110,7 +112,9 @@ angular.module('starter.controllers', [])
 		{
 			time: '18:45',
 			pickupLocation: [34.07636433,-118.4290661],
+      pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
 			dropLocation: [34.07636433,-118.4290661],
+      dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
 			repeatedDays: [false,
 									true,
 									false,
@@ -133,7 +137,7 @@ angular.module('starter.controllers', [])
 .controller('callRideCtrl', function($scope, $stateParams, $compile, $ionicLoading){
     function initialize() {
         var myLatlng = new google.maps.LatLng(34.07636433,-118.4290661);
-        
+
         var mapOptions = {
           center: myLatlng,
           zoom: 16,
@@ -141,7 +145,7 @@ angular.module('starter.controllers', [])
         };
         var map = new google.maps.Map(document.getElementById("map"),
             mapOptions);
-        
+
         //Marker + infowindow + angularjs compiled ng-click
         var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
         var compiled = $compile(contentString)($scope);
@@ -163,7 +167,7 @@ angular.module('starter.controllers', [])
         $scope.map = map;
       }
       google.maps.event.addDomListener(window, 'load', initialize);
-      
+
       $scope.centerOnMe = function() {
         if(!$scope.map) {
           return;
@@ -185,18 +189,18 @@ angular.module('starter.controllers', [])
           alert('Unable to get location: ' + error.message);
         });
       };
-      
+
       $scope.clickTest = function() {
         alert('Will Launch Call Uber Window From here')
       };
-    
+
 })
 
 .controller('settingsCtrl', function($scope, $stateParams){
      $scope.editAddress = function() {
       console.log("Testing");
      }
-		 
+
 		 $scope.updatePrefered = function(id) {
 			 //Update prefered Uber type
 			 console.log("Updating prefered Uber to " + $scope.uberTypes[id].name);
@@ -205,7 +209,7 @@ angular.module('starter.controllers', [])
 			 }
 			 $scope.uberTypes[id].prefered = true; //Set to true
 		 }
-		 
+
 		 $scope.uberTypes = [
 			 {
 				 name: "uberX",
@@ -228,7 +232,7 @@ angular.module('starter.controllers', [])
 				 prefered: false
 			 },
 		 ]
-    
+
     $scope.savedLocations = [
       {
         name: "Home",

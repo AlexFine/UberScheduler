@@ -14,16 +14,33 @@
     opacity: 0;
 }
 
+/*Styling for scheduling dropdown*/
 .scheduled-options-card {
-	margin: 12px;
 	border: 1px solid black;
-	padding: 12px;
+  padding: 6px;
 }
 
 .repeated-day-picker {
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.repeated-day-button {
 	min-height: 24px;
+  width: 35px;
+  padding: 0px;
+  font-size: 12px;
+  line-height: 24px;
 }
 
 .selected-day-picker {
 	background-color: #4da5ff !important; /* color when highlighted */
+}
+
+.date-select {
+  overflow: initial;
+  white-space: initial; /*For word wrap*/
+  margin: 4px;
+  border: 1px solid black;
 }

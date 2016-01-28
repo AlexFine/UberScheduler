@@ -5,26 +5,49 @@
 				{{ride.time}}
 				<a ng-click="toggleShow({{$index}})">
 					<spam ng-hide="ride.showOptions">Show Options</spam>
-					<spam ng-show="ride.showOptions">Hide Options</spam>
+					<spam ng-show="ride.showOptions">Save Options</spam>
 					<i class="icon ion-android-arrow-dropdown"></i>
 				</a>
 				<div ng-show="ride.showOptions" class="scheduled-options-card">
-					<h1>{{$scope.reverseGeocode(34.07636433,-118.4290661)}}</h1>
-					<h3>Pickup Location: {{ride.pickupLocation}}</h3>
-					<h3>Dropoff Location: {{ride.dropLocation}}</h3>
-					<table>
+          <div class="item item-button-right">
+            <h3>
+              Pickup Location: <br>{{ride.pickupName[0]}}<br>
+              {{ride.pickupName[1]}}, {{ride.pickupName[2]}} {{ride.pickupName[3]}}
+            </h3>
+             <button class="button button-positive">
+               <i class="icon ion-android-locate"></i>
+             </button>
+           </div>
+           <div class="item item-button-right">
+              <h3>
+                Dropoff Location: <br>{{ride.dropName[0]}}<br>
+                {{ride.dropName[1]}}, {{ride.dropName[2]}} {{ride.dropName[3]}}
+              </h3>
+              <button class="button button-positive">
+                <i class="icon ion-android-pin"></i>
+              </button>
+            </div>
+					<table class="repeated-day-picker">
 						<tr>
 							<td ng-repeat="day in ride.repeatedDays track by $index">
-								<button class="button button-light repeated-day-picker"
+								<button class="button button-light repeated-day-button"
 												ng-class="{ 'selected-day-picker' : day == true }"
 												ng-click="updateRepeatedDay({{$parent.$index}}, {{$index}})">
-									<h2>{{daysOfWeek[$index].substr(0, 3)}}</h2>
+									<p>{{daysOfWeek[$index].substr(0, 3)}}</p>
 								</button>
 							</td>
 						</tr>
 					</table>
-					<h3>Start Date: {{ride.startDate | date : 'fullDate'}}</h3>
-					<h3>End Date: {{ride.endDate | date : 'fullDate'}}</h3>
+          <div class="row">
+            <div class="col date-select">
+              Start Date:<br>
+              {{ride.startDate | date : 'fullDate'}}
+            </div>
+            <div class="col date-select">
+              End Date:<br>
+              {{ride.endDate | date : 'fullDate'}}
+            </div>
+          </div>
 					<h3>Uber Type: {{UberTypes[ride.product]}}</h3>
 				</div>
       </ion-item>

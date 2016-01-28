@@ -6,7 +6,6 @@ from google.appengine.ext import ndb
 
 import webapp2
 
-
 class UserID(ndb.Model):
     """Sub model for representing an author."""
     id = ndb.IntegerProperty()
@@ -33,7 +32,12 @@ class Ride(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 
-user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
-user_key = user.put();
+def createUser():
+    user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
+    user_key = user.put();
+def returnUserID(ids):
+        q =UserID.all()
+        return q.filter("id =", ids)
 
-#YEAH THATS FUCKING RIGHT THIS WORKS
+
+#YEAH THATS RIGHT THIS WORKS

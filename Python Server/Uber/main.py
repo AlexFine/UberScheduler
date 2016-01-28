@@ -3,7 +3,7 @@
 # Import the Flask Framework
 from flask import Flask
 import time
-
+from datastore import createUser,returnUserID
 from google.appengine.api import urlfetch
 
 from datetime import timedelta
@@ -78,7 +78,10 @@ def hello():
 
     # return diff
 
-
+@app.route('/datastore')
+def dataStore():
+    createUser()
+    return returnUserID(1)
 @app.errorhandler(404)
 def page_not_found(e):
     """Return a custom 404 error."""

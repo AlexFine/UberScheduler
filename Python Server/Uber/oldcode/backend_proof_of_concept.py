@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-
+from datetime import timedelta
 cords = input("Do you want to input coordinates? If not, I'll use defaults. 0 or 1?")
 slat = ""
 slong = ""

@@ -83,7 +83,7 @@ def dataStore():
     createUser()
     return returnUserID(1)
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found():
     """Return a custom 404 error."""
     return 'Sorry, Nothing at this URL.', 404
 

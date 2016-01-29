@@ -34,10 +34,14 @@ class Ride(ndb.Model):
 
 def createUser():
     user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
+    print user
+
     user_key = user.put();
+
 def returnUserID(ids):
-        q =UserID.all()
-        return q.filter("id =", ids)
+        q =UserID.get_by_id(1)
+        print q
+        return q
 
 
 #YEAH THATS RIGHT THIS WORKS

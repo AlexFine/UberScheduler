@@ -1,13 +1,27 @@
-<ion-view view-title="Playlists">
+<ion-view view-title="Scheduled Rides">
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="ride in scheduledRides">
-				{{ride.time}}
-				<a ng-click="toggleShow({{$index}})">
-					<spam ng-hide="ride.showOptions">Show Options</spam>
-					<spam ng-show="ride.showOptions">Save Options</spam>
-					<i class="icon ion-android-arrow-dropdown"></i>
-				</a>
+        <div class="row">
+          <div class="col">
+            {{ride.time | date : 'h:mm a'}}
+          </div>
+          <div class="col">
+            Next ride in:
+          </div>
+          <div class="col">
+            <div class="show-options">
+      				<a ng-click="toggleShow({{$index}})">
+      					<spam ng-hide="ride.showOptions">
+                  <i class="icon ion-ios-settings-strong scheduled-rides-configure"></i>
+                </spam>
+      					<spam ng-show="ride.showOptions">
+                  <i class="icon ion-checkmark scheduled-rides-save"></i>
+                </spam>
+      				</a>
+            </div>
+          </div>
+        </div>
 				<div ng-show="ride.showOptions" class="scheduled-options-card">
           <div class="item item-button-right">
             <h3>
@@ -41,14 +55,17 @@
           <div class="row">
             <div class="col date-select">
               Start Date:<br>
-              {{ride.startDate | date : 'fullDate'}}
+              <b>{{ride.startDate | date : 'fullDate'}}</b>
             </div>
             <div class="col date-select">
               End Date:<br>
-              {{ride.endDate | date : 'fullDate'}}
+              <b>{{ride.endDate | date : 'fullDate'}}</b>
             </div>
           </div>
-					<h3>Uber Type: {{UberTypes[ride.product]}}</h3>
+          <div>
+            Uber Type:<br>
+            <b>{{UberTypes[ride.product]}}</b>
+         </div>
 				</div>
       </ion-item>
     </ion-list>

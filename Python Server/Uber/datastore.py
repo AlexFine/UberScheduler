@@ -6,9 +6,8 @@ from google.appengine.ext import ndb
 
 import webapp2
 
-
 class UserID(ndb.Model):
-    """Sub model for representing an author."""
+    """Sub model for representing a user."""
     id = ndb.IntegerProperty()
     email = ndb.StringProperty(indexed=False) #We will never need to sort by email, thus indexed=false
     passwd = ndb.StringProperty(indexed=False)
@@ -22,7 +21,7 @@ eelat = dropLocation[0]
 eelong = dropLocation[1]
 
 class Ride(ndb.Model):
-    """A main model for representing an individual Guestbook entry."""
+    """A main model for representing a Ride."""
     uid = ndb.StructuredProperty(UserID)
     slong = ndb.FloatProperty(indexed=False)
     slat = ndb.FloatProperty(indexed=False)
@@ -43,6 +42,16 @@ print ride_key
 #RETRIEVE FROM DATASTORE
 qry = Ride.query(Ride.uid.id < 5)
 print qry.key
+def createUser():
+    user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
+    print user
+
+    user_key = user.put();
+
+def returnUserID(ids):
+        q =UserID.get_by_id(1)
+        print q
+        return q
 
 
-#YEAH THATS FUCKING RIGHT THIS WORKS
+#YEAH THATS RIGHT THIS WORKS

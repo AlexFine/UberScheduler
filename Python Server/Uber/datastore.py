@@ -41,17 +41,18 @@ print ride_key
 
 #RETRIEVE FROM DATASTORE
 qry = Ride.query(Ride.uid.id < 5)
-print qry.key
+print ("query",qry.kind)
 def createUser():
-    user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
-    print user
-
-    user_key = user.put();
-
+    # user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
+    # print user
+    #
+    # user_key = user.put();
+    # print user_key
+    print "test"
 def returnUserID(ids):
-        q =UserID.get_by_id(1)
+        q = Ride.query(Ride.uid.id < 5)
         print q
-        return q
+        return q.kind
 
 
 #YEAH THATS RIGHT THIS WORKS

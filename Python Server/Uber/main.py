@@ -80,7 +80,7 @@ def hello():
 
 @app.route('/datastore')
 def dataStore():
-    createUser()
+    createUser(2, "username", "passwd")
     return returnUserID(1)
 @app.errorhandler(404)
 def page_not_found():

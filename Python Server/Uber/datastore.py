@@ -33,6 +33,11 @@ class Ride(ndb.Model):
 
 #INSERT INTO DATASTORE
 user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
+user.put();
+users = UserID(id=2, email="sswag@bomb.com", passwd="mscswag1n")
+users.put();
+user2 = UserID(id=3, email="sswag@bomb.com", passwd="mscswag1n")
+user2.put();
 ride = Ride(uid=user, slong=sslong, slat=sslat, elong=eelong, elat=eelat, time="12:00", date="012816")
 ride_key = ride.put()
 print ride_key
@@ -42,17 +47,17 @@ print ride_key
 #RETRIEVE FROM DATASTORE
 qry = Ride.query(Ride.uid.id < 5)
 print ("query",qry.kind)
-def createUser():
-    # user = UserID(id=1, email="swag@bomb.com", passwd="mcswag1n")
-    # print user
-    #
-    # user_key = user.put();
-    # print user_key
+def createUser(id, email, passwd):
+    user = UserID(id=id, email=email, passwd=passwd)
+    print user
+
+    user_key = user.put();
+    print user_key
     print "test"
 def returnUserID(ids):
-        q = Ride.query(Ride.uid.id < 5)
-        print q
-        return q.kind
+        qs = ndb.StringProperty
+        return qs
+
 
 
 #YEAH THATS RIGHT THIS WORKS

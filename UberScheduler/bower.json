@@ -1,10 +1,26 @@
 {
   "name": "HelloIonic",
-  "private": "true",
+  "private": true,
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.2.4"
   },
   "dependencies": {
     "ng-cordova-oauth": "~0.2.2"
-  }
+  },
+  "homepage": "https://github.com/AlexFine/UberScheduler",
+  "authors": [
+    "AlexFine <alexkfine2@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ]
 }

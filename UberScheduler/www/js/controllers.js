@@ -90,6 +90,29 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         });
     };
 
+    $scope.newScheduledRide = function() {
+      $scope.scheduledRides.push(
+        {
+          time: new Date(2016, 0, 1, 2, 3, 4, 567),
+          pickupLocation: [34.07636433, -118.4290661],
+          pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
+          dropLocation: [34.07636433, -118.4290661],
+          dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
+          repeatedDays: [false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false],
+          startDate: new Date(2016, 01, 01), //Months indexed from 0
+          endDate: new Date(2016, 3, 01),
+          product: 1,
+          showOptions: true //Show options when adding new schedule
+        }
+      )
+    }
+
     $scope.UberTypes = ["UberX", "UberBlack", "UberBlack", "ACCESS"];
     $scope.daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     $scope.scheduledRides = [
@@ -100,16 +123,16 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             dropLocation: [34.07636433, -118.4290661],
             dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
             repeatedDays: [false,
-         true,
-         false,
-         true,
-         false,
-         true,
-         false],
+              true,
+              false,
+              true,
+              false,
+              true,
+              false],
             startDate: new Date(2016, 01, 01), //Months indexed from 0
             endDate: new Date(2016, 2, 01),
             product: 1,
-            showOptions: false //Default false
+            showOptions: false
   },
         {
             time: new Date(2016, 0, 1, 18, 32, 5, 567),
@@ -118,16 +141,16 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             dropLocation: [34.07636433, -118.4290661],
             dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
             repeatedDays: [false,
-         true,
-         false,
-         true,
-         false,
-         true,
-         false],
+              true,
+              false,
+              true,
+              false,
+              true,
+              false],
             startDate: new Date(2016, 01, 01),
             endDate: new Date(2016, 4, 01),
             product: 2,
-            showOptions: false //Default false
+            showOptions: false
   }
  ];
 })

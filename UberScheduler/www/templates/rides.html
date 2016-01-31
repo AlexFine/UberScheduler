@@ -1,5 +1,8 @@
 <ion-view view-title="Scheduled Rides">
   <ion-content>
+    <button class="button button-full button-positive" ng-click="newScheduledRide()">
+      New Schedule Pickup
+    </button>
     <ion-list>
       <ion-item ng-repeat="ride in scheduledRides">
         <div class="row">
@@ -11,7 +14,7 @@
           </div>
           <div class="col">
             <div class="show-options">
-      				<a ng-click="toggleShow({{$index}})">
+      				<a class="show-options-button" ng-click="toggleShow({{$index}})">
       					<spam ng-hide="ride.showOptions">
                   <i class="icon ion-ios-settings-strong scheduled-rides-configure"></i>
                 </spam>
@@ -41,17 +44,15 @@
                 <i class="icon ion-android-pin"></i>
               </button>
             </div>
-					<table class="repeated-day-picker">
-						<tr>
-							<td ng-repeat="day in ride.repeatedDays track by $index">
-								<button class="button button-light repeated-day-button"
+					<div class="row repeated-day-picker">
+							<div class="col" ng-repeat="day in ride.repeatedDays track by $index">
+								<button class="button button-light"
 												ng-class="{ 'selected-day-picker' : day == true }"
 												ng-click="updateRepeatedDay({{$parent.$index}}, {{$index}})">
 									<p>{{daysOfWeek[$index].substr(0, 3)}}</p>
 								</button>
-							</td>
-						</tr>
-					</table>
+							</div>
+					</div>
           <div class="row">
             <div class="col date-select">
               Start Date:<br>

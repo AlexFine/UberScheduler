@@ -25,17 +25,13 @@
   float: right;
 }
 
-.repeated-day-picker {
-  width: 100%;
-  margin-top: 12px;
-  margin-bottom: 12px;
+.show-options-button {
+  /*color: #444;*/
 }
 
-.repeated-day-button {
-	height: 35px;
-  padding: 0px;
-  font-size: 12px;
-  line-height: 24px;
+.repeated-day-picker {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 
 .selected-day-picker {

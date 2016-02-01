@@ -7,7 +7,7 @@ from google.appengine.ext import ndb
 import webapp2
 class User(ndb.Model):
     """Sub model for representing a user."""
-    id = ndb.IntegerProperty()
+    # id = ndb.IntegerProperty()
     email = ndb.StringProperty(indexed=False) #We will never need to sort by email, thus indexed=false
     passwd = ndb.StringProperty(indexed=False)
 
@@ -21,7 +21,7 @@ eelong = dropLocation[1]
 
 class Ride(ndb.Model):
     """A main model for representing a Ride."""
-    uid = ndb.StructuredProperty(User)
+    ukey = ndb.IntegerProperty(indexed=False)
     slong = ndb.FloatProperty(indexed=False)
     slat = ndb.FloatProperty(indexed=False)
     elong = ndb.FloatProperty(indexed=False)

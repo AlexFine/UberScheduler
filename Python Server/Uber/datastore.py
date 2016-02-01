@@ -5,12 +5,6 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 
 import webapp2
-USER_DATABASE = "default_database"
-def database_key(databaseName=USER_DATABASE):
-    """Constructs a Datastore key for a Guestbook entity.
-    We use guestbook_name as the key.
-    """
-    return ndb.Key('user_database', guestbook_name)
 class User(ndb.Model):
     """Sub model for representing a user."""
     id = ndb.IntegerProperty()

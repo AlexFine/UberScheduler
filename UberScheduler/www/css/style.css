@@ -21,6 +21,10 @@
   padding: 6px;
 }
 
+.scheduled-time {
+  font-size: 20px !important;
+}
+
 .show-options {
   float: right;
 }

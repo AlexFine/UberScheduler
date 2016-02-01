@@ -7,7 +7,9 @@
       <ion-item ng-repeat="ride in scheduledRides">
         <div class="row">
           <div class="col">
-            {{ride.time | date : 'h:mm a'}}
+            <h2 class="scheduled-time">
+              {{ride.time | date : 'h:mm a'}}
+            </h2>
           </div>
           <div class="col">
             Next ride in:
@@ -28,8 +30,8 @@
 				<div ng-show="ride.showOptions" class="scheduled-options-card">
           <div class="item item-button-right">
             <h3>
-              Pickup Location: <br>{{ride.pickupName[0]}}<br>
-              {{ride.pickupName[1]}}, {{ride.pickupName[2]}} {{ride.pickupName[3]}}
+              Pickup Location: <br><b>{{ride.pickupName[0]}}</b><br>
+              <b>{{ride.pickupName[1]}}, {{ride.pickupName[2]}} {{ride.pickupName[3]}}</b>
             </h3>
              <button class="button button-positive">
                <i class="icon ion-android-locate"></i>
@@ -37,8 +39,8 @@
            </div>
            <div class="item item-button-right">
               <h3>
-                Dropoff Location: <br>{{ride.dropName[0]}}<br>
-                {{ride.dropName[1]}}, {{ride.dropName[2]}} {{ride.dropName[3]}}
+                Dropoff Location: <br><b>{{ride.dropName[0]}}</b><br>
+                <b>{{ride.dropName[1]}}, {{ride.dropName[2]}} {{ride.dropName[3]}}</b>
               </h3>
               <button class="button button-positive">
                 <i class="icon ion-android-pin"></i>

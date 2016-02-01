@@ -42,7 +42,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 .controller('ridesCtrl', function ($scope, $ionicPopup, $timeout) {
-    
+    //MODAL SHIZ STUFF FOR UI BOOTSTRAP
   $scope.items = ['item1', 'item2', 'item3'];
 
   $scope.animationsEnabled = true;
@@ -121,21 +121,19 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         });
     };
 
+
+
     $scope.newScheduledRide = function() {
+      // console.log("Adding new scheduled rides");
+      var currentTime = new Date().getTime(); //Number of seconds since Jan 1, 1970
       $scope.scheduledRides.push(
         {
-          time: new Date(2016, 0, 1, 2, 3, 4, 567),
+          time: currentTime,
           pickupLocation: [34.07636433, -118.4290661],
           pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
           dropLocation: [34.07636433, -118.4290661],
           dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
-          repeatedDays: [false,
-            true,
-            false,
-            true,
-            false,
-            true,
-            false],
+          repeatedDays: [false, true, false, true, false, true, false],
           startDate: new Date(2016, 01, 01), //Months indexed from 0
           endDate: new Date(2016, 3, 01),
           product: 1,
@@ -153,37 +151,26 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
             dropLocation: [34.07636433, -118.4290661],
             dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
-            repeatedDays: [false,
-              true,
-              false,
-              true,
-              false,
-              true,
-              false],
+            repeatedDays: [false, true, false, true, false, true, false],
             startDate: new Date(2016, 01, 01), //Months indexed from 0
             endDate: new Date(2016, 2, 01),
             product: 1,
-            showOptions: false
-  },
-        {
+            showOptions: true
+          },
+          {
             time: new Date(2016, 0, 1, 18, 32, 5, 567),
             pickupLocation: [34.07636433, -118.4290661],
             pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
             dropLocation: [34.07636433, -118.4290661],
             dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
-            repeatedDays: [false,
-              true,
-              false,
-              true,
-              false,
-              true,
-              false],
+            repeatedDays: [false, true, false, true, false, true, false],
             startDate: new Date(2016, 01, 01),
             endDate: new Date(2016, 4, 01),
             product: 2,
             showOptions: false
   }
  ];
+    //POPUP SEXY ACTION STUFF
     // Triggered on a button click, or some other target
 $scope.showPopup = function() {
   $scope.data = {};
@@ -247,6 +234,90 @@ $scope.showPopup = function() {
      console.log('Thank you for not eating my delicious ice cream cone');
    });
  };
+    
+        
+
+        $scope.today = function () {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+
+        $scope.clear = function () {
+            $scope.dt = null;
+        };
+
+        // Disable weekend selection
+        $scope.disabled = function (date, mode) {
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+        };
+
+        $scope.toggleMin = function () {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+
+        $scope.toggleMin();
+        $scope.maxDate = new Date(2020, 5, 22);
+
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.setDate = function (year, month, day) {
+            $scope.dt = new Date(year, month, day);
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+        $scope.altInputFormats = ['M!/d!/yyyy'];
+
+        $scope.popup1 = {
+            opened: false
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 1);
+        $scope.events = [
+            {
+                date: tomorrow,
+                status: 'full'
+      },
+            {
+                date: afterTomorrow,
+                status: 'partially'
+      }
+    ];
+
+        $scope.getDayClass = function (date, mode) {
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                    if (dayToCheck === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        };
+
 })
 
 .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {

@@ -3,9 +3,9 @@
 # Import the Flask Framework
 from flask import Flask
 import time
-from datastore import createUser,returnUserID
+from datastore import UserRideDataBase
 from google.appengine.api import urlfetch
-
+datastores  = UserRideDataBase()
 from datetime import timedelta
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
@@ -80,8 +80,12 @@ def hello():
 
 @app.route('/datastore')
 def dataStore():
-    createUser(2, "username", "passwd")
-    return returnUserID(1)
+    datastores.createUser(2, "username", "passwd")
+    users = datastores.returnUserID(2)
+    stuff_print = ""
+    for x in users:
+        stuff_print += str(x.email)
+    return stuff_print
 @app.errorhandler(404)
 def page_not_found():
     """Return a custom 404 error."""

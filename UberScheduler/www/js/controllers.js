@@ -71,8 +71,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
   $scope.toggleAnimation = function () {
     $scope.animationsEnabled = !$scope.animationsEnabled;
   };
-    
-    
+
+
     $scope.toggleShow = function (index) {
         for (var i = 0; i < $scope.scheduledRides.length; i++) {
             if (i == index) {
@@ -168,74 +168,42 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             endDate: new Date(2016, 4, 01),
             product: 2,
             showOptions: false
-  }
- ];
-    //POPUP SEXY ACTION STUFF
-    // Triggered on a button click, or some other target
-$scope.showPopup = function() {
-  $scope.data = {};
-
-  // An elaborate, custom popup
-  var myPopup = $ionicPopup.show({
-    template: '<input type="password" ng-model="data.wifi">',
-    title: 'Enter Wi-Fi Password',
-    subTitle: 'Please use normal things',
-    scope: $scope,
-    buttons: [
-      { text: 'Cancel' },
-      {
-        text: '<b>Save</b>',
-        type: 'button-positive',
-        onTap: function(e) {
-          if (!$scope.data.wifi) {
-            //don't allow the user to close unless he enters wifi password
-            e.preventDefault();
-          } else {
-            return $scope.data.wifi;
           }
-        }
-      }
-    ]
-  });
+        ];
 
-  myPopup.then(function(res) {
-    console.log('Tapped!', res);
-  });
+        //POPUP SEXY ACTION STUFF
+        // Triggered on a button click, or some other target
 
-  $timeout(function() {
-     myPopup.close(); //close the popup after 3 seconds for some reason
-  }, 3000);
- };
+       // A confirm dialog
+       $scope.selectDate = function(varToChange, scheduleNum) {
+         var calendarPopup = $ionicPopup.alert({
+           title: 'Please Select a Date',
+           template: '<span id="dateValue">{{dt | date:"fullDate" }}</span><div style="display:inline-block; min-height:290px;">' +
+           '<uib-datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>' +
+           '</div>',
+           okText: 'Confirm',
+           okType: 'button-positive'
+         });
 
- // A confirm dialog
- $scope.showConfirm = function() {
-   var confirmPopup = $ionicPopup.confirm({
-     title: 'Consume Ice Cream',
-     template: 'Are you sure you want to eat this ice cream?'
-   });
+         calendarPopup.then(function(res) {
+           var date = document.getElementById('dateValue').innerHTML; //The scope variable doesn't update for some reason so I'm doing something really jank
+           //The date value can be retrieved in the modal itself so I'm assigning an ID to it
+           //Then I call the value of the respective tag - it gives me the correct date
+           switch (varToChange) {
+             case "startDate":
+               console.log("Changing start date for schedule", scheduleNum, "to", date);
+               $scope.scheduledRides[scheduleNum].startDate = date;
+               break;
+             case "endDate":
+               console.log("Changing end date for schedule", scheduleNum, "to", date);
+               $scope.scheduledRides[scheduleNum].endDate = date;
+               break;
+             default:
+               console.log("Found no variable to change")
+           }
+         });
+       };
 
-   confirmPopup.then(function(res) {
-     if(res) {
-       console.log('You are sure');
-     } else {
-       console.log('You are not sure');
-     }
-   });
- };
-
- // An alert dialog
- $scope.showAlert = function() {
-   var alertPopup = $ionicPopup.alert({
-     title: 'Don\'t eat that!',
-     template: 'It might taste good'
-   });
-
-   alertPopup.then(function(res) {
-     console.log('Thank you for not eating my delicious ice cream cone');
-   });
- };
-    
-        
 
         $scope.today = function () {
             $scope.dt = new Date();

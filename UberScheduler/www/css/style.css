@@ -56,3 +56,8 @@
 .scheduled-rides-save {
   font-size: 32px;
 }
+
+/*Override ionic popup width*/
+.popup {
+  width: 330px !important;
+}

@@ -28,6 +28,7 @@ class Ride(ndb.Model):
     elat = ndb.FloatProperty(indexed=False)
     time = ndb.StringProperty()
     date = ndb.StringProperty()
+    rid = ndb.StringProperty() #ride ID
 
 class UserRideDataBase(webapp2.RequestHandler):
 

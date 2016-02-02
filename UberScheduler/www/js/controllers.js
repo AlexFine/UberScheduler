@@ -178,7 +178,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
        $scope.selectDate = function(varToChange, scheduleNum) {
          var calendarPopup = $ionicPopup.alert({
            title: 'Please Select a Date',
-           template: '<span id="dateValue">{{dt | date:"fullDate" }}</span><div style="display:inline-block; min-height:290px;">' +
+           template: '<h5>Date Selected: <span id="dateValue">{{dt | date:"fullDate" }}</span></h5><div style="display:inline-block; min-height:290px;">' +
            '<uib-datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>' +
            '</div>',
            okText: 'Confirm',

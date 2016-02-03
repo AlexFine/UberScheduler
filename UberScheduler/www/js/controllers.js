@@ -1,3 +1,5 @@
+
+
 angular.module('starter.controllers', ['ui.bootstrap'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
@@ -93,6 +95,17 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             }
         }
     };
+
+    $scope.findNextRide = function(time, daysOfWeek) { //Now using node package: 'later'
+      // repeatedDays: [false, true, false, true, false, true, false],
+      var hours = time.getHours();
+      var minutes = time.getMinutes();
+      console.log(hours + ":" + minutes);
+      var currentDate = new Date().getTime();
+      console.log(currentDate);
+
+    };
+    $scope.findNextRide(new Date(1454528052967), [false, true, false, true, false, true, false])
 
     $scope.reverseGeocode = function (lat, lng) {
         var geocoder = new google.maps.Geocoder;

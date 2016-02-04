@@ -96,16 +96,37 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         }
     };
 
-    $scope.findNextRide = function(time, daysOfWeek) { //Now using node package: 'later'
-      // repeatedDays: [false, true, false, true, false, true, false],
-      var hours = time.getHours();
-      var minutes = time.getMinutes();
-      console.log(hours + ":" + minutes);
-      var currentDate = new Date().getTime();
-      console.log(currentDate);
+    $scope.findNextRide = function(rideTime, daysOfWeek) { //Now using node package: 'later'
+      var arrayOfDays = [];
+      for (var i = 0; i < daysOfWeek.length; i++) {
+        if (daysOfWeek[i]) { //if that day is true
+          arrayOfDays.push(i);
+        }
+      }
 
+      var hour = new Date(rideTime).getHours();
+      var minutes = new Date(rideTime).getMinutes();
+
+      var schedule = {
+        schedules: [
+          {
+            h: [hour],
+            m: [minutes],
+            dw: arrayOfDays
+          }
+        ]
+      };
+      console.log(schedule);
+
+      var compiledSchedule = later.schedule(schedule);
+      console.log("Compiled schedule");
+      console.log(compiledSchedule);
+      var nextRide = compiledSchedule.next(1); //Next instance of schedule
+
+      console.log(nextRide); //It works
     };
-    $scope.findNextRide(new Date(1454528052967), [false, true, false, true, false, true, false])
+
+    // $scope.findNextRide(new Date(1454528052967), [false, true, false, true, false, true, false])
 
     $scope.reverseGeocode = function (lat, lng) {
         var geocoder = new google.maps.Geocoder;

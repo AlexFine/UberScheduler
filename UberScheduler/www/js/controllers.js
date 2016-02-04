@@ -86,25 +86,42 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     };
 
     $scope.updateRepeatedDay = function (parent, child) {
-        console.log("Updating days of week of schedule", parent)
-        var previous = $scope.scheduledRides[parent].repeatedDays;
+        // console.log("Updating days of week of schedule", parent)
+        var schedule = $scope.scheduledRides[parent];
+        var previous = schedule.repeatedDays;
         for (var i = 0; i < previous.length; i++) {
             if (i == child) {
                 $scope.scheduledRides[parent].repeatedDays[i] = !previous[i]; //Flip value
-                console.log("Day", i, "now", !previous[i]);
+                // console.log("Day", i, "now", !previous[i]);
             }
         }
+        var updatedSchedule = $scope.scheduledRides[parent];
+        var rideTime = updatedSchedule.time;
+        var daysOfWeek = updatedSchedule.repeatedDays;
+        $scope.scheduledRides[parent].nextRide = $scope.findNextRide(rideTime, daysOfWeek);
+        console.log($scope.scheduledRides[parent].nextRide); //Feedback
     };
 
     $scope.findNextRide = function(rideTime, daysOfWeek) { //Now using node package: 'later'
+      //Doesn't incorporate start/end date of schedule
       var arrayOfDays = [];
       for (var i = 0; i < daysOfWeek.length; i++) {
         if (daysOfWeek[i]) { //if that day is true
-          arrayOfDays.push(i);
+          arrayOfDays.push(i + 1); //'later' uses a 1-7 scale not a 0-6
         }
       }
+      // console.log("Days of week:", arrayOfDays)
 
       var hour = new Date(rideTime).getHours();
+      console.log("Hour:", hour);
+      if (hour <= 16) {
+        hour += 8; //Add 8 to compensate
+      } else {
+        var num = hour + 8;
+        hour = num % 24;
+      }
+      console.log("Updated hour:", hour);
+
       var minutes = new Date(rideTime).getMinutes();
 
       var schedule = {
@@ -116,14 +133,28 @@ angular.module('starter.controllers', ['ui.bootstrap'])
           }
         ]
       };
-      // console.log(schedule);
+      // console.log(schedule.schedules[0].h); //Debugging
 
       var compiledSchedule = later.schedule(schedule);
       // console.log("Compiled schedule");
       // console.log(compiledSchedule);
       var nextRide = compiledSchedule.next(1); //Next instance of schedule
 
-      // console.log(nextRide); //It works
+      //It always sets the hours 8 hours too few after compiling the schedule
+      if (nextRide.getHours() >= 16) { //Compensating because it's so jank
+        nextRide.setDate(nextRide.getDate() + 1); //Add a day
+        var previousRide = compiledSchedule.prev(1);
+        previousRide.setDate(previousRide.getDate() + 1);
+        var currentDate = new Date();
+        console.log(previousRide.getTime())
+        console.log(currentDate.getTime())
+        if (previousRide.getTime() > currentDate.getTime()) { //If the previous ride should be the current ride
+          console.log(previousRide)
+          nextRide = previousRide;
+        }
+      }
+
+      // console.log(nextRide);
       return nextRide; //Return the date and time of the next ride
     };
 

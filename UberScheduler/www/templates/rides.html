@@ -13,7 +13,9 @@
           </div>
           <div class="col">
             Next ride in:
-            <button ng-click="findNextRide({{ride.time}}, {{ride.repeatedDays}})">Test</button>
+            {{timeUntilDate(ride.nextRide, "string")}}
+            <!-- <button ng-click="findNextRide({{ride.time}}, {{ride.repeatedDays}})">Test</button>
+            <button ng-click="timeUntilDate({{ride.nextRide}})">Test Time Difference</button> -->
           </div>
           <div class="col">
             <div class="show-options">

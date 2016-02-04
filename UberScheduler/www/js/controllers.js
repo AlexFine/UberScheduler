@@ -116,17 +116,46 @@ angular.module('starter.controllers', ['ui.bootstrap'])
           }
         ]
       };
-      console.log(schedule);
+      // console.log(schedule);
 
       var compiledSchedule = later.schedule(schedule);
-      console.log("Compiled schedule");
-      console.log(compiledSchedule);
+      // console.log("Compiled schedule");
+      // console.log(compiledSchedule);
       var nextRide = compiledSchedule.next(1); //Next instance of schedule
 
-      console.log(nextRide); //It works
+      // console.log(nextRide); //It works
+      return nextRide; //Return the date and time of the next ride
     };
 
-    // $scope.findNextRide(new Date(1454528052967), [false, true, false, true, false, true, false])
+    $scope.timeUntilDate = function(a, returnType) {
+      var firstDate = new Date(); //Current time
+      var secondDate = new Date(a); //Input time
+
+      // http://stackoverflow.com/questions/8528382/javascript-show-milliseconds-as-dayshoursmins-without-seconds
+      var t = Math.abs(secondDate.getTime() - firstDate.getTime()); //Milliseconds between the time
+      var cd = 24 * 60 * 60 * 1000,
+      ch = 60 * 60 * 1000,
+      d = Math.floor(t / cd),
+      h = Math.floor( (t - d * cd) / ch),
+      m = Math.round( (t - d * cd - h * ch) / 60000),
+      pad = function(n){ return n < 10 ? '0' + n : n; };
+      if( m === 60 ){
+        h++;
+        m = 0;
+      }
+      if( h === 24 ){
+        d++;
+        h = 0;
+      }
+      // console.log([d, pad(h), pad(m)].join(':')); //Feedback
+      if (returnType == "string") {
+        return (
+          d + " days, " + h + " hours, " + m + " minutes"
+        )
+      } else {
+        return [d, pad(h), pad(m)].join(':');
+      }
+    };
 
     $scope.reverseGeocode = function (lat, lng) {
         var geocoder = new google.maps.Geocoder;
@@ -160,6 +189,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.newScheduledRide = function() {
       // console.log("Adding new scheduled rides");
       var currentTime = new Date().getTime(); //Number of seconds since Jan 1, 1970
+      var defaultRepeat = [false, true, false, true, false, true, false];
       $scope.scheduledRides.push(
         {
           time: currentTime,
@@ -167,9 +197,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
           pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
           dropLocation: [34.07636433, -118.4290661],
           dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
-          repeatedDays: [false, true, false, true, false, true, false],
+          repeatedDays: defaultRepeat,
           startDate: new Date(2016, 01, 01), //Months indexed from 0
           endDate: new Date(2016, 3, 01),
+          nextRide: $scope.findNextRide(currentTime, defaultRepeat),
           product: 1,
           showOptions: true //Show options when adding new schedule
         }
@@ -188,6 +219,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             repeatedDays: [false, true, false, true, false, true, false],
             startDate: new Date(2016, 01, 01), //Months indexed from 0
             endDate: new Date(2016, 2, 01),
+            nextRide: new Date($scope.findNextRide(new Date(2016, 0, 1, 2, 3, 4, 567), [false, true, false, true, false, true, false])), //Calculated on spot because these are tests
             product: 1,
             showOptions: true
           },
@@ -200,6 +232,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             repeatedDays: [false, true, false, true, false, true, false],
             startDate: new Date(2016, 01, 01),
             endDate: new Date(2016, 4, 01),
+            nextRide: new Date($scope.findNextRide(new Date(2016, 0, 1, 18, 32, 5, 567), [false, true, false, true, false, true, false])),
             product: 2,
             showOptions: false
           }

@@ -286,9 +286,28 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
        // A confirm dialog
        $scope.selectDate = function(varToChange, scheduleNum) {
+
+         var previousValue;
+
+         switch (varToChange) {
+           case "startDate":
+             previousValue = new Date($scope.scheduledRides[scheduleNum].startDate);
+             break;
+           case "endDate":
+             previousValue = new Date($scope.scheduledRides[scheduleNum].endDate);
+             break;
+           default:
+             console.log("Found no variable to change")
+         }
+
+         var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+         var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+         var dateString = days[previousValue.getDay()] + ", " + months[previousValue.getMonth()] + ", " + previousValue.getDay() + ", " + previousValue.getFullYear();
+
+
          var calendarPopup = $ionicPopup.alert({
            title: 'Please Select a Date',
-           template: '<h5>Date Selected: <span id="dateValue">{{dt | date:"fullDate" }}</span></h5><div style="display:inline-block; min-height:290px;">' +
+           template: '<h5>Previous Date: ' + dateString + '</h5><h5>Date Selected: <span id="dateValue">{{dt | date:"fullDate" }}</span></h5><div style="display:inline-block; min-height:290px;">' +
            '<uib-datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm" custom-class="getDayClass(date, mode)"></uib-datepicker>' +
            '</div>',
            okText: 'Confirm',
@@ -297,6 +316,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
          calendarPopup.then(function(res) {
            var date = document.getElementById('dateValue').innerHTML; //The scope variable doesn't update for some reason so I'm doing something really jank
+           if (date == "") { //If didn't select a date
+             console.log("Did not select a date");
+             date = previousValue; //Set it back to old value
+           }
+           $scope.dt = date; //Assign scope variable
+
            //The date value can be retrieved in the modal itself so I'm assigning an ID to it
            //Then I call the value of the respective tag - it gives me the correct date
            switch (varToChange) {

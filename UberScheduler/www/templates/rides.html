@@ -59,12 +59,12 @@
 							</div>
 					</div>
           <div class="row">
-            <div class="col date-select" ng-click="selectDate('startDate', {{$index}})">
-              Start Date:<br>
+            <div class="col date-select button button-outline button-positive" ng-click="selectDate('startDate', {{$index}})">
+              Start Date:
               <b>{{ride.startDate | date : 'fullDate'}}</b>
             </div>
-            <div class="col date-select" ng-click="selectDate('endDate', {{$index}})">
-              End Date:<br>
+            <div class="col date-select button button-outline button-positive" ng-click="selectDate('endDate', {{$index}})">
+              End Date:
               <b>{{ride.endDate | date : 'fullDate'}}</b>
             </div>
           </div>

@@ -466,7 +466,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 .controller('rideCtrl', function ($scope, $stateParams) {})
 
 .controller('callRideCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {
-    $scope.initialize = function () {
+    initialize = function () {
       console.log("Initializing Google Maps")
         var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
 
@@ -498,7 +498,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
         $scope.map = map;
     }
-    google.maps.event.addDomListener(window, 'load', $scope.initialize());
+    google.maps.event.addDomListener(window, 'load', initialize());
 
     $scope.centerOnMe = function () {
         if (!$scope.map) {
@@ -512,28 +512,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
         navigator.geolocation.getCurrentPosition(function (pos) {
             $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-            $scope.loading.hide();
-            alat = pos.coords.latitude;
-            along = pos.coords.longitude;
-            document.getElementById("lat").innerHTML = pos.coords.latitude;
-            document.getElementById("long").innerHTML = pos.coords.longitude;
-        }, function (error) {
-            alert('Unable to get location: ' + error.message);
-        });
-    };
-
-    $scope.dropMarker = function () {
-        if (!$scope.map) {
-            return;
-        }
-
-        $scope.loading = $ionicLoading.show({
-            content: 'Getting current location...',
-            showBackdrop: false
-        });
-
-        navigator.geolocation.getCurrentPosition(function (pos) {
-            $scope.map.setCenter(new google.maps.getCenter());
             $scope.loading.hide();
             alat = pos.coords.latitude;
             along = pos.coords.longitude;

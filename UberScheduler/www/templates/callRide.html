@@ -21,12 +21,11 @@
           </div>
         </div>
 
-        <button ng-click="$scope.centerOnMe()">Get Current Location</button>
-        <button ng-click="$scope.dropMarker()">Set Location</button>
+        <button ng-click="centerOnMe()">Get Current Location</button>
         <div id="estimate">Estimate Here</div>
         <div id="lat">lat</div>
         <div id="long">long</div>
-        <div id="map" data-tap-disabled="true" ng-init="$scope.initialize(); centerOnMe()">
+        <div id="map" data-tap-disabled="true" ng-init="initialize(); centerOnMe()">
 
         </div>
         <!--This is transparent, but here for debugging-->

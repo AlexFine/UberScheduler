@@ -11,7 +11,7 @@ import webapp2
 
 class FetchRide(webapp2.RequestHandler):
 
-	currenttime = strftime("%Y-%m-%d %H:%M:%S", gmtime()) #convert this to a numerical format later
+	currenttime = strftime("%Y%m%d%H%M%S", gmtime()) #convert this to a numerical format later
 
 	#im not very confident on what this next part does. is qry the thing used? or returnRides?
     qry = Ride.query(Ride.time < (Ride.time-(currentime+30)) #30 is arbitrary and will be changed

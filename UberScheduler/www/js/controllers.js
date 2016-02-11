@@ -304,27 +304,24 @@ angular.module('starter.controllers', ['ui.bootstrap'])
           showOptions: false
         }
       ];
+      //POPUP SEXY ACTION STUFF
+      // Triggered on a button click, or some other target
 
-      $scope.pushRidesToServer();
+      // A confirm dialog
+      $scope.selectDate = function(varToChange, scheduleNum) {
 
-        //POPUP SEXY ACTION STUFF
-        // Triggered on a button click, or some other target
+        var previousValue;
 
-       // A confirm dialog
-       $scope.selectDate = function(varToChange, scheduleNum) {
-
-         var previousValue;
-
-         switch (varToChange) {
-           case "startDate":
-             previousValue = new Date($scope.scheduledRides[scheduleNum].startDate);
-             break;
-           case "endDate":
-             previousValue = new Date($scope.scheduledRides[scheduleNum].endDate);
-             break;
-           default:
-             console.log("Found no variable to change")
-         }
+        switch (varToChange) {
+          case "startDate":
+            previousValue = new Date($scope.scheduledRides[scheduleNum].startDate);
+            break;
+          case "endDate":
+            previousValue = new Date($scope.scheduledRides[scheduleNum].endDate);
+            break;
+          default:
+            console.log("Found no variable to change")
+        }
 
          var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
          var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -469,7 +466,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 .controller('rideCtrl', function ($scope, $stateParams) {})
 
 .controller('callRideCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {
-    function initialize() {
+    $scope.initialize = function () {
+      console.log("Initializing Google Maps")
         var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
 
         var mapOptions = {
@@ -500,7 +498,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
         $scope.map = map;
     }
-    google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', $scope.initialize());
 
     $scope.centerOnMe = function () {
         if (!$scope.map) {
@@ -514,6 +512,28 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
         navigator.geolocation.getCurrentPosition(function (pos) {
             $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            $scope.loading.hide();
+            alat = pos.coords.latitude;
+            along = pos.coords.longitude;
+            document.getElementById("lat").innerHTML = pos.coords.latitude;
+            document.getElementById("long").innerHTML = pos.coords.longitude;
+        }, function (error) {
+            alert('Unable to get location: ' + error.message);
+        });
+    };
+
+    $scope.dropMarker = function () {
+        if (!$scope.map) {
+            return;
+        }
+
+        $scope.loading = $ionicLoading.show({
+            content: 'Getting current location...',
+            showBackdrop: false
+        });
+
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            $scope.map.setCenter(new google.maps.getCenter());
             $scope.loading.hide();
             alat = pos.coords.latitude;
             along = pos.coords.longitude;

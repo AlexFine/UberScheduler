@@ -42,18 +42,25 @@ class UserRideDataBase(webapp2.RequestHandler):
 
 
     #RETRIEVE FROM DATASTORE
-    
-    print ("query",qry.kind)
-    def createUser(self,id, email, passwd):
-        user = User(id=id, email=email, passwd=passwd)
+    # qry = Ride.query(Ride.uid.id < 5)
+    # print ("query",qry.kind)
+
+    def createUser(self, email, passwd):
+        user = User(email=email, passwd=passwd)
         user_key = user.put();
         print("userKey",user_key)
-    def returnUserID(self,id):
+        return user_key
+
+    def createRide(self, ukey, slong, slat, elong, elat, time, date, rid):
+        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date, rid=rid)
+        ride_key = ride.put();
+        print("rideKey",ride_key)
+        return ride_key
+
+    def returnUser(self,email):
         # d = UserID.all()
-        databaseQuery = User.query().order(-User.id)
+        databaseQuery = User.query()
         greetings = databaseQuery.fetch(10)
+        print "HERE IT IS-----------------"
         print greetings
         return greetings
-
-
-    #YEAH THATS RIGHT THIS WORKS

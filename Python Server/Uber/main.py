@@ -80,12 +80,15 @@ def hello():
 
 @app.route('/datastore')
 def dataStore():
-    datastores.createUser(2, "username", "passwd")
-    users = datastores.returnUserID(2)
-    stuff_print = ""
-    for x in users:
-        stuff_print += str(x.email)
-    return stuff_print
+    userkey = datastores.createUser("username", "passwd")
+    # users = datastores.returnUserID("email")
+    # stuff_print = ""
+    # for x in users:
+    #     stuff_print += str(x.email)
+    # return stuff_print
+    printme = datastores.returnUser("username")
+    return str(printme[0])
+
 @app.errorhandler(404)
 def page_not_found():
     """Return a custom 404 error."""

@@ -50,7 +50,7 @@ class UserRideDataBase(webapp2.RequestHandler):
         print("userKey",user_key)
     def returnUserID(self,id):
         # d = UserID.all()
-        databaseQuery = User.query().order(-User.id)
+        databaseQuery = User.query().order(-User.id).filter('id =', id)
         greetings = databaseQuery.fetch(10)
         print greetings
         return greetings

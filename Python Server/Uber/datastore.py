@@ -42,7 +42,7 @@ class UserRideDataBase(webapp2.RequestHandler):
 
 
     #RETRIEVE FROM DATASTORE
-    qry = Ride.query(Ride.uid.id < 5)
+    
     print ("query",qry.kind)
     def createUser(self,id, email, passwd):
         user = User(id=id, email=email, passwd=passwd)

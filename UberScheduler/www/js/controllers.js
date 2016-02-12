@@ -505,19 +505,16 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             return;
         }
 
-        $scope.loading = $ionicLoading.show({
-            content: 'Getting current location...',
-            showBackdrop: false
-        });
-
         navigator.geolocation.getCurrentPosition(function (pos) {
             $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 
             alat = pos.coords.latitude;
             along = pos.coords.longitude;
+            console.log(alat, along)
             document.getElementById("lat").innerHTML = pos.coords.latitude;
             document.getElementById("long").innerHTML = pos.coords.longitude;
             $ionicLoading.hide();
+
         }, function (error) {
             alert('Unable to get location: ' + error.message);
         });

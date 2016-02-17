@@ -57,10 +57,16 @@ class UserRideDataBase(webapp2.RequestHandler):
         print("rideKey",ride_key)
         return ride_key
 
+    def returnRide(self, rid):
+        # d = UserID.all()
+        databaseQuery = Ride.query()
+        greetings = databaseQuery.fetch(10)
+        print greetings
+        return greetings
+
     def returnUser(self,email):
         # d = UserID.all()
         databaseQuery = User.query()
         greetings = databaseQuery.fetch(10)
-        print "HERE IT IS-----------------"
         print greetings
         return greetings

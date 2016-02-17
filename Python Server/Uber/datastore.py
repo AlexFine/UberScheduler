@@ -10,7 +10,9 @@ class User(ndb.Model):
     # id = ndb.IntegerProperty()
     email = ndb.StringProperty(indexed=False) #We will never need to sort by email, thus indexed=false
     passwd = ndb.StringProperty(indexed=False)
+    uberauth = ndb.StringProperty()
 
+#Not relavent:
 pickupLocation = [34.07636433,-118.4290661]
 dropLocation = [34.07636433,-118.4290661]
 
@@ -45,8 +47,8 @@ class UserRideDataBase(webapp2.RequestHandler):
     # qry = Ride.query(Ride.uid.id < 5)
     # print ("query",qry.kind)
 
-    def createUser(self, email, passwd):
-        user = User(email=email, passwd=passwd)
+    def createUser(self, email, passwd, ua):
+        user = User(email=email, passwd=passwd, uberauth=ua)
         user_key = user.put();
         print("userKey",user_key)
         return user_key

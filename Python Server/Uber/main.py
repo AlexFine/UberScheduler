@@ -80,7 +80,7 @@ def hello():
 
 @app.route('/datastore')
 def dataStore():
-    userkey = datastores.createUser("username", "passwd")
+    userkey = datastores.createUser("username", "passwd", "uberauthtoken")
     # users = datastores.returnUserID("email")
     # stuff_print = ""
     # for x in users:

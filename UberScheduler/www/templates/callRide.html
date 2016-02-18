@@ -2,15 +2,15 @@
     <ion-content>
         <!--                <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a onclick="testimate((lat).childNodes[0].innerHTML, (long).childNodes[0].innerHTML)" class="button button-icon icon ion-clock">Time Estimate</a>-->
 
-        <div style="width:98%; margin:1%; border:2px solid #ADD8E6; border-radius:5px;">
+        <div class="main-address-div">
             <!--ADD SHIT HERE -->
             <div style="margin:1%;">
               <div class="list">
-                <label class="item item-input">
+                <label class="item item-input address-input">
                   <input type="text" placeholder="Pick Up">
                     
                 </label>
-                <label class="item item-input">
+                <label class="item item-input address-input">
                   <input type="text" placeholder="Drop Off">
                 </label>
               </div>
@@ -40,12 +40,20 @@
 
 
 
-        <button ng-click="centerOnMe()">Get Current Location</button>
-        <div id="estimate">Estimate Here</div>
-        <div id="lat">lat</div>
-        <div id="long">long</div>
         <div id="map" data-tap-disabled="true" ng-init="initialize(); centerOnMe()">
 
+        </div>
+        <div class="current-location-div">
+          <!-- <button class="button button-icon icon ion-android-locate"></button> -->
+          <button class="button button-light current-location-button" ng-click="centerOnMe()">
+            <span class="icon ion-android-locate"></span>
+          </button>
+        </div>
+        <div class="main-modal">
+          <button ng-click="centerOnMe()">Get Current Location</button>
+          <div id="estimate">Estimate Here</div>
+          <div id="lat">lat</div>
+          <div id="long">long</div>
         </div>
         <!--This is transparent, but here for debugging-->
 

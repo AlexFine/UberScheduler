@@ -1,17 +1,59 @@
 /* Empty. Add your own CSS if you like */
 #map {
   width: 100%;
+<<<<<<< Updated upstream
   height: 60%;
+=======
+  height: 100%;
+>>>>>>> Stashed changes
 }
 
 .scroll {
   height: 100%;
 }
-#lat{
-    opacity: 0;
+
+.current-location-div {
+  position: absolute;
+  left: 3%;
+  bottom: 3%;
+  z-index: 1;
 }
-#long{
-    opacity: 0;
+.current-location-button:before {
+  /*Icon size doesn't work*/
+  font-size: 12px;
+}
+
+/*Styling for home page address text boxes*/
+.main-address-div {
+  width: 98%;
+  margin: 1%;
+  border: 2px solid #ADD8E6;
+  border-radius: 5px;
+  position: absolute;
+}
+
+.main-modal {
+  /*Overlay on the bottom*/
+  position: absolute;
+  bottom: 0px;
+  z-index: 1;
+
+  /*Sizing*/
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 5%;
+
+  /*Styling*/
+  border: 2px solid grey;
+  background-color: rgba(255, 255, 255, .8);
+  border-radius: 5px;
+  text-align: center;
+
+}
+
+.address-input {
+  background-color: rgba(255, 255, 255, .95);
+  color: rgba(255, 255, 255, 1);
 }
 
 /*Styling for scheduling dropdown*/

@@ -473,7 +473,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true // Disable UI controls
         };
         var map = new google.maps.Map(document.getElementById("map"),
             mapOptions);
@@ -501,18 +502,28 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     google.maps.event.addDomListener(window, 'load', initialize());
 
     $scope.centerOnMe = function () {
+      console.log("Getting current location...")
         if (!$scope.map) {
             return;
         }
 
         navigator.geolocation.getCurrentPosition(function (pos) {
-            $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+          var myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            $scope.map.setCenter(myLatlng);
 
             alat = pos.coords.latitude;
             along = pos.coords.longitude;
-            console.log(alat, along)
-            document.getElementById("lat").innerHTML = pos.coords.latitude;
-            document.getElementById("long").innerHTML = pos.coords.longitude;
+            console.log(alat, along);
+            document.getElementById("lat").innerHTML = alat;
+            document.getElementById("long").innerHTML = along;
+
+            // Set marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: $scope.map,
+                title: 'Uluru (Ayers Rock)'
+            });
+
             $ionicLoading.hide();
 
         }, function (error) {

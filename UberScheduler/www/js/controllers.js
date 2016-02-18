@@ -468,37 +468,38 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 .controller('callRideCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {
     initialize = function () {
       console.log("Initializing Google Maps")
-        var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
+      var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
 
-        var mapOptions = {
-            center: myLatlng,
-            zoom: 16,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: true // Disable UI controls
-        };
-        var map = new google.maps.Map(document.getElementById("map"),
-            mapOptions);
+      var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          disableDefaultUI: true // Disable UI controls
+      };
+      var map = new google.maps.Map(document.getElementById("map"),
+          mapOptions);
 
-        //Marker + infowindow + angularjs compiled ng-click
-        var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
-        var compiled = $compile(contentString)($scope);
+      //Marker + infowindow + angularjs compiled ng-click
+      var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
+      var compiled = $compile(contentString)($scope);
 
-        var infowindow = new google.maps.InfoWindow({
-            content: compiled[0]
-        });
+      var infowindow = new google.maps.InfoWindow({
+          content: compiled[0]
+      });
 
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            map: map,
-            title: 'Uluru (Ayers Rock)'
-        });
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Uluru (Ayers Rock)'
+      });
 
-        google.maps.event.addListener(marker, 'click', function () {
-            infowindow.open(map, marker);
-        });
+      google.maps.event.addListener(marker, 'click', function () {
+          infowindow.open(map, marker);
+      });
 
-        $scope.map = map;
-    
+      $scope.map = map;
+    }
+
     google.maps.event.addDomListener(window, 'load', initialize());
 
     $scope.centerOnMe = function () {
@@ -534,11 +535,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.clickTest = function () {
         alert('Will Launch Call Uber Window From here')
     };
-    
-    }
+
+    // }
     //ACCORDIAN CODE
-    function($scope) {
-  $scope.groups = [];
+    //Named this code so that it wouldn't return errors
+    $scope.randomName = function($scope) {
+      $scope.groups = [];
   for (var i=0; i<10; i++) {
     $scope.groups[i] = {
       name: i,
@@ -548,7 +550,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
       $scope.groups[i].items.push(i + '-' + j);
     }
   }
-  
+
   /*
    * if given group is the selected group, deselect it
    * else, select the given group
@@ -563,7 +565,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
   $scope.isGroupShown = function(group) {
     return $scope.shownGroup === group;
   };
-        //END OF ACORDIAN CODE 
+        //END OF ACORDIAN CODE
 
 }
     })

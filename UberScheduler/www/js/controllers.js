@@ -44,6 +44,10 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 .controller('ridesCtrl', function ($scope, $ionicPopup, $timeout) {
+    
+    $scope.isCollapsed = false;
+    
+    
     //MODAL SHIZ STUFF FOR UI BOOTSTRAP
   $scope.items = ['item1', 'item2', 'item3'];
 

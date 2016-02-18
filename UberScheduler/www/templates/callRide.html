@@ -5,38 +5,26 @@
         <div class="main-address-div">
             <!--ADD SHIT HERE -->
             <div style="margin:1%;">
-              <div class="list">
-                <label class="item item-input address-input">
-                  <input type="text" placeholder="Pick Up">
-                    
-                </label>
-                <label class="item item-input address-input">
-                  <input type="text" placeholder="Drop Off">
-                </label>
-              </div>
+                <div class="list">
+                    <label class="item item-input address-input">
+                        <input type="text" placeholder="Pick Up">
 
-            <button class="button button-outline button-block  button-calm">
-              Call Ride
-            </button>
+                    </label>
+                    <label class="item item-input address-input">
+                        <input type="text" placeholder="Drop Off">
+                    </label>
+                    <label class="item" style="background:transparent; border:0px solid white;">
+                        <button class="button button button-block  button-calm">
+                            Call Ride
+                        </button>
+                    </label>
 
-          </div>
+
+
+                </div>
+            </div>
         </div>
-        <ion-list>
-        <div ng-repeat="group in groups">
-          <ion-item class="item-stable"
-                    ng-click="toggleGroup(group)"
-                    ng-class="{active: isGroupShown(group)}">
-              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-            &nbsp;
-            Group {{group.name}}
-          </ion-item>
-          <ion-item class="item-accordion"
-                    ng-repeat="item in group.items"
-                    ng-show="isGroupShown(group)">
-            {{item}}
-          </ion-item>
-        </div>
-      </ion-list>
+
 
 
 
@@ -44,17 +32,19 @@
 
         </div>
         <div class="current-location-div">
-          <!-- <button class="button button-icon icon ion-android-locate"></button> -->
-          <button class="button button-light current-location-button" ng-click="centerOnMe()">
-            <span class="icon ion-android-locate"></span>
-          </button>
+            <!-- <button class="button button-icon icon ion-android-locate"></button> -->
+            <button class="button button-light current-location-button" ng-click="centerOnMe()">
+                <span class="icon ion-android-locate"></span>
+            </button>
         </div>
+        <!--
         <div class="main-modal">
           <button ng-click="centerOnMe()">Get Current Location</button>
           <div id="estimate">Estimate Here</div>
           <div id="lat">lat</div>
           <div id="long">long</div>
         </div>
+-->
         <!--This is transparent, but here for debugging-->
 
 

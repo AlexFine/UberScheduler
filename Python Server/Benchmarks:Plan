@@ -1,0 +1,21 @@
+Large Backend Benchmarks
+
+*AUTH*
+-Make auth.py work so that a user entry can be created in the database and retrieved upon a get request
+*DB*
+-Make a script (createride.py) to insert an entry into the Rides table with the requisite info
+-Make a script (fetchrides.py) work to find any ride based on any parameter (user, time, etc)
+-Figure out a cron job/new script to run through the ride entries and pick which ones need to be dealt with
+*API*
+-Make a script (requestride.py) that will request a ride on behalf of the user
+
+Small Things
+-Set deadlines for benchmarks
+-How much money does this cost
+-Add column for refresh token in user table (for authentication to work when token expires after 30 days)
+-Figure out what uber's redirect_uri parameter does after you get the access token
+-Figure out how the frontend will work
+  *Opens in-app browser where user accepts permissions
+  *Redirects to server url with ?access_token=value and we deal with it
+  *How to close browser/check for success?
+-Figure out how to make scripts/uri's accept parameters with a ?p=value after the url

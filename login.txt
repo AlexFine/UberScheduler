@@ -1,7 +1,0 @@
-How to login to the server: (replace username and password with your own username and password)
-
-1. Open Terminal
-2. Type ssh username@adambn.com
-3. If necessary, type “yes” to confirm that you want to connect. This only happens the first time you connect
-4. Type your password
-5. cd /var/www/adambn.com/public_html/uberrequest

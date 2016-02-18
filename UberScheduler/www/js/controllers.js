@@ -192,8 +192,20 @@ angular.module('starter.controllers', ['ui.bootstrap'])
       }
       // console.log([d, pad(h), pad(m)].join(':')); //Feedback
       if (returnType == "string") {
+        var dayLabel = " days, ";
+        if (d == 1) { //If only one day
+          dayLabel = " day, ";
+        }
+        var hourLabel = " hours, ";
+        if (h == 1) { //If only one day
+          hourLabel = " hour, ";
+        }
+        var minuteLabel = " minutes";
+        if (m == 1) { //If only one day
+          minuteLabel = " minute";
+        }
         return (
-          d + " days, " + h + " hours, " + m + " minutes"
+          d +  dayLabel + h + hourLabel + m + minuteLabel
         )
       } else {
         return [d, pad(h), pad(m)].join(':');
@@ -474,7 +486,15 @@ angular.module('starter.controllers', ['ui.bootstrap'])
           center: myLatlng,
           zoom: 16,
           mapTypeId: google.maps.MapTypeId.ROADMAP,
-          disableDefaultUI: true // Disable UI controls
+          disableDefaultUI: true, // Disable UI controls
+
+          // Individual UI Components
+          zoomControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          rotateControl: false,
+          fullscreenControl: false
       };
       var map = new google.maps.Map(document.getElementById("map"),
           mapOptions);
@@ -522,7 +542,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: $scope.map,
-                title: 'Uluru (Ayers Rock)'
+                title: 'Uluru (Ayers Rock)' // Don't know what this is for
             });
 
             $ionicLoading.hide();

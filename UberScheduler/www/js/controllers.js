@@ -497,7 +497,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         });
 
         $scope.map = map;
-    }
+    
     google.maps.event.addDomListener(window, 'load', initialize());
 
     $scope.centerOnMe = function () {
@@ -505,19 +505,16 @@ angular.module('starter.controllers', ['ui.bootstrap'])
             return;
         }
 
-        $scope.loading = $ionicLoading.show({
-            content: 'Getting current location...',
-            showBackdrop: false
-        });
-
         navigator.geolocation.getCurrentPosition(function (pos) {
             $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 
             alat = pos.coords.latitude;
             along = pos.coords.longitude;
+            console.log(alat, along)
             document.getElementById("lat").innerHTML = pos.coords.latitude;
             document.getElementById("long").innerHTML = pos.coords.longitude;
             $ionicLoading.hide();
+
         }, function (error) {
             alert('Unable to get location: ' + error.message);
         });
@@ -526,8 +523,39 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     $scope.clickTest = function () {
         alert('Will Launch Call Uber Window From here')
     };
+    
+    }
+    //ACCORDIAN CODE
+    function($scope) {
+  $scope.groups = [];
+  for (var i=0; i<10; i++) {
+    $scope.groups[i] = {
+      name: i,
+      items: []
+    };
+    for (var j=0; j<3; j++) {
+      $scope.groups[i].items.push(i + '-' + j);
+    }
+  }
+  
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+        //END OF ACORDIAN CODE 
 
-})
+}
+    })
 
 .controller('settingsCtrl', function ($scope, $stateParams) {
     $scope.editAddress = function () {

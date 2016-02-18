@@ -1,0 +1,11 @@
+AUTHENTICATION FLOW
+
+SEND USER TO https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=_g8Fw1o5KsrVRNBNskv2cMEMhoE6RPbW&redirect_uri=URL OF THE THING THAT ACCEPTS AUTH CODE
+On acceptance, in-app browser will navigate to special-server-url with an auth code passed as a parameter
+
+SERVER REQUESTS https://login.uber.com/oauth/v2/token?client_secret=YOUR_CLIENT_SECRET&client_id=YOUR_CLIENT_ID&grant_type=authorization_code&redirect_uri=YOUR_REDIRECT_URI(not sure about this yet)&code=AUTHORIZATION_CODE_FROM_STEP_2
+Uber responds with access token & refresh token. We insert this into database
+
+Now the server can requests products with the header of
+'Authorization: Bearer YOUR_ACCESS_TOKEN'
+and process outlined in https://developer.uber.com/docs/v1-requests

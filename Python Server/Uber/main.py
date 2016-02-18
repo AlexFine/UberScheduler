@@ -92,7 +92,7 @@ def hello():
 
 @app.route('/datastore')
 def dataStore():
-    userkey = datastores.createUser("username", "passwd")
+    userkey = datastores.createUser("username", "passwd","sadaw")
     # users = datastores.returnUserID("email")
     # stuff_print = ""
     # for x in users:
@@ -101,9 +101,9 @@ def dataStore():
     printme = datastores.returnUser("username")
     print printme
     return str(printme[0])
-@app.route('/datastore/createUser/<email>/<pswd>')
-def userCreate(email=None, pswd = None):
-    userkey = datastores.createUser(email, pswd)
+@app.route('/datastore/createUser/<email>/<pswd>/<code>')
+def userCreate(email=None, pswd = None,code=None):
+    userkey = datastores.createUser(email, pswd,code)
     return userkey
 @app.route('/datastore/returnUser/<email>')
 def userReturn(email=None):

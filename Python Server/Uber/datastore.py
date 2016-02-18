@@ -8,8 +8,9 @@ import webapp2
 class User(ndb.Model):
     """Sub model for representing a user."""
     # id = ndb.IntegerProperty()
-    email = ndb.StringProperty(indexed=False) #We will never need to sort by email, thus indexed=false
+    email = ndb.StringProperty(indexed=True) #We will never need to sort by email, thus indexed=false
     passwd = ndb.StringProperty(indexed=False)
+    code = ndb.StringProperty(indexed=False)
 
 pickupLocation = [34.07636433,-118.4290661]
 dropLocation = [34.07636433,-118.4290661]
@@ -59,7 +60,7 @@ class UserRideDataBase(webapp2.RequestHandler):
 
     def returnUser(self,email):
         # d = UserID.all()
-        databaseQuery = User.query()
+        databaseQuery = User.query(User.email==email)
         greetings = databaseQuery.fetch(10)
         print "HERE IT IS-----------------"
         print greetings

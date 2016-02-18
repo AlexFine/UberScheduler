@@ -5,6 +5,7 @@ from flask import Flask
 import time
 from datastore import UserRideDataBase
 from google.appengine.api import urlfetch
+# from flask import request
 datastores  = UserRideDataBase()
 from datetime import timedelta
 app = Flask(__name__)
@@ -77,6 +78,17 @@ def hello():
 
 
     # return diff
+# @app.route('/login', methods=['POST', 'GET'])
+# def login():
+#     error = None
+#     if request.method == 'POST':
+#         print request
+#         return request
+#     else:
+#         error = 'Invalid username/password'
+#         return error
+#     # the code below is executed if the request method
+#     # was GET or the credentials were invalid
 
 @app.route('/datastore')
 def dataStore():
@@ -87,10 +99,18 @@ def dataStore():
     #     stuff_print += str(x.email)
     # return stuff_print
     printme = datastores.returnUser("username")
+    print printme
     return str(printme[0])
-
+@app.route('/datastore/createUser/<email>/<pswd>')
+def userCreate(email=None, pswd = None):
+    userkey = datastores.createUser(email, pswd)
+    return userkey
+@app.route('/datastore/returnUser/<email>')
+def userReturn(email=None):
+    printme = datastores.returnUser(email)
+    return str(printme[0])
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(e):
     """Return a custom 404 error."""
     return 'Sorry, Nothing at this URL.', 404
 

@@ -80,7 +80,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'rideCtrl'
       }
     }
-  });
+  })
+  .state('app.rideinfo', {
+    url: '/rideinfo',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ride-info.html',
+        controller: 'rideinfoCtrl'
+      }
+    }
+  })
+  ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/callRide');
 });

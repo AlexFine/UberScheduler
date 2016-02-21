@@ -1,6 +1,6 @@
 
-#We are always D for D 
-down for development
+# Uber Scheduler
+Contemporary Compute Science - D Block
 </br>
 <hr>
 To Do List

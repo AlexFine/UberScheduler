@@ -40,7 +40,7 @@
                     </div>
                     <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
                         <div class="col" ng-repeat="day in ride.repeatedDays track by $index">
-                            <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{$parent.$index}}, {{$index}})">
+                            <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" >
                                 <p>{{daysOfWeek[$index].substr(0, 3)}}</p>
                             </button>
                         </div>

@@ -1,0 +1,49 @@
+<ion-view view-title="Configure Ride">
+  <ion-content>
+    <h1>Configure a Ride</h1>
+    <div class="row">
+        <div class="col">
+            <p class="scheduled-time">{{configuredRide.time | date : 'h:mm a'}}</p>
+        </div>
+        <div class="col">
+            Next ride in:
+            <br> {{timeUntilDate(configuredRide.nextRide, "string")}}
+        </div>
+    </div>
+    <div class="scheduled-options-card">
+        <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Pickup:</span>
+                {{configuredRide.pickupName[0]}} {{configuredRide.pickupName[1]}}, {{configuredRide.pickupName[2]}} {{configuredRide.pickupName[3]}}
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Dropoff:</span>
+                {{configuredRide.dropName[0]}} {{configuredRide.dropName[1]}}, {{configuredRide.dropName[2]}} {{configuredRide.dropName[3]}}
+            </label>
+        </div>
+        <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
+            <div class="col" ng-repeat="day in configuredRide.repeatedDays track by $index">
+                <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{rideId}}, {{$index}})">
+                    <p>{{daysOfWeek[$index].substr(0, 3)}}</p>
+                </button>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col date-select button button-outline button-positive" ng-click="selectDate('startDate', {{$index}})">
+                Start Date:
+                <b>{{configuredRide.startDate | date : 'fullDate'}}</b>
+            </div>
+            <div class="col date-select button button-outline button-positive" ng-click="selectDate('endDate', {{$index}})">
+                End Date:
+                <b>{{configuredRide.ndDate | date : 'fullDate'}}</b>
+            </div>
+        </div> -->
+        <div>
+            Uber Type:
+            <br>
+            <b>{{UberTypes[configuredRide.product]}}</b>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>

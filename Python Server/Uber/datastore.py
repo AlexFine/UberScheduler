@@ -57,8 +57,8 @@ class UserRideDataBase(webapp2.RequestHandler):
     def createRide(self, ukey, slong, slat, elong, elat, time, date, rid):
         ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date, rid=rid)
         ride_key = ride.put();
-        print("rideKey",ride_key)
-        return ride_key
+        print("rideKey",ride_key.id())
+        return ride_key.id()
 
     def returnRide(self, rid):
         # d = UserID.all()

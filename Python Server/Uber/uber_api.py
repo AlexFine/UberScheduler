@@ -20,7 +20,7 @@ class Greeting(messages.Message):
 class userKey(messages.Message):
   """Greeting that stores a message."""
   key = messages.StringField(2, required=True)
-class userKey(messages.Message):
+class user(messages.Message):
   """Greeting that stores a message."""
   # key = messages.StringField(2, required=True)
   code=messages.IntegerField(1, variant=messages.Variant.INT32)
@@ -47,24 +47,26 @@ class UberApi(remote.Service):
                     path='returnUser', http_method='POST',
                     name='user.return')
   def greetings_list(self, request):
-      try:
-          datastores.returnUser(request.email)
-          return Greeting(message =datastores.returnUser(request.email))
-      except:
-          return Greeting(message="not in database")
+      # try:
+      print datastores.returnUser(request.key)
+
+      return Greeting(message =str(datastores.returnUser(request.key)[0]))
+      # except:
+      #     return Greeting(message="not in database")
 
   ID_RESOURCE = endpoints.ResourceContainer(
-      message_types.VoidMessage,
-      code=messages.IntegerField(1, variant=messages.Variant.INT32),email = messages.StringField(2, required=True),pswd = messages.StringField(3, required=True))
+      user
+      # code=messages.IntegerField(1, variant=messages.Variant.INT32),email = messages.StringField(2, required=True),pswd = messages.StringField(3, required=True))
+  )
 
-
-  @endpoints.method(ID_RESOURCE, Greeting,
-                    path='usercreate/{code}/{email}/{pswd}', http_method='GET',
+  @endpoints.method(ID_RESOURCE, userKey,
+                    path='usercreate', http_method='POST',
                     name='user.create')
   def greeting_get(self, request):
     userkey = datastores.createUser(request.email, request.pswd,str(request.code))
+
     try:
-      return Greeting(message=str(userkey))
+      return userKey(key=str(userkey))
     except (IndexError, TypeError):
       raise endpoints.NotFoundException('Greeting %s not found.' %
                                         (request.code,))

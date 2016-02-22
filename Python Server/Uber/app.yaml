@@ -6,7 +6,7 @@
 # TODO: Enter your application id below. If you have signed up
 # using cloud.google.com/console use the "project id" for your application
 # id.
-application: your-application-id-here
+application: uberscheduler-1203
 version: 1
 runtime: python27
 api_version: 1
@@ -14,7 +14,8 @@ threadsafe: yes
 
 # Handlers define how to route requests to your application.
 handlers:
-
+- url: /_ah/spi/.*
+  script: uber_api.APPLICATION
 # App Engine serves and caches static files contained in the listed directories
 # (and subdirectories). Uncomment and set the directory as needed.
 #- url: /client
@@ -38,3 +39,7 @@ libraries:
 #  version: latest
 - name: ssl
   version: latest
+- name: pycrypto
+  version: latest
+- name: endpoints
+  version: 1.0

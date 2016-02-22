@@ -108,7 +108,12 @@ def userCreate(email=None, pswd = None,code=None):
 @app.route('/datastore/returnUser/<email>')
 def userReturn(email=None):
     printme = datastores.returnUser(email)
-    return str(printme[0])
+    k = ""
+    j =0
+    for x in printme:
+        k += str(x)
+        j+=1
+    return str(j)+k
 @app.errorhandler(404)
 def page_not_found(e):
     """Return a custom 404 error."""

@@ -70,6 +70,6 @@ class UserRideDataBase(webapp2.RequestHandler):
     def returnUser(self,email):
         # d = UserID.all()
         databaseQuery = User.query(User.email==email)
-        greetings = databaseQuery.fetch(10)
+        greetings = databaseQuery.fetch(1)
         print greetings
         return greetings

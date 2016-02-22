@@ -3,12 +3,10 @@
   <component name="FacetManager">
     <facet type="google-appengine-python" name="Google App Engine (Python)">
       <configuration>
-        <option name="rootFolder" value="$MODULE_DIR$" />
+        <option name="rootFolder" value="$USER_HOME$/Desktop/UberScheduler/Python Server/Uber" />
         <option name="sdkFolder" value="/usr/local/google_appengine" />
         <option name="templatesFolder" value="" />
-        <option name="oauth2" value="false" />
-        <option name="deployConfigured" value="false" />
-        <option name="saveCredentials" value="false" />
+        <option name="oauth2" value="true" />
       </configuration>
     </facet>
   </component>

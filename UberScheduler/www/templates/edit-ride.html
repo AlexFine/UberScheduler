@@ -1,35 +1,142 @@
-<ion-view view-title="Configure Ride">
-  <ion-content>
-    <h1>Configure a Ride</h1>
-    <div class="row">
-        <div class="col">
-            <p class="scheduled-time">{{configuredRide.time | date : 'h:mm a'}}</p>
-        </div>
-        <div class="col">
-            Next ride in:
-            <br> {{timeUntilDate(configuredRide.nextRide, "string")}}
-        </div>
-    </div>
-    <div class="scheduled-options-card">
-        <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
-        <div class="list">
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Pickup:</span>
-                {{configuredRide.pickupName[0]}} {{configuredRide.pickupName[1]}}, {{configuredRide.pickupName[2]}} {{configuredRide.pickupName[3]}}
-            </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Dropoff:</span>
-                {{configuredRide.dropName[0]}} {{configuredRide.dropName[1]}}, {{configuredRide.dropName[2]}} {{configuredRide.dropName[3]}}
-            </label>
-        </div>
-        <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
-            <div class="col" ng-repeat="day in configuredRide.repeatedDays track by $index">
-                <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{rideId}}, {{$index}})">
-                    <p>{{daysOfWeek[$index].substr(0, 3)}}</p>
-                </button>
+<ion-view view-title="Configure Schedule">
+    <ion-content>
+
+        <div class="item item-text-wrap">
+            <p class="lead" style="font-size:22px;">Schedule</p>
+            <div class="list list-inset">
+
+                <div class="item">
+                    Next Ride: {{configuredRide.time | date : 'h:mm a'}}
+                </div>
+                <div class="item">
+                    Remaining Time: {{timeUntilDate(configuredRide.nextRide, "string")}}
+                </div>
+                <div class="item">
+                    Future Rides: 13 <span style="float:right; font-size:20px;" class="ion-ios-information-outline" ng-click="showAlert()"></span>
+                </div>
+
+
             </div>
         </div>
-        <!-- <div class="row">
+        <div class="item item-text-wrap">
+            <p class="lead" style="font-size:22px;">Pickup + Dropoff</p>
+            <div class="list list-inset">
+
+                <div class="item row">
+                    <div style="width:90%;">
+                        <label class="item item-input">Pickup:
+                            <input type="text" placeholder="Pickup" value=" {{configuredRide.pickupName[0]}} {{configuredRide.pickupName[1]}}, {{configuredRide.pickupName[2]}} {{configuredRide.pickupName[3]}}">
+
+                        </label>
+
+                    </div>
+                    <button class="button button-calm" ng-click="isCollapsedPickup = !isCollapsedPickup" style="margin-left:1%;">
+                        <span ng-if="isCollapsedPickup"><i class="ion-ios-arrow-down"></i></span>
+                        <span ng-if="!isCollapsedPickup"><i class="ion-ios-arrow-up"></i></span>
+                    </button>
+                </div>
+
+                <div uib-collapse="isCollapsedPickup">
+                    <!--Options for alternate addresses -->
+                    <div class="list list-inset" style="margin-bottom:1%;">
+
+                        <div class="item" ng-click="showAlert()">
+                            <span>759 Ocean Ave San Francisco</span>
+                        </div>
+                        <div class="item">
+                            <span>725 Ocean Ave San Francisco</span>
+                        </div>
+                        <div class="item">
+                            <span>74425 Ocean Ave San Francisco</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="item row">
+
+                    <div style="width:90%;">
+                        <label class="item item-input">Dropoff:
+                            <input type="text" placeholder="Dropoff" value=" {{configuredRide.dropName[0]}} {{configuredRide.dropName[1]}}, {{configuredRide.dropName[2]}} {{configuredRide.dropName[3]}}">
+                        </label>
+                    </div>
+                    <button class="button button-calm" style="margin-left:1%;" ng-click="isCollapsedDropoff = !isCollapsedDropoff">
+                        <span ng-if="isCollapsedDropoff"><i class="ion-ios-arrow-down"></i></span>
+                        <span ng-if="!isCollapsedDropoff"><i class="ion-ios-arrow-up"></i></span>
+                    </button>
+                </div>
+                <div uib-collapse="isCollapsedDropoff">
+                    <div class="list list-inset" style="margin-bottom:1%;">
+
+                        <div class="item" ng-click="showAlert()">
+                            <span>759 Ocean Ave San Francisco</span>
+                        </div>
+                        <div class="item">
+                            <span>725 Ocean Ave San Francisco</span>
+                        </div>
+                        <div class="item">
+                            <span>74425 Ocean Ave San Francisco</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <button class="button button-outline button-calm button-block" ng-click="isCollapsedMap = !isCollapsedMap">
+                <span ng-if="isCollapsedMap">Open</span><span ng-if="!isCollapsedMap">Close</span> Map
+            </button>
+            <div uib-collapse="isCollapsedMap" style="padding:10px;">
+                <!--Options for alternate MAP SECTION -->
+                <div class="main-address-div-ride-edit">
+                    <div style="margin:1%;">
+                        <div class="list">
+                            <label class="item item-input">
+                                <i class="icon ion-search placeholder-icon"></i>
+                                <input type="text" placeholder="Search">
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div id="map" data-tap-disabled="true" ng-init="initialize(); centerOnMe()">
+
+                </div>
+                <!--END OF MAP SECTION -->
+            </div>
+
+
+            <hr>
+
+            <div class="card">
+                <div class="item item-text-wrap">
+                    This is a basic Card which contains an item that has wrapping text.
+                </div>
+            </div>
+
+            <div class="scheduled-options-card">
+                <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Pickup:</span> {{configuredRide.pickupName[0]}} {{configuredRide.pickupName[1]}}, {{configuredRide.pickupName[2]}} {{configuredRide.pickupName[3]}}
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Dropoff:</span> {{configuredRide.dropName[0]}} {{configuredRide.dropName[1]}}, {{configuredRide.dropName[2]}} {{configuredRide.dropName[3]}}
+                    </label>
+                </div>
+                <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
+                    <div class="col" ng-repeat="day in configuredRide.repeatedDays track by $index">
+                        <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{rideId}}, {{$index}})">
+                            <p>{{daysOfWeek[$index].substr(0, 3)}}</p>
+                        </button>
+                    </div>
+                </div>
+                <!-- <div class="row">
             <div class="col date-select button button-outline button-positive" ng-click="selectDate('startDate', {{$index}})">
                 Start Date:
                 <b>{{configuredRide.startDate | date : 'fullDate'}}</b>
@@ -39,11 +146,11 @@
                 <b>{{configuredRide.ndDate | date : 'fullDate'}}</b>
             </div>
         </div> -->
-        <div>
-            Uber Type:
-            <br>
-            <b>{{UberTypes[configuredRide.product]}}</b>
-        </div>
-    </div>
-  </ion-content>
+                <div>
+                    Uber Type:
+                    <br>
+                    <b>{{UberTypes[configuredRide.product]}}</b>
+                </div>
+            </div>
+    </ion-content>
 </ion-view>

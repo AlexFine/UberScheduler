@@ -393,8 +393,96 @@ angular.module('starter.controllers', ['ui.bootstrap'])
   };
 })
 
-.controller('rideEdit', function($scope, $stateParams) {
-  //Get ride ID
+.controller('rideEdit', function($scope, $stateParams, $ionicPopup, $timeout,  $compile, $ionicLoading) {
+  
+    
+    
+    //GOOGLE MAPS CODE 
+     initialize = function () {
+      console.log("Initializing Google Maps")
+      var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
+
+      var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          disableDefaultUI: true, // Disable UI controls
+
+          // Individual UI Components
+          zoomControl: false,
+          mapTypeControl: false,
+          scaleControl: false,
+          streetViewControl: false,
+          rotateControl: false,
+          fullscreenControl: false
+      };
+      var map = new google.maps.Map(document.getElementById("map"),
+          mapOptions);
+
+      //Marker + infowindow + angularjs compiled ng-click
+      var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
+      var compiled = $compile(contentString)($scope);
+
+      var infowindow = new google.maps.InfoWindow({
+          content: compiled[0]
+      });
+
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: 'Uluru (Ayers Rock)'
+      });
+
+      google.maps.event.addListener(marker, 'click', function () {
+          infowindow.open(map, marker);
+      });
+
+      $scope.map = map;
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize());
+
+    $scope.centerOnMe = function () {
+      console.log("Getting current location...")
+        if (!$scope.map) {
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          var myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            $scope.map.setCenter(myLatlng);
+
+            alat = pos.coords.latitude;
+            along = pos.coords.longitude;
+            console.log(alat, along);
+            document.getElementById("lat").innerHTML = alat;
+            document.getElementById("long").innerHTML = along;
+
+            // Set marker
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: $scope.map,
+                title: 'Uluru (Ayers Rock)' // Don't know what this is for
+            });
+
+            $ionicLoading.hide();
+
+        }, function (error) {
+            alert('Unable to get location: ' + error.message);
+        });
+    };
+
+    $scope.clickTest = function () {
+        alert('Will Launch Call Uber Window From here')
+    };
+    //END OF GOOGLE MAPS CODE
+    
+    
+    
+    
+    
+    
+    //Get ride ID
   $scope.rideId = $stateParams.rideId;
   console.log($scope.rideId)
 
@@ -436,7 +524,27 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
   $scope.configuredRide = $scope.scheduledRides[$scope.rideId];
 
+//Controller for popup icon that gives information on what Future Rides are 
+    // Triggered on a button click, or some other target
 
+ // An alert dialog
+ $scope.showAlert = function() {
+     console.log("Hello test");
+   var alertPopup = $ionicPopup.alert({
+     title: 'Future Rides',
+     template: 'The number of future rides you have on this schedule'
+   });
+
+   alertPopup.then(function(res) {
+     console.log('Thank you for not eating my delicious ice cream cone');
+   });
+ };
+    
+    $scope.isCollapsedPickup = true;
+    $scope.isCollapsedDropoff = true;
+    $scope.isCollapsedMap = true;
+    
+    
 })
 
 .controller('callRideCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {

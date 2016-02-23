@@ -27,6 +27,10 @@
   border-radius: 5px;
   position: absolute;
 }
+.main-address-div-ride-edit {
+  width: 98%;
+  margin: 1%;
+}
 
 .main-modal {
   /*Overlay on the bottom*/

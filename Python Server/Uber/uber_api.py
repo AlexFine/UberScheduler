@@ -12,6 +12,7 @@ from datastore import UserRideDataBase
 import time
 from google.appengine.api import urlfetch
 # from flask import Flask
+import unicodedata
 
 datastores = UserRideDataBase()
 package = 'Hello'
@@ -22,17 +23,19 @@ class Greeting(messages.Message):
     message = messages.StringField(1)
 
 
-class userKey(messages.Message):#this class is for the user key still needs to be changed
-# from email to something better
+class userKey(messages.Message):  # this class is for the user key still needs to be changed
+    # from email to something better
 
     """Greeting that stores a message."""
-    key = messages.StringField(2, required=True)
+    key = messages.IntegerField(1, variant=messages.Variant.INT32)
+
 
 class timeMin(messages.Message):
     # min = messages.IntegerField(1, variant=messages.Variant.INT32)
     min = messages.StringField(1)
 
-class user(messages.Message):           #this is input and response class for user
+
+class user(messages.Message):  # this is input and response class for user
     """Greeting that stores a message."""
     # key = messages.StringField(2, required=True)
     code = messages.IntegerField(1, variant=messages.Variant.INT32)
@@ -54,18 +57,27 @@ STORED_GREETINGS = GreetingCollection(items=[
 @endpoints.api(name='uberApi', version='v1')
 class UberApi(remote.Service):
     ID_RESOURCE2 = endpoints.ResourceContainer(
-        userKey
-    )#defines resources in post request
+        Greeting
+        # userkey
+    )  # defines resources in post request
 
-    @endpoints.method(ID_RESOURCE2, Greeting,
+    @endpoints.method(ID_RESOURCE2, user,
                       path='datastore/returnUser', http_method='POST',
-                      name='user.return')#defines url and type of request
+                      name='user.return')  # defines url and type of request
     def returnUser(self, request):
         # try:
         # print datastores.returnUser(request.key)
 
-        user = datastores.returnUser(request.key)[0] #pings data store api
-        return Greeting(message=str(user)) #returns in json format
+        users = datastores.returnUser(request.message)  # pings data store api
+        print user
+        print "test 2"
+        email = str(unicodedata.normalize('NFKD', users[0]).encode('ascii', 'ignore'))
+        pswd = str(unicodedata.normalize('NFKD', users[1]).encode('ascii', 'ignore'))
+        code = int(unicodedata.normalize('NFKD', users[2]).encode('ascii', 'ignore'))
+        print email
+        print pswd
+        print code
+        return user(email=email, pswd=pswd, code=code)  # returns in json format
         # except:
         # return Greeting(message="not in database")
 
@@ -78,11 +90,10 @@ class UberApi(remote.Service):
                       path='datastore/usercreate', http_method='POST',
                       name='user.create')
     def greeting_get(self, request):
-        userkey = datastores.createUser(request.email, request.pswd, str(request.code)) #create user from requests object
+        userkey = datastores.createUser(request.email, request.pswd,
+                                        str(request.code))  # create user from requests object
 
-
-        return userKey(key=str(userkey)) # returns userkey to frontend
-
+        return userKey(key=userkey)  # returns userkey to frontend
 
 
     def compare(pickuptime, pickupdate):
@@ -138,7 +149,7 @@ class UberApi(remote.Service):
         url = baseurl + "?" + "server_token=" + parameters['server_token'] + "&start_latitude=" + parameters[
             'start_latitude'] + "&start_longitude=" + parameters['start_longitude']
 
-        #url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
+        # url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
         result = urlfetch.fetch(url)
         if result.status_code == 200:
             print result.content
@@ -152,6 +163,18 @@ class UberApi(remote.Service):
             # estimate = float(uxef[0])
             # print(estimate) #estimate in seconds
             # return estimate
+        # ID_RESOURCE3 = endpoints.ResourceContainer(
+        #     message_types.VoidMessage,
+        #
+        #     slat=messages.FloatField(1, variant=messages.Variant.FLOAT),
+        #     slong=messages.FloatField(2, variant=messages.Variant.FLOAT),
+        #
+        # )
+        #
+        # @endpoints.method(ID_RESOURCE3, timeMin,
+        #                   path='uber/getTime', http_method='GET',
+        #                   name='uber.getTime')
+        # def gettime(self, request):
 
 
 APPLICATION = endpoints.api_server([UberApi])

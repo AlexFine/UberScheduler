@@ -52,7 +52,7 @@ class UserRideDataBase(webapp2.RequestHandler):
         user = User(email=email, passwd=passwd, uberauth=ua)
         user_key = user.put();
         print("userKey",user_key)
-        return user_key
+        return user_key.id()
 
     def createRide(self, ukey, slong, slat, elong, elat, time, date, rid):
         ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date, rid=rid)
@@ -70,6 +70,8 @@ class UserRideDataBase(webapp2.RequestHandler):
     def returnUser(self,email):
         # d = UserID.all()
         databaseQuery = User.query(User.email==email)
-        greetings = databaseQuery.fetch(1)
+        greetings = databaseQuery.fetch(1)[0]
         print greetings
-        return greetings
+        x =[greetings.email, greetings.passwd, greetings.uberauth]
+        print x
+        return x

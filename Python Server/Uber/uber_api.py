@@ -4,31 +4,45 @@ Defined here are the ProtoRPC messages needed to define Schemas for methods
 as well as those methods defined in an API.
 """
 
-
 import endpoints
 from protorpc import messages
 from protorpc import message_types
 from protorpc import remote
 from datastore import UserRideDataBase
-datastores  = UserRideDataBase()
+import time
+from google.appengine.api import urlfetch
+# from flask import Flask
+
+datastores = UserRideDataBase()
 package = 'Hello'
 
 
 class Greeting(messages.Message):
-  """Greeting that stores a message."""
-  message = messages.StringField(1)
-class userKey(messages.Message):
-  """Greeting that stores a message."""
-  key = messages.StringField(2, required=True)
-class user(messages.Message):
-  """Greeting that stores a message."""
-  # key = messages.StringField(2, required=True)
-  code=messages.IntegerField(1, variant=messages.Variant.INT32)
-  email = messages.StringField(2, required=True)
-  pswd = messages.StringField(3, required=True)
+    """Greeting that stores a message."""
+    message = messages.StringField(1)
+
+
+class userKey(messages.Message):#this class is for the user key still needs to be changed
+# from email to something better
+
+    """Greeting that stores a message."""
+    key = messages.StringField(2, required=True)
+
+class timeMin(messages.Message):
+    # min = messages.IntegerField(1, variant=messages.Variant.INT32)
+    min = messages.StringField(1)
+
+class user(messages.Message):           #this is input and response class for user
+    """Greeting that stores a message."""
+    # key = messages.StringField(2, required=True)
+    code = messages.IntegerField(1, variant=messages.Variant.INT32)
+    email = messages.StringField(2, required=True)
+    pswd = messages.StringField(3, required=True)
+
+
 class GreetingCollection(messages.Message):
-  """Collection of Greetings."""
-  items = messages.MessageField(Greeting, 1, repeated=True)
+    """Collection of Greetings."""
+    items = messages.MessageField(Greeting, 1, repeated=True)
 
 
 STORED_GREETINGS = GreetingCollection(items=[
@@ -39,47 +53,105 @@ STORED_GREETINGS = GreetingCollection(items=[
 
 @endpoints.api(name='uberApi', version='v1')
 class UberApi(remote.Service):
+    ID_RESOURCE2 = endpoints.ResourceContainer(
+        userKey
+    )#defines resources in post request
 
-  ID_RESOURCE2 = endpoints.ResourceContainer(
-      userKey
-      )
-  @endpoints.method(ID_RESOURCE2, Greeting,
-                    path='returnUser', http_method='POST',
-                    name='user.return')
-  def greetings_list(self, request):
-      # try:
-      print datastores.returnUser(request.key)
+    @endpoints.method(ID_RESOURCE2, Greeting,
+                      path='datastore/returnUser', http_method='POST',
+                      name='user.return')#defines url and type of request
+    def returnUser(self, request):
+        # try:
+        # print datastores.returnUser(request.key)
 
-      return Greeting(message =str(datastores.returnUser(request.key)[0]))
-      # except:
-      #     return Greeting(message="not in database")
+        user = datastores.returnUser(request.key)[0] #pings data store api
+        return Greeting(message=str(user)) #returns in json format
+        # except:
+        # return Greeting(message="not in database")
 
-  ID_RESOURCE = endpoints.ResourceContainer(
-      user
-      # code=messages.IntegerField(1, variant=messages.Variant.INT32),email = messages.StringField(2, required=True),pswd = messages.StringField(3, required=True))
-  )
+    ID_RESOURCE = endpoints.ResourceContainer(
+        user
+        # code=messages.IntegerField(1, variant=messages.Variant.INT32),email = messages.StringField(2, required=True),pswd = messages.StringField(3, required=True))
+    )
 
-  @endpoints.method(ID_RESOURCE, userKey,
-                    path='usercreate', http_method='POST',
-                    name='user.create')
-  def greeting_get(self, request):
-    userkey = datastores.createUser(request.email, request.pswd,str(request.code))
+    @endpoints.method(ID_RESOURCE, userKey,
+                      path='datastore/usercreate', http_method='POST',
+                      name='user.create')
+    def greeting_get(self, request):
+        userkey = datastores.createUser(request.email, request.pswd, str(request.code)) #create user from requests object
 
-    try:
-      return userKey(key=str(userkey))
-    except (IndexError, TypeError):
-      raise endpoints.NotFoundException('Greeting %s not found.' %
-                                        (request.code,))
-  # MULTIPLY_METHOD_RESOURCE = endpoints.ResourceContainer(
-  #     Greeting,
-  #     times=messages.IntegerField(2, variant=messages.Variant.INT32,
-  #                                 required=True))
-  #
-  # @endpoints.method(MULTIPLY_METHOD_RESOURCE, Greeting,
-  #                   path='hellogreeting/{times}', http_method='POST',
-  #                   name='greetings.multiply')
-  # def greetings_multiply(self, request):
-  #   return Greeting(message=request.message * request.times)
+
+        return userKey(key=str(userkey)) # returns userkey to frontend
+
+
+
+    def compare(pickuptime, pickupdate):
+
+        spt = pickuptime.split(":")
+        dhour = float(spt[0])
+        dmin = float(spt[1])
+        dtmins = (dhour * 60) + (dmin)
+
+        sdt = pickupdate.split("/")
+        dmonth = float(sdt[0])
+        ddate = float(sdt[1])
+        dyear = float(sdt[2])
+        hour = float(time.strftime('%H')) * 60
+        min = float(time.strftime('%M'))
+        day = float(time.strftime('%d'))
+        month = float(time.strftime('%m'))
+        year = float(time.strftime('%y'))
+
+        tmins = hour + min
+
+        diff = dtmins - tmins
+
+
+    ID_RESOURCE3 = endpoints.ResourceContainer(
+        message_types.VoidMessage,
+
+        slat=messages.FloatField(1, variant=messages.Variant.FLOAT),
+        slong=messages.FloatField(2, variant=messages.Variant.FLOAT),
+
+    )
+
+    @endpoints.method(ID_RESOURCE3, timeMin,
+                      path='uber/getTime', http_method='GET',
+                      name='uber.getTime')
+    def gettime(self, request):
+        # slat = ""
+        # slong = ""
+
+        slat = request.slat
+        slong = request.slong
+        # elat = 37.791948
+        # elong = -122.446480
+
+        baseurl = "https://sandbox-api.uber.com/v1/estimates/time"
+
+        parameters = {
+            'server_token': 'ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd',
+            'start_latitude': str(slat),
+            'start_longitude': str(slong),
+        }
+
+        url = baseurl + "?" + "server_token=" + parameters['server_token'] + "&start_latitude=" + parameters[
+            'start_latitude'] + "&start_longitude=" + parameters['start_longitude']
+
+        #url = "https://sandbox-api.uber.com/v1/estimates/time?server_token=ikGvlAJSejPSY6bUp7APhxkwyu5ermguZnreUaCd&start_latitude=37.775818&start_longitude=-122.418028"
+        result = urlfetch.fetch(url)
+        if result.status_code == 200:
+            print result.content
+            return timeMin(min=str(result.content))
+        else:
+            return None
+            # data = str(response.json())
+            # ux = data.split("uberX")
+            # uxe = ux[1].split(":")
+            # uxef = uxe[1].split(",")
+            # estimate = float(uxef[0])
+            # print(estimate) #estimate in seconds
+            # return estimate
 
 
 APPLICATION = endpoints.api_server([UberApi])

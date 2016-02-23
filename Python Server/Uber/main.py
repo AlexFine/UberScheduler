@@ -1,8 +1,10 @@
 """`main` is the top level module for your Flask application."""
 
 # Import the Flask Framework
+# import requests
 from flask import Flask
 import time
+# from google.appengine.api import urlfetch
 from datastore import UserRideDataBase
 from google.appengine.api import urlfetch
 # from flask import request

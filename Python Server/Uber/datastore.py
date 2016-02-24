@@ -31,7 +31,7 @@ class Ride(ndb.Model):
     elat = ndb.FloatProperty(indexed=False)
     time = ndb.StringProperty()
     date = ndb.StringProperty()
-    rid = ndb.StringProperty() #ride ID
+     #ride ID
 
 class UserRideDataBase(webapp2.RequestHandler):
 
@@ -52,7 +52,7 @@ class UserRideDataBase(webapp2.RequestHandler):
         user = User(email=email, passwd=passwd, uberauth=ua)
         user_key = user.put();
         print("userKey",user_key)
-        return user_key.id()
+        return user_key
 
     def createRide(self, ukey, slong, slat, elong, elat, time, date, rid):
         ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date, rid=rid)
@@ -62,16 +62,17 @@ class UserRideDataBase(webapp2.RequestHandler):
 
     def returnRide(self, rid):
         # d = UserID.all()
-        databaseQuery = Ride.query()
-        greetings = databaseQuery.fetch(10)
+        key= ndb.Key("Ride", rid)
+        greetings = key.get()
         print greetings
         return greetings
 
-    def returnUser(self,email):
+    def returnUser(self,keys):
         # d = UserID.all()
-        databaseQuery = User.query(User.email==email)
-        greetings = databaseQuery.fetch(1)[0]
+        key= ndb.Key("User", keys)
+        greetings = key.get()
         print greetings
+
         x =[greetings.email, greetings.passwd, greetings.uberauth]
         print x
         return x

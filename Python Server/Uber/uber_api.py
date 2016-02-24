@@ -47,6 +47,16 @@ class GreetingCollection(messages.Message):
     """Collection of Greetings."""
     items = messages.MessageField(Greeting, 1, repeated=True)
 
+class Ride(messages.Message):
+    """A main model for representing a Ride."""
+    ukey = messages.IntegerField(1, required=True, variant=messages.Variant.INT32)
+    slong = messages.FloatField(2, required=True)
+    slat = messages.FloatField(3, required=True)
+    elong = messages.FloatField(4, required=True)
+    elat = messages.FloatField(5, required=True)
+    time = messages.StringField(6, required=True)
+    date = messages.StringField(7, required=True)
+    rid = messages.StringField(8, required=True) #ride ID
 
 STORED_GREETINGS = GreetingCollection(items=[
     Greeting(message='hello world!'),
@@ -57,8 +67,8 @@ STORED_GREETINGS = GreetingCollection(items=[
 @endpoints.api(name='uberApi', version='v1')
 class UberApi(remote.Service):
     ID_RESOURCE2 = endpoints.ResourceContainer(
-        Greeting
-        # userkey
+        # Greeting
+        userKey
     )  # defines resources in post request
 
     @endpoints.method(ID_RESOURCE2, user,
@@ -68,7 +78,7 @@ class UberApi(remote.Service):
         # try:
         # print datastores.returnUser(request.key)
 
-        users = datastores.returnUser(request.message)  # pings data store api
+        users = datastores.returnUser(request.key)  # pings data store api
         print user
         print "test 2"
         email = str(unicodedata.normalize('NFKD', users[0]).encode('ascii', 'ignore'))
@@ -80,7 +90,22 @@ class UberApi(remote.Service):
         return user(email=email, pswd=pswd, code=code)  # returns in json format
         # except:
         # return Greeting(message="not in database")
-
+    # ID_RESOURCE3 = endpoints.ResourceContainer(
+    #     Ride
+    #     # userkey
+    # )  # defines resources in post request
+    #
+    # @endpoints.method(ID_RESOURCE3, Greeting,
+    #                   path='datastore/returnUser', http_method='POST',
+    #                   name='user.return')  # defines url and type of request
+    # def returnUser(self, request):
+    #     return Greeting(messages="test")
+    #     # try:
+    #     # print datastores.returnUser(request.key)
+    #
+    #       # returns in json format
+    #     # except:
+    #     # return Greeting(message="not in database")
     ID_RESOURCE = endpoints.ResourceContainer(
         user
         # code=messages.IntegerField(1, variant=messages.Variant.INT32),email = messages.StringField(2, required=True),pswd = messages.StringField(3, required=True))

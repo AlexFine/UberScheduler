@@ -394,11 +394,11 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 })
 
 .controller('rideEdit', function($scope, $stateParams, $ionicPopup, $timeout,  $compile, $ionicLoading) {
-  
-    
-    
-    //GOOGLE MAPS CODE 
-     initialize = function () {
+
+
+
+    //GOOGLE MAPS CODE
+    initialize = function () {
       console.log("Initializing Google Maps")
       var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
 
@@ -476,12 +476,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
         alert('Will Launch Call Uber Window From here')
     };
     //END OF GOOGLE MAPS CODE
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     //Get ride ID
   $scope.rideId = $stateParams.rideId;
   console.log($scope.rideId)
@@ -524,7 +524,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
   $scope.configuredRide = $scope.scheduledRides[$scope.rideId];
 
-//Controller for popup icon that gives information on what Future Rides are 
+//Controller for popup icon that gives information on what Future Rides are
     // Triggered on a button click, or some other target
 
  // An alert dialog
@@ -539,12 +539,12 @@ angular.module('starter.controllers', ['ui.bootstrap'])
      console.log('Thank you for not eating my delicious ice cream cone');
    });
  };
-    
+
     $scope.isCollapsedPickup = true;
     $scope.isCollapsedDropoff = true;
     $scope.isCollapsedMap = true;
-    
-    
+
+
 })
 
 .controller('callRideCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {

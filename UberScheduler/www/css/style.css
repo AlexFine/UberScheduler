@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.map-ride-edit {
+  height: 50vh !important;
+}
+
 .current-location-div {
   position: absolute;
   left: 3%;

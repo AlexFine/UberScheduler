@@ -23,7 +23,7 @@ class Greeting(messages.Message):
     message = messages.StringField(1)
 
 
-class userKey(messages.Message):  # this class is for the user key still needs to be changed
+class keySearch(messages.Message):  # this class is for the key search used by return functions to search by
     # from email to something better
 
     """Greeting that stores a message."""
@@ -66,14 +66,51 @@ STORED_GREETINGS = GreetingCollection(items=[
 
 @endpoints.api(name='uberApi', version='v1')
 class UberApi(remote.Service):
-    ID_RESOURCE2 = endpoints.ResourceContainer(
-        # Greeting
-        userKey
+    rideReturn = endpoints.ResourceContainer(
+        keySearch
+        # userkey
     )  # defines resources in post request
 
-    @endpoints.method(ID_RESOURCE2, user,
+    @endpoints.method(rideReturn, Greeting,
+                      path='datastore/returnRide', http_method='POST',
+                      name='ride.return')  # defines url and type of request
+    def returnRide(self, request):
+        ride = datastores.returnRide(request.key)
+        return Greeting(messages=str(ride))
+        # try:
+        # print datastores.returnUser(request.key)
+
+          # returns in json format
+        # except:
+        # return Greeting(message="not in database")
+    rideCreate = endpoints.ResourceContainer(
+        Ride
+        # userkey
+    )  # defines resources in post request
+
+    @endpoints.method(rideReturn, Greeting,
+                      path='datastore/createRide', http_method='POST',
+                      name='ride.create')  # defines url and type of request
+    def createRide(self, request):
+        ride = datastores.returnRide(request.key)
+        return Greeting(messages=str(ride))
+
+    # This area bellow is for user specific api functions
+
+
+
+
+
+
+    userReturn = endpoints.ResourceContainer(
+        # Greeting
+        keySearch
+    )  # defines resources in post request
+
+    @endpoints.method(userReturn, user,
                       path='datastore/returnUser', http_method='POST',
                       name='user.return')  # defines url and type of request
+
     def returnUser(self, request):
         # try:
         # print datastores.returnUser(request.key)
@@ -90,35 +127,20 @@ class UberApi(remote.Service):
         return user(email=email, pswd=pswd, code=code)  # returns in json format
         # except:
         # return Greeting(message="not in database")
-    # ID_RESOURCE3 = endpoints.ResourceContainer(
-    #     Ride
-    #     # userkey
-    # )  # defines resources in post request
-    #
-    # @endpoints.method(ID_RESOURCE3, Greeting,
-    #                   path='datastore/returnUser', http_method='POST',
-    #                   name='user.return')  # defines url and type of request
-    # def returnUser(self, request):
-    #     return Greeting(messages="test")
-    #     # try:
-    #     # print datastores.returnUser(request.key)
-    #
-    #       # returns in json format
-    #     # except:
-    #     # return Greeting(message="not in database")
-    ID_RESOURCE = endpoints.ResourceContainer(
+
+    createUser = endpoints.ResourceContainer(
         user
         # code=messages.IntegerField(1, variant=messages.Variant.INT32),email = messages.StringField(2, required=True),pswd = messages.StringField(3, required=True))
     )
 
-    @endpoints.method(ID_RESOURCE, userKey,
+    @endpoints.method(createUser, keySearch,
                       path='datastore/usercreate', http_method='POST',
                       name='user.create')
-    def greeting_get(self, request):
+    def userCreate(self, request):
         userkey = datastores.createUser(request.email, request.pswd,
                                         str(request.code))  # create user from requests object
 
-        return userKey(key=userkey)  # returns userkey to frontend
+        return keySearch(key=userkey)  # returns userkey to frontend
 
 
     def compare(pickuptime, pickupdate):

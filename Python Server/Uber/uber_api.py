@@ -56,7 +56,7 @@ class Ride(messages.Message):
     elat = messages.FloatField(5, required=True)
     time = messages.StringField(6, required=True)
     date = messages.StringField(7, required=True)
-    rid = messages.StringField(8, required=True) #ride ID
+    # rid = messages.StringField(8, required=True) #ride ID
 
 STORED_GREETINGS = GreetingCollection(items=[
     Greeting(message='hello world!'),
@@ -71,12 +71,13 @@ class UberApi(remote.Service):
         # userkey
     )  # defines resources in post request
 
-    @endpoints.method(rideReturn, Greeting,
+    @endpoints.method(rideReturn, Ride,
                       path='datastore/returnRide', http_method='POST',
                       name='ride.return')  # defines url and type of request
     def returnRide(self, request):
         ride = datastores.returnRide(request.key)
-        return Greeting(messages=str(ride))
+        print ride
+        return Ride(ukey=ride[0], slong=ride[1], slat=ride[2], elong=ride[3], elat=ride[4], time=ride[5], date=ride[6])
         # try:
         # print datastores.returnUser(request.key)
 
@@ -88,12 +89,12 @@ class UberApi(remote.Service):
         # userkey
     )  # defines resources in post request
 
-    @endpoints.method(rideReturn, Greeting,
+    @endpoints.method(rideCreate, keySearch,
                       path='datastore/createRide', http_method='POST',
                       name='ride.create')  # defines url and type of request
     def createRide(self, request):
-        ride = datastores.returnRide(request.key)
-        return Greeting(messages=str(ride))
+        ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time, request.date, )
+        return keySearch(key=int(ride))
 
     # This area bellow is for user specific api functions
 

@@ -54,8 +54,8 @@ class UserRideDataBase(webapp2.RequestHandler):
         print("userKey",user_key)
         return user_key
 
-    def createRide(self, ukey, slong, slat, elong, elat, time, date, rid):
-        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date, rid=rid)
+    def createRide(self, ukey, slong, slat, elong, elat, time, date):
+        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date)
         ride_key = ride.put();
         print("rideKey",ride_key.id())
         return ride_key.id()
@@ -65,7 +65,9 @@ class UserRideDataBase(webapp2.RequestHandler):
         key= ndb.Key("Ride", rid)
         greetings = key.get()
         print greetings
-        return greetings
+        x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time, greetings.date]
+
+        return x
 
     def returnUser(self,keys):
         # d = UserID.all()

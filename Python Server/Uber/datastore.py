@@ -31,6 +31,10 @@ class Ride(ndb.Model):
     elat = ndb.FloatProperty(indexed=False)
     time = ndb.StringProperty()
     date = ndb.StringProperty()
+    @classmethod
+    def query_book(cls, ancestor_key):
+        return cls.query(ancestor=ancestor_key).order(-cls.date)
+
      #ride ID
 
 class UserRideDataBase(webapp2.RequestHandler):
@@ -59,11 +63,21 @@ class UserRideDataBase(webapp2.RequestHandler):
         ride_key = ride.put();
         print("rideKey",ride_key.id())
         return ride_key.id()
-
-    def returnRide(self, rid):
+    def returnRide(self, userId):
         # d = UserID.all()
-        key= ndb.Key("Ride", rid)
+        key= ndb.Key("User", userId)
         greetings = key.get()
+        print greetings
+        x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time, greetings.date]
+
+        return x
+
+    def returnAllRides(self, userId):
+        # d = UserID.all()
+        key= ndb.Key("Ride", userId)
+        greetings = Ride.query_book(key).fetch(20)
+
+
         print greetings
         x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time, greetings.date]
 

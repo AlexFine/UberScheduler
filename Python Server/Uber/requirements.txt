@@ -6,3 +6,5 @@
 # Note: The `lib` directory is added to `sys.path` by `appengine_config.py`.
 Flask==0.10
 requests==2.3
+uber_rides=0.2
+

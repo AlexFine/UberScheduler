@@ -1,9 +1,9 @@
 import cgi
 import requests #need this
 
-from google.appengine.api import users
-from google.appengine.ext import ndb
-
+# from google.appengine.api import users
+# from google.appengine.ext import ndb
+import datastore
 import webapp2
 import json #need this
 #WHICH OF THESE DO WE NEED AND WHICH ARE NOT NESSESARY??
@@ -20,12 +20,13 @@ r = requests.get("https://login.uber.com/oauth/v2/token?client_secret=MOlViQFGoz
 #removed paramenter: &redirect_uri=YOUR_REDIRECT_URI becuase I don't get how it works.
 
 #parse the json that was returned:
+print r
 pjson = json.loads(r)
 accesstoken = pjson['access_token'] #the real deal
 refreshtoken = pjson['refresh_token'] #to refresh the access token after 30 days
 
 #insert into database
-userkey = datastores.createUser(user, passw, authtoken)
+userkey = datastore.createUser(user, passw, authtoken)
 
 #return userkey somehow
 print userkey #CHANGE THIS

@@ -378,6 +378,7 @@ angular.module('starter.controllers', ['ui.bootstrap'])
       };
       var map = new google.maps.Map(document.getElementById("map"),
           mapOptions);
+          
 
       //Marker + infowindow + angularjs compiled ng-click
       var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
@@ -488,8 +489,8 @@ angular.module('starter.controllers', ['ui.bootstrap'])
     // Triggered on a button click, or some other target
 
  // An alert dialog
- $scope.showAlert = function() {
-     console.log("Hello test");
+ $scope.showRemainingRides = function() {
+   console.log("Hello test");
    var alertPopup = $ionicPopup.alert({
      title: 'Future Rides',
      template: 'The number of future rides you have on this schedule'

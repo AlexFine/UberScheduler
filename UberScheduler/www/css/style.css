@@ -32,8 +32,11 @@
   position: absolute;
 }
 .main-address-div-ride-edit {
-  width: 98%;
-  margin: 1%;
+  position: absolute;
+  padding: 2%;
+  padding-top: 10px;
+  left: 2%;
+  width: 96%;
 }
 
 .main-modal {

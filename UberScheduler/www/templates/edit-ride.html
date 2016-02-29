@@ -12,7 +12,7 @@
                     Remaining Time: {{timeUntilDate(configuredRide.nextRide, "string")}}
                 </div>
                 <div class="item">
-                    Future Rides: 13 <span style="float:right; font-size:20px;" class="ion-ios-information-outline" ng-click="showAlert()"></span>
+                    Future Rides: 13 <span style="float:right; font-size:20px;" class="ion-ios-information-outline" ng-click="showRemainingRides()"></span>
                 </div>
 
 
@@ -87,7 +87,7 @@
             <button class="button button-outline button-calm button-block" ng-click="isCollapsedMap = !isCollapsedMap">
                 <span ng-if="isCollapsedMap">Open</span><span ng-if="!isCollapsedMap">Close</span> Map
             </button>
-            <div uib-collapse="isCollapsedMap" style="padding:10px;">
+            <div uib-collapse="!isCollapsedMap" style="padding:1%;">
                 <!--Options for alternate MAP SECTION -->
                 <div class="main-address-div-ride-edit">
                     <div style="margin:1%;">
@@ -100,7 +100,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
 
@@ -117,26 +116,16 @@
             <div class="card">
                 <div class="item item-text-wrap">
                     This is a basic Card which contains an item that has wrapping text.
-                </div>
-            </div>
-
-            <div class="scheduled-options-card">
-                <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
-                <div class="list">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Pickup:</span> {{configuredRide.pickupName[0]}} {{configuredRide.pickupName[1]}}, {{configuredRide.pickupName[2]}} {{configuredRide.pickupName[3]}}
-                    </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Dropoff:</span> {{configuredRide.dropName[0]}} {{configuredRide.dropName[1]}}, {{configuredRide.dropName[2]}} {{configuredRide.dropName[3]}}
-                    </label>
-                </div>
-                <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
-                    <div class="col" ng-repeat="day in configuredRide.repeatedDays track by $index">
-                        <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{rideId}}, {{$index}})">
-                            <p>{{daysOfWeek[$index].substr(0, 3)}}</p>
-                        </button>
+                    <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
+                    <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
+                        <div class="col" ng-repeat="day in configuredRide.repeatedDays track by $index">
+                            <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{rideId}}, {{$index}})">
+                                <p>{{daysOfWeek[$index].substr(0, 3)}}</p>
+                            </button>
+                        </div>
                     </div>
                 </div>
+            </div>
                 <!-- <div class="row">
             <div class="col date-select button button-outline button-positive" ng-click="selectDate('startDate', {{$index}})">
                 Start Date:

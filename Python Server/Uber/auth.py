@@ -1,17 +1,12 @@
 import cgi
 import requests #need this
 
-<<<<<<< HEAD
-# from google.appengine.api import users
-# from google.appengine.ext import ndb
-import datastore
-import webapp2
-=======
+
 #from google.appengine.api import users
 #from google.appengine.ext import ndb
 
 #import webapp2
->>>>>>> origin/master
+
 import json #need this
 #WHICH OF THESE DO WE NEED AND WHICH ARE NOT NESSESARY??
 

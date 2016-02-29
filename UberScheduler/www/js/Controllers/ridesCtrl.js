@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ui.bootstrap']).controller('ridesCtrl', function ($scope, $ionicPopup, $timeout) {
+angular.module('starter.controllers', ['ui.bootstrap']).controller('ridesCtrl', function ($scope, $ionicPopup, $timeout, accessSchedule) {
 
   $scope.isCollapsed = false;
 

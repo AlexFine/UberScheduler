@@ -53,10 +53,10 @@ class UserRideDataBase(webapp2.RequestHandler):
     # print ("query",qry.kind)
 
     def createUser(self, email, passwd, ua):
-        user = User(email=email, passwd=passwd, uberauth=ua)
-        user_key = user.put();
+        user = User(email=email, passwd=passwd, uberauth=ua) #creates user object
+        user_key = user.put(); #add to datastore
         print("userKey",user_key)
-        return user_key
+        return user_key.id()
 
     def createRide(self, ukey, slong, slat, elong, elat, time, date):
         ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time, date=date)
@@ -74,7 +74,7 @@ class UserRideDataBase(webapp2.RequestHandler):
 
     def returnAllRides(self, userId):
         # d = UserID.all()
-        key= ndb.Key("Ride", userId)
+        key= ndb.Key("Ride", userId)  #
         greetings = Ride.query_book(key).fetch(20)
 
 
@@ -89,6 +89,6 @@ class UserRideDataBase(webapp2.RequestHandler):
         greetings = key.get()
         print greetings
 
-        x =[greetings.email, greetings.passwd, greetings.uberauth]
+        x =[greetings.email, greetings.passwd, greetings.uberauth] #formats it correctly
         print x
         return x

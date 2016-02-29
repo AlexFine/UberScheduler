@@ -119,12 +119,10 @@ class UberApi(remote.Service):
         users = datastores.returnUser(request.key)  # pings data store api
         print user
         print "test 2"
-        email = str(unicodedata.normalize('NFKD', users[0]).encode('ascii', 'ignore'))
+        email = str(unicodedata.normalize('NFKD', users[0]).encode('ascii', 'ignore')) #turns unicode to ascii
         pswd = str(unicodedata.normalize('NFKD', users[1]).encode('ascii', 'ignore'))
         code = int(unicodedata.normalize('NFKD', users[2]).encode('ascii', 'ignore'))
-        print email
-        print pswd
-        print code
+
         return user(email=email, pswd=pswd, code=code)  # returns in json format
         # except:
         # return Greeting(message="not in database")
@@ -161,7 +159,7 @@ class UberApi(remote.Service):
         month = float(time.strftime('%m'))
         year = float(time.strftime('%y'))
 
-        tmins = hour + min
+        tmins = hour + min                  #
 
         diff = dtmins - tmins
 

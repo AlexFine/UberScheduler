@@ -45,7 +45,6 @@ angular.module('starter.controllers', ['ui.bootstrap'])
 
     $scope.isCollapsed = false;
 
-
     //MODAL SHIZ STUFF FOR UI BOOTSTRAP
     $scope.items = ['item1', 'item2', 'item3'];
 

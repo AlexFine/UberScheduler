@@ -1,6 +1,6 @@
-angular.module('starter.services', ['ionic', 'ngCordova'])
+// console.log("Rides service file loaded")
+angular.module('myServiceModule', ['ionic', 'ngCordova'])
   .factory('accessSchedule', function() {
-    return {
-      scheduledRides: "hello"
-    }
+    var testVariable = "Kevin"
+    return testVariable;
   })

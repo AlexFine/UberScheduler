@@ -1,4 +1,6 @@
-angular.module('starter.controllers', ['ui.bootstrap']).controller('ridesCtrl', function ($scope, $ionicPopup, $timeout, accessSchedule) {
+console.log("Rides controller file loaded");
+angular.module('starter.controllers', ['ui.bootstrap'])
+.controller('ridesCtrl', function ($scope, $ionicPopup, $timeout, accessSchedule) {
 
   $scope.isCollapsed = false;
 

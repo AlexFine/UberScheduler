@@ -11,21 +11,22 @@ import json #need this
 
 from rauth import OAuth2Service
 
-uber_api = OAuth2Service(
-     client_id='_g8Fw1o5KsrVRNBNskv2cMEMhoE6RPbW',
-     client_secret='MOlViQFGozeOuCdADPhBBay7_Jz6Ac1YfqcZpTWT',
-     name='On Point',
-     authorize_url='https://login.uber.com/oauth/authorize',
-     access_token_url='https://login.uber.com/oauth/token',
-     base_url='https://api.uber.com/v1/',
- )
+def auth_step_one():
+    uber_api = OAuth2Service(
+         client_id='_g8Fw1o5KsrVRNBNskv2cMEMhoE6RPbW',
+         client_secret='MOlViQFGozeOuCdADPhBBay7_Jz6Ac1YfqcZpTWT',
+         name='On Point',
+         authorize_url='https://login.uber.com/oauth/authorize',
+         access_token_url='https://login.uber.com/oauth/token',
+         base_url='https://api.uber.com/v1/',
+     )
 
-parameters = {
-    'response_type': 'code',
-    'redirect_uri': 'appspoturl.com/auth_2',
-    'scope': 'profile',
-}
+    parameters = {
+        'response_type': 'code',
+        'redirect_uri': 'appspoturl.com/auth_2',
+        'scope': 'profile',
+    }
 
-# Redirect user here to authorize your application
-login_url = uber_api.get_authorize_url(**parameters)
-print(login_url)
+    # Redirect user here to authorize your application
+    login_url = uber_api.get_authorize_url(**parameters)
+    return login_url

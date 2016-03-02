@@ -13,6 +13,8 @@ import time
 from google.appengine.api import urlfetch
 # from flask import Flask
 import unicodedata
+from auth_1 import auth_step_one
+from auth_2 import auth_step_two
 
 datastores = UserRideDataBase()
 package = 'Hello'
@@ -89,15 +91,20 @@ class UberApi(remote.Service):
         # userkey
     )  # defines resources in post request
 
-    @endpoints.method(rideCreate, keySearch,
-                      path='datastore/createRide', http_method='POST',
-                      name='ride.create')  # defines url and type of request
+    @endpoints.method(rideCreate, keySearch, path='datastore/createRide', http_method='POST', name='ride.create')  # defines url and type of request
     def createRide(self, request):
         ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time, request.date, )
         return keySearch(key=int(ride))
 
-    # This area bellow is for user specific api functions
+    # Authorization
+    @endpoints.method(path='authorize/stepone', http_method='GET', name='auth.one')
+    def redirectUrl(self, request):
+        reurl = auth_step_one()
 
+    @endpoints.method(path='authorize/steptwo', http_method='GET', name='auth.two')
+    def returnToken(self, request):
+        uniquet = self.request.get('code')
+        realtoken = auth_step_two(uniquet)
 
 
 

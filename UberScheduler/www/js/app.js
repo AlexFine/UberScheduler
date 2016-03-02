@@ -10,6 +10,7 @@ angular.module('starter', ['ionic',
   'editRideCtrl',
   'homeScreenCtrl',
   'scheduledRidesCtrl',
+  'rideHistoryCtrl',
   'settingsCtrl',
   'helpCtrl',
   'ModalInstanceCtrl'
@@ -42,7 +43,7 @@ angular.module('starter', ['ionic',
   })
 
   .state('app.homeScreen', {
-    url: '/callRide',
+    url: '/homeScreen',
     views: {
       'menuContent': {
         templateUrl: 'templates/homeScreen.html',
@@ -52,7 +53,7 @@ angular.module('starter', ['ionic',
   })
 
   .state('app.scheduledRides', {
-    url: '/rides',
+    url: '/scheduledRides',
     views: {
       'menuContent': {
         templateUrl: 'templates/scheduledRides.html',
@@ -71,7 +72,17 @@ angular.module('starter', ['ionic',
     }
   })
 
-  .state('app.settingsCtrl', {
+  .state('app.rideHistory', {
+    url: '/rideHistory',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ride-history.html',
+        controller: 'rideHistoryCtrl'
+      }
+    }
+  })
+
+  .state('app.settings', {
     url: '/settings',
     views: {
       'menuContent': {
@@ -92,5 +103,5 @@ angular.module('starter', ['ionic',
   })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/callRide');
+  $urlRouterProvider.otherwise('/app/homeScreen');
 });

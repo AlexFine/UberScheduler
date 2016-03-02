@@ -7,9 +7,10 @@
 angular.module('starter', ['ionic',
   'starter.controllers',
   'ridesCtrl',
-  'editRide',
+  'editRideCtrl',
   'homeScreenCtrl',
   'scheduledRidesCtrl',
+  'rideHistoryCtrl',
   'settingsCtrl',
   'helpCtrl',
   'ModalInstanceCtrl'
@@ -41,12 +42,42 @@ angular.module('starter', ['ionic',
     controller: 'AppCtrl'
   })
 
-  .state('app.callRide', {
-    url: '/callRide',
+  .state('app.homeScreen', {
+    url: '/homeScreen',
     views: {
       'menuContent': {
-        templateUrl: 'templates/callRide.html',
-        controller: 'callRideCtrl'
+        templateUrl: 'templates/homeScreen.html',
+        controller: 'homeScreenCtrl'
+      }
+    }
+  })
+
+  .state('app.scheduledRides', {
+    url: '/scheduledRides',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/scheduledRides.html',
+        controller: 'scheduledRidesCtrl'
+      }
+    }
+  })
+
+  .state('app.editRide', {
+    url: '/rideEdit/:rideId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/edit-ride.html',
+        controller: 'editRideCtrl'
+      }
+    }
+  })
+
+  .state('app.rideHistory', {
+    url: '/rideHistory',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ride-history.html',
+        controller: 'rideHistoryCtrl'
       }
     }
   })
@@ -71,26 +102,6 @@ angular.module('starter', ['ionic',
     }
   })
 
-  .state('app.rides', {
-    url: '/rides',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/rides.html',
-        controller: 'ridesCtrl'
-      }
-    }
-  })
-
-  .state('app.edit-ride', {
-    url: '/rideEdit/:rideId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/edit-ride.html',
-        controller: 'rideEdit'
-      }
-    }
-  })
-
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/callRide');
+  $urlRouterProvider.otherwise('/app/homeScreen');
 });

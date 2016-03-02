@@ -1,5 +1,6 @@
-angular.module('starter.controllers', ['ui.bootstrap'])
+angular.module('editRide', ['ui.bootstrap'])
 .controller('rideEdit', function ($scope, $stateParams, $ionicPopup, $timeout, $compile, $ionicLoading) {
+  //Need to change rideEdit to editRide
 
 
 

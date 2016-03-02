@@ -1,9 +1,7 @@
-console.log("Rides controller file loaded");
-angular.module('ridesCtrl', ['ui.bootstrap'])
-.controller('ridesCtrl', function ($scope, $ionicPopup, $timeout) {
+angular.module('scheduledRidesCtrl', ['ui.bootstrap'])
+.controller('scheduledRidesCtrl', function ($scope, $ionicPopup, $timeout) {
 
   $scope.isCollapsed = false;
-
 
   //MODAL SHIZ STUFF FOR UI BOOTSTRAP
   $scope.items = ['item1', 'item2', 'item3'];
@@ -290,5 +288,172 @@ angular.module('ridesCtrl', ['ui.bootstrap'])
 
     return '';
   };
+
+})
+
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+})
+
+.controller('rideEdit', function ($scope, $stateParams, $ionicPopup, $timeout, $compile, $ionicLoading) {
+
+
+
+  //GOOGLE MAPS CODE
+  initialize = function () {
+    console.log("Initializing Google Maps")
+    var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
+
+    var mapOptions = {
+      center: myLatlng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true, // Disable UI controls
+
+      // Individual UI Components
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false
+    };
+    var map = new google.maps.Map(document.getElementById("map"),
+      mapOptions);
+
+
+    //Marker + infowindow + angularjs compiled ng-click
+    var contentString = "<div><a ng-click='clickTest()'>Call Uber!</a></div>";
+    var compiled = $compile(contentString)($scope);
+
+    var infowindow = new google.maps.InfoWindow({
+      content: compiled[0]
+    });
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Uluru (Ayers Rock)'
+    });
+
+    google.maps.event.addListener(marker, 'click', function () {
+      infowindow.open(map, marker);
+    });
+
+    $scope.map = map;
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize());
+
+  $scope.centerOnMe = function () {
+    console.log("Getting current location...")
+    if (!$scope.map) {
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var myLatlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+      $scope.map.setCenter(myLatlng);
+
+      alat = pos.coords.latitude;
+      along = pos.coords.longitude;
+      console.log(alat, along);
+      // document.getElementById("lat").innerHTML = alat;
+      // document.getElementById("long").innerHTML = along;
+
+      // Set marker
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: $scope.map,
+        title: 'Uluru (Ayers Rock)' // Don't know what this is for
+      });
+
+      $ionicLoading.hide();
+
+    }, function (error) {
+      alert('Unable to get location: ' + error.message);
+    });
+  };
+
+  $scope.clickTest = function () {
+    alert('Will Launch Call Uber Window From here')
+  };
+  //END OF GOOGLE MAPS CODE
+
+
+  //Get ride ID
+  $scope.rideId = $stateParams.rideId;
+  console.log($scope.rideId)
+
+  $scope.UberTypes = ["UberX", "UberBlack", "UberBlack", "ACCESS"];
+  $scope.daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  $scope.updateRepeatedDay = function (parent, child) {
+    // console.log("Updating days of week of schedule", parent)
+    var schedule = $scope.scheduledRides[parent];
+    var previous = schedule.repeatedDays;
+    for (var i = 0; i < previous.length; i++) {
+      if (i == child) {
+        $scope.scheduledRides[parent].repeatedDays[i] = !previous[i]; //Flip value
+        // console.log("Day", i, "now", !previous[i]);
+      }
+    }
+    var updatedSchedule = $scope.scheduledRides[parent];
+    var rideTime = updatedSchedule.time;
+    var daysOfWeek = updatedSchedule.repeatedDays;
+    $scope.scheduledRides[parent].nextRide = findNextRide(rideTime, daysOfWeek);
+    // console.log($scope.scheduledRides[parent].nextRide); //Feedback
+  };
+
+  //Copied from 'rides' controller - can't figure out how to access variables across different controllers
+  $scope.scheduledRides = [
+    {
+      time: new Date(2016, 0, 1, 2, 3, 4, 567),
+      pickupLocation: [34.07636433, -118.4290661],
+      pickupName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"], //Will declare this variable when the location is selected on the map
+      dropLocation: [34.07636433, -118.4290661],
+      dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
+      repeatedDays: [false, true, false, true, false, true, false],
+      startDate: new Date(2016, 01, 01), //Months indexed from 0
+      endDate: new Date(2016, 2, 01),
+      nextRide: new Date(findNextRide(new Date(2016, 0, 1, 2, 3, 4, 567), [false, true, false, true, false, true, false])), //Calculated on spot because these are tests
+      product: 1,
+      showOptions: true
+    }
+  ];
+
+  $scope.configuredRide = $scope.scheduledRides[$scope.rideId];
+
+  // Controller for popup icon that gives information on what Future Rides are
+  // Triggered on a button click, or some other target
+
+  // An alert dialog
+  $scope.showRemainingRides = function () {
+    console.log("Hello test");
+    var alertPopup = $ionicPopup.alert({
+      title: 'Future Rides',
+      template: 'The number of future rides you have on this schedule'
+    });
+
+    alertPopup.then(function (res) {
+      console.log('Thank you for not eating my delicious ice cream cone');
+    });
+  };
+
+  $scope.isCollapsedPickup = true;
+  $scope.isCollapsedDropoff = true;
+  $scope.isCollapsedMap = true;
+
 
 })

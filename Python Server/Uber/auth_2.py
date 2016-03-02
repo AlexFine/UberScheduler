@@ -1,14 +1,18 @@
 import cgi
 import requests
 #from rauth import OAuth2Service
-from flask import request, url_f
+from flask import Flask
+from flask import request
+app = Flask(__name__)
 
 # Once your user has signed in using the previous step you should redirect
 # them here
-def go():
+with app.test_request_context():
+
     parameters = {
-        'redirect_uri': 'INSERT_ROUTE_TO_STEP_TWO',
-        'code': request.args.get('code'),
+        'redirect_uri': 'http://localhost',
+        #'code': request.args.get('code'),
+        'code': 'i7q6Yfx6FjKy53f23v5P2mopue4zkg',
         'grant_type': 'authorization_code',
     }
 
@@ -20,7 +24,7 @@ def go():
         ),
         data=parameters,
     )
-
+    print response
     # This access_token is what we'll use to make requests in the following
     # steps
     access_token = response.json().get('access_token')

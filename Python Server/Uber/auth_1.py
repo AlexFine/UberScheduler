@@ -22,9 +22,10 @@ uber_api = OAuth2Service(
 
 parameters = {
     'response_type': 'code',
-    'redirect_uri': 'INSERT_ROUTE_TO_STEP_TWO',
+    'redirect_uri': 'appspoturl.com/auth_2',
     'scope': 'profile',
 }
 
 # Redirect user here to authorize your application
 login_url = uber_api.get_authorize_url(**parameters)
+print(login_url)

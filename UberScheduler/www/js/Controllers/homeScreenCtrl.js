@@ -1,5 +1,5 @@
 angular.module('homeScreenCtrl', ['ui.bootstrap'])
-.controller('callRideCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {
+.controller('homeScreenCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {
   initialize = function () {
     console.log("Initializing Google Maps")
     var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
@@ -57,8 +57,6 @@ angular.module('homeScreenCtrl', ['ui.bootstrap'])
       alat = pos.coords.latitude;
       along = pos.coords.longitude;
       console.log(alat, along);
-      document.getElementById("lat").innerHTML = alat;
-      document.getElementById("long").innerHTML = along;
 
       // Set marker
       var marker = new google.maps.Marker({

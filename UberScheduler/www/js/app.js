@@ -7,7 +7,7 @@
 angular.module('starter', ['ionic',
   'starter.controllers',
   'ridesCtrl',
-  'editRide',
+  'editRideCtrl',
   'homeScreenCtrl',
   'scheduledRidesCtrl',
   'settingsCtrl',
@@ -41,17 +41,37 @@ angular.module('starter', ['ionic',
     controller: 'AppCtrl'
   })
 
-  .state('app.callRide', {
+  .state('app.homeScreen', {
     url: '/callRide',
     views: {
       'menuContent': {
-        templateUrl: 'templates/callRide.html',
-        controller: 'callRideCtrl'
+        templateUrl: 'templates/homeScreen.html',
+        controller: 'homeScreenCtrl'
       }
     }
   })
 
-  .state('app.settings', {
+  .state('app.scheduledRides', {
+    url: '/rides',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/scheduledRides.html',
+        controller: 'scheduledRidesCtrl'
+      }
+    }
+  })
+
+  .state('app.editRide', {
+    url: '/rideEdit/:rideId',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/edit-ride.html',
+        controller: 'editRideCtrl'
+      }
+    }
+  })
+
+  .state('app.settingsCtrl', {
     url: '/settings',
     views: {
       'menuContent': {
@@ -67,26 +87,6 @@ angular.module('starter', ['ionic',
       'menuContent': {
         templateUrl: 'templates/help.html',
         controller: 'helpCtrl'
-      }
-    }
-  })
-
-  .state('app.rides', {
-    url: '/rides',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/rides.html',
-        controller: 'ridesCtrl'
-      }
-    }
-  })
-
-  .state('app.edit-ride', {
-    url: '/rideEdit/:rideId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/edit-ride.html',
-        controller: 'rideEdit'
       }
     }
   })

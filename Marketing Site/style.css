@@ -6,6 +6,8 @@ body {
   background-image: url("dirt.jpg");
 	font-size: 20px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	overflow-x: hidden;
+
 }
 body, html {
 	height: 100%
@@ -201,6 +203,8 @@ section.demo {
 	font-size: 0;
 	text-align: center;
 	background-image: url("asphalt.jpg");
+	margin-left:-10%;
+	width:120%;
 }
 section.demo.fullheight {
 	min-height: 100%;
@@ -343,7 +347,7 @@ h1.badge.velocity:after {
   min-width: 50px;
   height: 80px;
   margin: 25px auto 25px auto;
-  left:-35%;
+  left:-450px;
   content: url(car.png);
 }
 .road{
@@ -352,10 +356,10 @@ h1.badge.velocity:after {
     border: 0px solid white;
     padding: 0 5px;
     min-width: 50px;
-    height: 620px;
+    height: 820px;
     width: 260px;
     /*margin: 25px auto 25px auto;*/
-    left:10%;
+    left:200px;
     background-image: url(road.jpg);
     background-repeat: repeat-y;
     z-index: 0;

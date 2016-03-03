@@ -7,6 +7,7 @@
 </head>
 <body>
 <div class="scrollContent">
+
 	<section id="titlechart">
 		<div id="description">
 			<h1>App Name</h1>
@@ -17,6 +18,7 @@
 			var controller = new ScrollMagic.Controller();
 		</script>
 	</section>
+
 	<section class="demo">
 
 		<div id="trigger1" class="spacer s0"></div>
@@ -32,9 +34,9 @@ Your head will explode on impact with this app
 		<script>
 			$(function () { // wait for document ready
 				// build scene
-				var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 500})
+				var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 700})
 								.setPin("#pin1")
-								.addIndicators({name: "1 (duration: 500)"}) // add indicators (requires plugin)
+								.addIndicators({name: "1 (duration: 700)"}) // add indicators (requires plugin)
 								.addTo(controller);
 			});
 		</script>

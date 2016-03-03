@@ -1,0 +1,66 @@
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="scrollContent">
+	<section id="titlechart">
+		<div id="description">
+			<h1>App Name</h1>
+			<h2>So convinient you'll shit yourself</h2>
+		</div>
+		<script>
+			// init controller
+			var controller = new ScrollMagic.Controller();
+		</script>
+	</section>
+	<section class="demo">
+
+		<div id="trigger1" class="spacer s0"></div>
+<!-- <div id="carmove" class="spacer s0">
+Your head will explode on impact with this app
+</div> -->
+<div class="road"></div>
+
+		<div id="pin1" class="car">
+		</div>
+		<div class="spacer s2"></div>
+
+		<script>
+			$(function () { // wait for document ready
+				// build scene
+				var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 500})
+								.setPin("#pin1")
+								.addIndicators({name: "1 (duration: 500)"}) // add indicators (requires plugin)
+								.addTo(controller);
+			});
+		</script>
+
+	</section>
+
+
+	<!-- <section class="demo">
+		<div class="spacer s2"></div>
+		<div id="trigger2" class="spacer s0"></div>
+		<div id="pin2" class="box2 blue">
+			<p>Take me with you!</p>
+			<a href="#" class="viewsource">view source</a>
+		</div>
+		<div class="spacer s2"></div>
+		<script>
+			$(function () { // wait for document ready
+				// build scene
+				var scene = new ScrollMagic.Scene({triggerElement: "#pin2"})
+								.setPin("#pin2")
+								.addIndicators({name: "2 (duration: 0)"}) // add indicators (requires plugin)
+								.addTo(controller);
+			});
+		</script>
+	</section> -->
+	<div class="spacer s_viewport"></div>
+</div>
+</body>
+</html>

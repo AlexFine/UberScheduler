@@ -1,0 +1,73 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="jquery.min.js"></script>
+  <script src="ft.js"></script>
+
+<script src="waypoint.js"></script>
+
+</head>
+<body>
+<section id="one" class="section">
+  <h1 id="title">App Name</h1>
+  <h1 id="subtitle">So cool you'll freeze to death</h1>
+
+  <div id="wp" class="wp">
+  Trigger
+  </div>
+
+</section>
+
+<section id="two" class="section">
+
+<div class="animation">
+  <h1>Animation</h1>
+  <div class="car" id="car"></div>
+  <div class="road"></div>
+</div>
+
+<div class="content">
+<h1>Content</h1>
+</div>
+
+</section>
+
+  <img src="spacer.png" height="150%" width="1%" />
+
+
+<!--WAYPOINT DETECTORS-->
+<script type="text/javascript">
+var init = 1;
+
+  var waypoint = new Waypoint({
+    element: document.getElementById('wp'),
+    handler: function(direction) {
+      // alert('Basic waypoint triggered')
+      if(direction == "down"){
+        $("#car").css({"position" : "fixed", "top" : $("#car")[0].getBoundingClientRect().top});
+        console.log("triggered - down");
+      }
+      if(direction == "up"){
+        $("#car").css({"position" : "absolute", "top" : "115%"});
+        console.log("triggered - down");
+      }
+
+    }
+  })
+
+  var init = new Waypoint({
+    element: document.getElementById('init'),
+    handler: function() {
+      init=0;
+      console.log('Initialized');
+    }
+  })
+</script>
+<!--FITTEXT GENERATORS-->
+<script type="text/javascript">
+$("#title").fitText();
+$("#subtitle").fitText(1.9);
+</script>
+
+</body>
+</html>

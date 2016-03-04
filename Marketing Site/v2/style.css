@@ -1,0 +1,53 @@
+.road{
+  position: absolute;
+  height: 90%;
+  width: 260px;
+  left: 15%;
+  background-image: url(road.jpg);
+  background-repeat: repeat-y;
+  z-index: 0;
+}
+
+.car{
+  position: absolute;
+  width: 80px;
+  left: 17%;
+  content: url(car.png);
+  top:115%;
+  z-index: 1;
+}
+
+.animation{
+  height: 100%;
+  width: 40%;
+  float:left;
+  background-color: yellow;
+  z-index: 0;
+}
+
+.content{
+  height: 100%;
+  width: 60%;
+  float:right;
+  background-color: green;
+  z-index: 0;
+}
+.section{
+  height: 100%;
+}
+
+h1{
+  text-align: center;
+}
+
+#wp{
+  position: absolute;
+  top: 70%;
+}
+
+#one{
+  background-color: red;
+}
+#two{
+  background-color: blue;
+}

@@ -350,6 +350,9 @@ h1.badge.velocity:after {
   left:-450px;
   content: url(car.png);
 }
+
+
+
 .road{
     position: absolute;
     border-radius: 8px;

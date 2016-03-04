@@ -1,11 +1,16 @@
+* { margin: 0; padding: 0; }
+html, body{
+  max-width:100%;
+  overflow-x: hidden;
+}
 .road{
   position: absolute;
-  height: 90%;
+  height: 100%;
   width: 260px;
   left: 15%;
   background-image: url(road.jpg);
   background-repeat: repeat-y;
-  z-index: 0;
+  z-index: 1;
 }
 
 .car{
@@ -14,23 +19,52 @@
   left: 17%;
   content: url(car.png);
   top:115%;
-  z-index: 1;
+  z-index: 2;
 }
 
 .animation{
   height: 100%;
   width: 40%;
   float:left;
-  background-color: yellow;
-  z-index: 0;
+  background-color: #2E0854;
+  z-index: 1;
 }
 
 .content{
   height: 100%;
   width: 60%;
   float:right;
-  background-color: green;
-  z-index: 0;
+  background-color: #2E0854;
+  z-index: 1;
+  color:white;
+  font-family: 'Raleway', sans-serif;
+
+}
+
+.video{
+  position:relative;
+  z-index:-1;
+  height:100% !important;
+  width:100% !important;
+  min-height:100%;
+  min-width:100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: scale(1.23);
+}
+
+.overlay{
+  position:absolute;
+  z-index:1;
+  top:150px;
+  width:100%;
+  height:100%;
+  color:#2E0854;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  line-height: 200px;
+
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
 }
 .section{
   height: 100%;
@@ -40,14 +74,29 @@ h1{
   text-align: center;
 }
 
+#bg{
+  z-index:0;
+  width:100%;
+  height:100%;
+  transform: scale(1.22);
+}
+
 #wp{
   position: absolute;
   top: 70%;
 }
+#turn{
+  position: absolute;
+  top: 200%;
+}
 
 #one{
-  background-color: red;
+  z-index: 1;
 }
 #two{
-  background-color: blue;
+  background-color: #2E0854;
+}
+#three{
+  background-color: #2E0854;
+
 }

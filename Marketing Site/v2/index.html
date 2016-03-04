@@ -5,34 +5,56 @@
   <script src="ft.js"></script>
 
 <script src="waypoint.js"></script>
-
-</head>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,800' rel='stylesheet' type='text/css'></head>
 <body>
+
+<!--TITLE SECTION-->
 <section id="one" class="section">
-  <h1 id="title">App Name</h1>
+
+  <div class="video">
+    <video id="bg" src="bg.mp4" poster="nice-default.jpg" preload autoplay muted loop />
+</div>
+
+<div class="overlay">
+  <h1 id="title">On-Point Uber</h1>
   <h1 id="subtitle">So cool you'll freeze to death</h1>
 
   <div id="wp" class="wp">
-  Trigger
   </div>
+</div>
 
 </section>
 
+<!--BULLET POINTS-->
 <section id="two" class="section">
 
+<!--LEFT COLLUMN-->
 <div class="animation">
-  <h1>Animation</h1>
   <div class="car" id="car"></div>
   <div class="road"></div>
 </div>
 
+<!--RIGHT COLLUMN-->
 <div class="content">
-<h1>Content</h1>
+<h1 id="info"></br></br>Schedule Ubers <u>On</u> The Daily
+</br></br>
+Schedule Ubers <u>On</u> Fleek
+</br></br>
+Schedule Ubers <u>On</u> time
+</br></br>
+Schedule Ubers <u>Off</u>line
+</h1>
 </div>
+
+<div id="turn" class="turn"></div>
 
 </section>
 
-  <img src="spacer.png" height="150%" width="1%" />
+
+<section id="three" class="section">
+  <h1>Content</h1>
+</section>
+
 
 
 <!--WAYPOINT DETECTORS-->
@@ -49,24 +71,27 @@ var init = 1;
       }
       if(direction == "up"){
         $("#car").css({"position" : "absolute", "top" : "115%"});
-        console.log("triggered - down");
+        console.log("triggered - up");
       }
 
     }
   })
 
-  var init = new Waypoint({
-    element: document.getElementById('init'),
-    handler: function() {
-      init=0;
-      console.log('Initialized');
-    }
+  var turn = new Waypoint({
+    element: document.getElementById('turn'),
+    handler: function(direction) {
+      //do somthing later
+    },
+    offset: '60%'
   })
+
 </script>
 <!--FITTEXT GENERATORS-->
 <script type="text/javascript">
 $("#title").fitText();
 $("#subtitle").fitText(1.9);
+$("#info").fitText(1.5);
+
 </script>
 
 </body>

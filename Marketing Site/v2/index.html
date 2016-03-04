@@ -12,7 +12,7 @@
 <section id="one" class="section">
 
   <div class="video">
-    <video id="bg" src="bg.mp4" poster="nice-default.jpg" preload autoplay muted loop />
+    <video id="bg" src="bg.mp4" preload autoplay muted loop />
 </div>
 
 <div class="overlay">
@@ -76,15 +76,41 @@ var init = 1;
 
     }
   })
-
+var stop = 0;
   var turn = new Waypoint({
     element: document.getElementById('turn'),
     handler: function(direction) {
-      //do somthing later
+      if(direction == "down"){
+      rotate();
+    }
+    if(direction == "up"){
+      stop=1;
+      console.log('stop please');
+}
     },
     offset: '60%'
   })
 
+function rotate(){
+  var $cog = $('#car'),
+    $body = $(document.body),
+    bodyHeight = $body.height();
+
+    $(window).scroll(function () {
+      if(stop == 0){
+    $cog.css({
+        'transform': 'rotate(' + (($body.scrollTop() / bodyHeight * 360) -168) + 'deg)',
+        'left': (25.2 - (($body.scrollTop() / bodyHeight)*17)) + '%'
+    });
+    console.log(25.2-($body.scrollTop() / bodyHeight)*17);
+}
+    if(stop==1){
+      $("#car").css({"transform" : "none", "left" : "17%"});
+    return;
+  }
+});
+stop = 0;
+}
 </script>
 <!--FITTEXT GENERATORS-->
 <script type="text/javascript">

@@ -61,14 +61,38 @@ html, body{
   width:100%;
   height:100%;
   color:#2E0854;
-  /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   line-height: 200px;
-
   font-weight: bold;
-font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
+
+.description{
+  width:40%;
+  float: left;
+  margin: 4%;
+  font-family: 'Roboto', sans-serif;
+  color:#2E0854;
+  font-size: 25px;
+}
+.shot{
+  position:relative;
+  width:40%;
+  float: right;
+  margin-top: 4%;
+  margin-left: 4%;
+  font-family: 'Roboto', sans-serif;
+  color:#2E0854;
+  font-size: 25px;
+}
+
 .section{
   height: 100%;
+}
+
+.page{
+  background-color: #bdc3c7;
+
 }
 
 h1{
@@ -99,12 +123,7 @@ h1{
 #two{
   background-color: #2E0854;
 }
-#three{
-  background-color: #2E0854;
-}
-.check{
-  opacity:0;
-}
+
 #cbase{
   position: relative;
   content: url(face.png);

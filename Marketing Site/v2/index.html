@@ -52,13 +52,24 @@
 
 </section>
 
+<div class="page">
 
 <!-- <section id="three" class="section"> -->
-  <div class="car" id="car"></div>
+  <!-- <div class="car" id="car"></div> -->
+
+  <div class="description" id="description">
+<h1>FAQ</h1></br>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar, ligula a aliquam dignissim, nunc ligula ultricies magna, nec rhoncus orci ligula ut metus. Duis non ornare felis. Suspendisse fringilla mi vel tortor porta vestibulum. Curabitur tempus purus augue, consectetur egestas lectus malesuada in. Aenean arcu mi, vulputate quis pretium eget, lacinia sit amet diam. Suspendisse augue diam, aliquam id eros eu, rhoncus tristique nunc. Quisque vestibulum, massa quis dignissim tempus, lorem nisi eleifend quam, efficitur viverra neque lorem lacinia massa. Nam pharetra tristique leo non vehicula. Donec pellentesque cursus nulla, ac ultrices tortor porttitor sit amet. Duis quis bibendum mi. Praesent nec diam diam. Sed magna nulla, consectetur eget urna quis, tincidunt dignissim felis.
+</p>
+  </div>
+  <div class="shot" id="shot">
+<img src="iphone.png" width="100%"/>
+  </div>
+
 
   <img src="spacer.png" height="1000px">
-<!-- </section> -->
-
+</div>
 
 <!--WAYPOINT DETECTORS-->
 <script type="text/javascript">
@@ -90,15 +101,14 @@
     element: document.getElementById('t3'),
     handler: function(direction) {
       if(direction == "down"){
-        $('#car').css({'top': '55%', 'position' : 'fixed'});
         stop=1;
+        $('#shot').css({'transform' : 'rotate(0deg)'})
     }
     if(direction == "up"){
-      $('#car').css({'position' : 'absolute', 'top': '210%'});
       stop=0;
   }
     },
-    offset: '15%'
+    offset: '8%'
   })
 
 rotate();
@@ -118,15 +128,15 @@ stop = 0;
 }
 move();
 function move(){
-  var $cog = $('#car'),
+  var $cog = $('#shot'),
     $body = $(document.body),
     bodyHeight = $body.height();
     $(window).scroll(function () {
       // var px = (($body.scrollTop() / bodyHeight * 2000)-700);
       if(stop == 0){
-      var curve = Math.log(($body.scrollTop() / bodyHeight)*4)/4;
-      var px = (curve*100);
-      $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -((($body.scrollTop() / bodyHeight * 360)-90)*1.2) + 'deg)'});
+      var curve = Math.log(($body.scrollTop() / bodyHeight)*2)/2;
+      var px = (curve*100)+120;
+      $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -((($body.scrollTop() / bodyHeight * 360)-135)) + 'deg)'});
     }
     else{
       return;

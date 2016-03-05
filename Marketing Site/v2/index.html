@@ -5,7 +5,8 @@
   <script src="ft.js"></script>
 
 <script src="waypoint.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Raleway:400,800' rel='stylesheet' type='text/css'></head>
+<link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+</head>
 <body>
 
 <!--TITLE SECTION-->
@@ -19,8 +20,6 @@
   <h1 id="title">On-Point Uber</h1>
   <h1 id="subtitle">So cool you'll freeze to death</h1>
 
-  <div id="wp" class="wp">
-  </div>
 </div>
 
 </section>
@@ -30,93 +29,117 @@
 
 <!--LEFT COLLUMN-->
 <div class="animation">
-  <div class="car" id="car"></div>
-  <div class="road"></div>
+
+<div class="ccontainer" id="ccontainer">
+  <div class="cbase" id="cbase"></div>
+  <div class="chand" id="chand"></div>
+</div>
+  <!-- <div class="road"></div> -->
 </div>
 
 <!--RIGHT COLLUMN-->
 <div class="content">
-<h1 id="info"></br></br>Schedule Ubers <u>On</u> The Daily
+<h1 id="info"></br></br><div id="t1">Schedule Ubers <u>On</u> The Daily</div>
 </br></br>
-Schedule Ubers <u>On</u> Fleek
+<div id="t2">Schedule Ubers <u>On</u> Fleek</div>
 </br></br>
-Schedule Ubers <u>On</u> time
-</br></br>
-Schedule Ubers <u>Off</u>line
+<div id="t3">Schedule Ubers <u>On</u> Time</div>
+<!-- </br></br>
+<div id="t4"><img src="check.png" width="50px" id="check4" class="check" />Schedule Ubers <u>Off</u>line</div> -->
 </h1>
 </div>
 
-<div id="turn" class="turn"></div>
 
 </section>
 
 
-<section id="three" class="section">
-  <h1>Content</h1>
-</section>
+<!-- <section id="three" class="section"> -->
+  <div class="car" id="car"></div>
 
+  <img src="spacer.png" height="1000px">
+<!-- </section> -->
 
 
 <!--WAYPOINT DETECTORS-->
 <script type="text/javascript">
-var init = 1;
 
-  var waypoint = new Waypoint({
-    element: document.getElementById('wp'),
-    handler: function(direction) {
-      // alert('Basic waypoint triggered')
-      if(direction == "down"){
-        $("#car").css({"position" : "fixed", "top" : $("#car")[0].getBoundingClientRect().top});
-        console.log("triggered - down");
-      }
-      if(direction == "up"){
-        $("#car").css({"position" : "absolute", "top" : "115%"});
-        console.log("triggered - up");
-      }
 
-    }
-  })
-var stop = 0;
-  var turn = new Waypoint({
-    element: document.getElementById('turn'),
+  var t1 = new Waypoint({
+    element: document.getElementById('t1'),
     handler: function(direction) {
       if(direction == "down"){
-      rotate();
     }
     if(direction == "up"){
-      stop=1;
-      console.log('stop please');
-}
+  }
     },
-    offset: '60%'
+    offset: '45%'
   })
 
+  var t2 = new Waypoint({
+    element: document.getElementById('t2'),
+    handler: function(direction) {
+      if(direction == "down"){
+    }
+    if(direction == "up"){
+  }
+    },
+    offset: '45%'
+  })
+
+  var t3 = new Waypoint({
+    element: document.getElementById('t3'),
+    handler: function(direction) {
+      if(direction == "down"){
+        $('#car').css({'top': '55%', 'position' : 'fixed'});
+        stop=1;
+    }
+    if(direction == "up"){
+      $('#car').css({'position' : 'absolute', 'top': '210%'});
+      stop=0;
+  }
+    },
+    offset: '15%'
+  })
+
+rotate();
 function rotate(){
-  var $cog = $('#car'),
+  var $cog = $('#chand'),
     $body = $(document.body),
     bodyHeight = $body.height();
 
     $(window).scroll(function () {
-      if(stop == 0){
     $cog.css({
-        'transform': 'rotate(' + (($body.scrollTop() / bodyHeight * 360) -168) + 'deg)',
-        'left': (25.2 - (($body.scrollTop() / bodyHeight)*17)) + '%'
+        'transform': 'rotate(' + (($body.scrollTop() / bodyHeight * 360)) + 'deg)',
+        //'left': (25.2 - (($body.scrollTop() / bodyHeight)*17)) + '%'
     });
-    console.log(25.2-($body.scrollTop() / bodyHeight)*17);
-}
-    if(stop==1){
-      $("#car").css({"transform" : "none", "left" : "17%"});
-    return;
-  }
+    // console.log(25.2-($body.scrollTop() / bodyHeight)*17);
 });
 stop = 0;
 }
+move();
+function move(){
+  var $cog = $('#car'),
+    $body = $(document.body),
+    bodyHeight = $body.height();
+    $(window).scroll(function () {
+      // var px = (($body.scrollTop() / bodyHeight * 2000)-700);
+      if(stop == 0){
+      var curve = Math.log(($body.scrollTop() / bodyHeight)*4)/4;
+      var px = (curve*100);
+      $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -((($body.scrollTop() / bodyHeight * 360)-90)*1.2) + 'deg)'});
+    }
+    else{
+      return;
+    }
+});
+}
+
 </script>
 <!--FITTEXT GENERATORS-->
 <script type="text/javascript">
 $("#title").fitText();
 $("#subtitle").fitText(1.9);
-$("#info").fitText(1.5);
+$("#info").fitText(1.6);
 
 </script>
 

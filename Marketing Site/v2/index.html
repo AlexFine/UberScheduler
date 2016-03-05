@@ -3,8 +3,8 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="jquery.min.js"></script>
   <script src="ft.js"></script>
-
 <script src="waypoint.js"></script>
+
 <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="overlay">
-  <h1 id="title">On-Point Uber</h1>
+  <h1 id="title">Uber Swagger</h1>
   <h1 id="subtitle">So cool you'll freeze to death</h1>
 
 </div>
@@ -39,11 +39,11 @@
 
 <!--RIGHT COLLUMN-->
 <div class="content">
-<h1 id="info"></br></br><div id="t1">Schedule Ubers <u>On</u> The Daily</div>
+<h1 id="info"></br></br><div id="t1">Schedule Ubers On The Daily</div>
 </br></br>
-<div id="t2">Schedule Ubers <u>On</u> Fleek</div>
+<div id="t2">Schedule Ubers On Fleek</div>
 </br></br>
-<div id="t3">Schedule Ubers <u>On</u> Time</div>
+<div id="t3">Schedule Ubers On Time</div>
 <!-- </br></br>
 <div id="t4"><img src="check.png" width="50px" id="check4" class="check" />Schedule Ubers <u>Off</u>line</div> -->
 </h1>
@@ -51,7 +51,7 @@
 
 
 </section>
-
+<section class="section" id="three">
 <div class="page">
 
 <!-- <section id="three" class="section"> -->
@@ -60,98 +60,86 @@
   <div class="description" id="description">
 <h1>FAQ</h1></br>
 <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar, ligula a aliquam dignissim, nunc ligula ultricies magna, nec rhoncus orci ligula ut metus. Duis non ornare felis. Suspendisse fringilla mi vel tortor porta vestibulum. Curabitur tempus purus augue, consectetur egestas lectus malesuada in. Aenean arcu mi, vulputate quis pretium eget, lacinia sit amet diam. Suspendisse augue diam, aliquam id eros eu, rhoncus tristique nunc. Quisque vestibulum, massa quis dignissim tempus, lorem nisi eleifend quam, efficitur viverra neque lorem lacinia massa. Nam pharetra tristique leo non vehicula. Donec pellentesque cursus nulla, ac ultrices tortor porttitor sit amet. Duis quis bibendum mi. Praesent nec diam diam. Sed magna nulla, consectetur eget urna quis, tincidunt dignissim felis.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar, ligula a aliquam dignissim, nunc ligula ultricies magna, nec rhoncus orci ligula ut metus. Duis non ornare felis. Suspendisse fringilla mi vel tortor porta vestibulum. Curabitur tempus purus augue, consectetur egestas lectus malesuada in. Aenean arcu mi, vulputate quis pretium eget, lacinia sit amet diam. Suspendisse augue diam, aliquam id eros eu, rhoncus tristique nunc. Quisque vestibulum, massa quis dignissim tempus, lorem nisi eleifend quam, efficitur viverra neque lorem lacinia massa. Nam pharetra tristique leo non vehicula. Donec pellentesque cursus nulla, ac ultrices tortor porttitor sit amet. Duis quis bibendum mi. Praesent nec diam diam.
 </p>
   </div>
   <div class="shot" id="shot">
 <img src="iphone.png" width="100%"/>
   </div>
 
-
-  <img src="spacer.png" height="1000px">
 </div>
+</section>
 
-<!--WAYPOINT DETECTORS-->
+<section class="section" id="last">
+  <div class="overlay2">
+    <h1 id="title2">Made with &#10084; in SF</h1>
+    <center>
+    <section class="border"></br>
+    <button><b><a href="#">Contact</a></b></button>
+</section>
+</center>
+  </div>
+</section>
 <script type="text/javascript">
-
-
-  var t1 = new Waypoint({
-    element: document.getElementById('t1'),
-    handler: function(direction) {
-      if(direction == "down"){
-    }
-    if(direction == "up"){
+var t3 = new Waypoint({
+  element: document.getElementById('t3'),
+  handler: function(direction) {
+    if(direction == "down"){
+      stop=1;
+      $('#shot').css({'transform' : 'rotate(0deg)'})
   }
-    },
-    offset: '45%'
-  })
-
-  var t2 = new Waypoint({
-    element: document.getElementById('t2'),
-    handler: function(direction) {
-      if(direction == "down"){
-    }
-    if(direction == "up"){
-  }
-    },
-    offset: '45%'
-  })
-
-  var t3 = new Waypoint({
-    element: document.getElementById('t3'),
-    handler: function(direction) {
-      if(direction == "down"){
-        stop=1;
-        $('#shot').css({'transform' : 'rotate(0deg)'})
-    }
-    if(direction == "up"){
-      stop=0;
-  }
-    },
-    offset: '8%'
-  })
+  if(direction == "up"){
+    stop=0;
+}
+  },
+  offset: '20%'
+})
 
 rotate();
 function rotate(){
-  var $cog = $('#chand'),
-    $body = $(document.body),
-    bodyHeight = $body.height();
+var $cog = $('#chand'),
+  $body = $(document.body),
+  bodyHeight = $body.height();
 
-    $(window).scroll(function () {
-    $cog.css({
-        'transform': 'rotate(' + (($body.scrollTop() / bodyHeight * 360)) + 'deg)',
-        //'left': (25.2 - (($body.scrollTop() / bodyHeight)*17)) + '%'
-    });
-    // console.log(25.2-($body.scrollTop() / bodyHeight)*17);
+  $(window).scroll(function () {
+  $cog.css({
+      'transform': 'rotate(' + (($body.scrollTop() / bodyHeight * 360)) + 'deg)',
+      //'left': (25.2 - (($body.scrollTop() / bodyHeight)*17)) + '%'
+  });
+  // console.log(25.2-($body.scrollTop() / bodyHeight)*17);
 });
 stop = 0;
 }
 move();
 function move(){
-  var $cog = $('#shot'),
-    $body = $(document.body),
-    bodyHeight = $body.height();
-    $(window).scroll(function () {
-      // var px = (($body.scrollTop() / bodyHeight * 2000)-700);
-      if(stop == 0){
-      var curve = Math.log(($body.scrollTop() / bodyHeight)*2)/2;
-      var px = (curve*100)+120;
-      $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -((($body.scrollTop() / bodyHeight * 360)-135)) + 'deg)'});
-    }
-    else{
-      return;
-    }
+var $cog = $('#shot'),
+  $body = $(document.body),
+  bodyHeight = $body.height();
+  $(window).scroll(function () {
+    // var px = (($body.scrollTop() / bodyHeight * 2000)-700);
+    if(stop == 0){
+    var curve = Math.log(($body.scrollTop() / bodyHeight)*2)/2;
+    var px = (curve*100)+120;
+    $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -((($body.scrollTop() / bodyHeight * 360)-135)) + 'deg)'});
+  }
+  else{
+    return;
+  }
 });
 }
 
+window.onbeforeunload = function(){
+window.scrollTo(0,0);
+}
 </script>
+
 <!--FITTEXT GENERATORS-->
 <script type="text/javascript">
 $("#title").fitText();
+$("#title2").fitText();
 $("#subtitle").fitText(1.9);
 $("#info").fitText(1.6);
 
 </script>
-
 </body>
 </html>

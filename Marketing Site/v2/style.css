@@ -23,6 +23,7 @@ html, body{
 
 
 .animation{
+  position:relative;
   height: 100%;
   width: 40%;
   float:left;
@@ -51,6 +52,7 @@ html, body{
   min-width:100%;
   background-repeat: no-repeat;
   background-size: contain;
+  -webkit-transform: scale(1.23);
   transform: scale(1.23);
 }
 
@@ -94,6 +96,9 @@ html, body{
   font-family: 'Roboto', sans-serif;
   color:#542E73;
   font-size: 25px;
+  max-height: 90%;
+  overflow: hidden;
+
 }
 .shot{
   position:relative;
@@ -120,7 +125,7 @@ h1{
 }
 
 #team{
-  position:relative;
+  /*position:relative;*/
   background-color: #D3D3D3;
 }
 
@@ -156,6 +161,8 @@ h1{
 }
 #chand{
   transform-origin: 100% 0%;
+  -webkit-transform-origin: 100% 0%;
+  -ms-transform-origin: 100% 0%;
   position: absolute;
   content: url(hand80.png);
   width: 17%;

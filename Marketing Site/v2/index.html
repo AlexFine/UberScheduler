@@ -59,7 +59,7 @@
 
   <div class="description" id="description">
 <h1>FAQ</h1></br>
-<p>
+<p id="faq">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pulvinar, ligula a aliquam dignissim, nunc ligula ultricies magna, nec rhoncus orci ligula ut metus. Duis non ornare felis. Suspendisse fringilla mi vel tortor porta vestibulum. Curabitur tempus purus augue, consectetur egestas lectus malesuada in. Aenean arcu mi, vulputate quis pretium eget, lacinia sit amet diam. Suspendisse augue diam, aliquam id eros eu, rhoncus tristique nunc. Quisque vestibulum, massa quis dignissim tempus, lorem nisi eleifend quam, efficitur viverra neque lorem lacinia massa. Nam pharetra tristique leo non vehicula. Donec pellentesque cursus nulla, ac ultrices tortor porttitor sit amet. Duis quis bibendum mi. Praesent nec diam diam and diam.
 </p>
   </div>
@@ -108,17 +108,16 @@
 </section>
 <script type="text/javascript">
 var t3 = new Waypoint({
-  element: document.getElementById('t3'),
+  element: document.getElementById('shot'),
   handler: function(direction) {
     if(direction == "down"){
-      stop=1;
-      $('#shot').css({'transform' : 'rotate(0deg)'})
   }
   if(direction == "up"){
-    stop=0;
+    run = true;
+    stop = 0;
+    move();
 }
-  },
-  offset: '-15%'
+  }
 })
 
 rotate();
@@ -136,6 +135,7 @@ var $cog = $('#chand'),
 });
 stop = 0;
 }
+run = false;
 move();
 function move(){
 var $cog = $('#shot'),
@@ -143,14 +143,20 @@ var $cog = $('#shot'),
   bodyHeight = $body.height();
   $(window).scroll(function () {
     // var px = (($body.scrollTop() / bodyHeight * 2000)-700);
-    if(stop == 0){
+    // if((($body.scrollTop() / bodyHeight * 360)-135) > 0){
+    //   stop=1;
+    // }
+    var deg = ((($body.scrollTop() / bodyHeight * 360)-135))
+    if(deg >= 0){
+      deg = 0;
+    }
     var curve = Math.log(($body.scrollTop() / bodyHeight)*2)/2;
     var px = (curve*100)+120;
-    $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -((($body.scrollTop() / bodyHeight * 360)-135)) + 'deg)'});
-  }
-  else{
-    return;
-  }
+    if(px>=105.5){
+      px =105.5;
+    }
+    $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -deg + 'deg)'});
+
 });
 }
 

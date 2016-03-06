@@ -109,6 +109,9 @@ html, body{
   font-family: 'Roboto', sans-serif;
   color:#542E73;
   font-size: 25px;
+  /*transform-origin: 100% 0%;
+  -webkit-transform-origin: 100% 0%;
+  -ms-transform-origin: 100% 0%;*/
 }
 
 .section{

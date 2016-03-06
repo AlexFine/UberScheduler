@@ -151,11 +151,12 @@ var $cog = $('#shot'),
       deg = 0;
     }
     var curve = Math.log(($body.scrollTop() / bodyHeight)*2)/2;
-    var px = (curve*100)+120;
-    if(px>=105.5){
-      px =105.5;
+    var px = -(curve*500)+30;
+    if(px<=90){
+      px =90;
     }
-    $cog.css({'left': 100-px + '%', 'transform' : 'rotate(' + -deg + 'deg)'});
+    console.log(px);
+    $cog.css({'transform' : 'rotate(' + -deg/1.5 + 'deg) translateX('+ (px-100) +'%)'});
 
 });
 }

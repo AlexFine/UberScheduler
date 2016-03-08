@@ -35,17 +35,17 @@ angular.module('starter', ['ionic',
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/navbar.html',
     controller: 'AppCtrl'
   })
 
   .state('app.homeScreen', {
     url: '/homeScreen',
     views: {
-      'menuContent': {
+      'home-screen-tab': {
         templateUrl: 'templates/homeScreen.html',
         controller: 'homeScreenCtrl'
       }
@@ -55,7 +55,7 @@ angular.module('starter', ['ionic',
   .state('app.scheduledRides', {
     url: '/scheduledRides',
     views: {
-      'menuContent': {
+      'scheduled-rides-tab': {
         templateUrl: 'templates/scheduledRides.html',
         controller: 'scheduledRidesCtrl'
       }
@@ -65,7 +65,7 @@ angular.module('starter', ['ionic',
   .state('app.editRide', {
     url: '/rideEdit/:rideId',
     views: {
-      'menuContent': {
+      'edit-ride-tab': {
         templateUrl: 'templates/edit-ride.html',
         controller: 'editRideCtrl'
       }
@@ -75,7 +75,7 @@ angular.module('starter', ['ionic',
   .state('app.rideHistory', {
     url: '/rideHistory',
     views: {
-      'menuContent': {
+      'ride-history-tab': {
         templateUrl: 'templates/ride-history.html',
         controller: 'rideHistoryCtrl'
       }
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic',
   .state('app.settings', {
     url: '/settings',
     views: {
-      'menuContent': {
+      'settings-tab': {
         templateUrl: 'templates/settings.html',
         controller: 'settingsCtrl'
       }
@@ -95,7 +95,7 @@ angular.module('starter', ['ionic',
   .state('app.help', {
     url: '/help',
     views: {
-      'menuContent': {
+      'help-tab': {
         templateUrl: 'templates/help.html',
         controller: 'helpCtrl'
       }

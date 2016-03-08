@@ -38,7 +38,8 @@ angular.module('starter', ['ionic',
   .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/navbar.html',
+    templateUrl: 'templates/navbar.html', // For footer navbar
+    // templateUrl: 'templates/menu.html', // For menu side bar
     controller: 'AppCtrl'
   })
 

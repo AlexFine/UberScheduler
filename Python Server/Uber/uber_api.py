@@ -57,7 +57,6 @@ class Ride(messages.Message):
     elong = messages.FloatField(4, required=True)
     elat = messages.FloatField(5, required=True)
     time = messages.StringField(6, required=True)
-    date = messages.StringField(7, required=True)
     # rid = messages.StringField(8, required=True) #ride ID
 
 STORED_GREETINGS = GreetingCollection(items=[
@@ -79,7 +78,7 @@ class UberApi(remote.Service):
     def returnRide(self, request):
         ride = datastores.returnRide(request.key)
         print ride
-        return Ride(ukey=ride[0], slong=ride[1], slat=ride[2], elong=ride[3], elat=ride[4], time=ride[5], date=ride[6])
+        return Ride(ukey=ride[0], slong=ride[1], slat=ride[2], elong=ride[3], elat=ride[4], time=ride[5])
         # try:
         # print datastores.returnUser(request.key)
 
@@ -93,7 +92,7 @@ class UberApi(remote.Service):
 
     @endpoints.method(rideCreate, keySearch, path='datastore/createRide', http_method='POST', name='ride.create')  # defines url and type of request
     def createRide(self, request):
-        ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time, request.date, )
+        ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time)
         return keySearch(key=int(ride))
 
     # Authorization

@@ -22,36 +22,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Note that it’s before we load the rest of Ionic.
 // This is important!
 $positive:                        #2D659F !default;
+// ***   This isn't working   ***
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
-$themeColor: #2D659F;
-
-.button-color-scheme {
-  background-color: #2D659;
-  color: white;
-}
-
-.bar-color-scheme {
-  background-color: white;
-  color: #2D659;
-}
-
-.tabs-color-scheme {
-  background-color: #2D659 !important;
-}
-
-.tabs {
-  /*background-color: #2D659;*/
-  color: #2D659;
-}
-
-.tabs:visited .tabs:active .tabs:hover .tabs:link {
-  color: #2D659;
-  text-decoration: none;
-}
-
-.tab-item-active {
-  text-decoration: none !important;
-}

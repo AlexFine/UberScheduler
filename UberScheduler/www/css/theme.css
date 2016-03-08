@@ -1,0 +1,27 @@
+.button-color-scheme {
+  background-color: #2D659F;
+  color: white;
+}
+
+.bar-color-scheme {
+  background-color: white;
+  color: #2D659F;
+}
+
+.tabs-color-scheme {
+  background-color: #2D659F !important;
+}
+
+.tabs {
+  /*background-color: #2D659F;*/
+  color: #2D659F;
+}
+
+.tabs:visited .tabs:active .tabs:hover .tabs:link {
+  color: #2D659F;
+  text-decoration: none;
+}
+
+.tab-item-active {
+  text-decoration: none !important;
+}

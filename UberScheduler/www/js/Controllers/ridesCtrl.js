@@ -1,4 +1,3 @@
-console.log("Rides controller file loaded");
 angular.module('ridesCtrl', ['ui.bootstrap'])
 .controller('ridesCtrl', function ($scope, $ionicPopup, $timeout) {
 

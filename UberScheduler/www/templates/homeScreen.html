@@ -1,46 +1,38 @@
 <ion-view view-title="Call Ride">
-    <ion-content>
-        <!--                <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a onclick="testimate((lat).childNodes[0].innerHTML, (long).childNodes[0].innerHTML)" class="button button-icon icon ion-clock">Time Estimate</a>-->
-
-        <div class="main-address-div">
-            <div style="margin:1%;">
-                <div class="list">
-                    <label class="item item-input address-input">
-                        <input type="text" placeholder="Pick Up">
-                    </label>
-                    <label class="item item-input address-input">
-                        <input type="text" placeholder="Drop Off">
-                    </label>
-                    <label class="item" style="background:transparent; border:0px solid white;">
-                        <button class="button button button-block button-color-scheme" ng-click="">
-                            Schedule Ride
-                        </button>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div id="map" data-tap-disabled="true" ng-init="initialize(); centerOnMe()">
-
-        </div>
-        <div class="current-location-div">
-            <button class="button button-light current-location-button" ng-click="centerOnMe()">
-                <span class="icon ion-android-locate"></span>
+  <ion-content>
+    <!-- <a ng-click="centerOnMe()" class="button button-icon icon ion-navigate">Find Me</a>                <a onclick="testimate((lat).childNodes[0].innerHTML, (long).childNodes[0].innerHTML)" class="button button-icon icon ion-clock">Time Estimate</a> -->
+    <div class="main-address-div">
+      <div style="margin:1%;">
+        <div class="list">
+          <label class="item item-input address-input">
+            <input type="text" placeholder="Pick Up">
+          </label>
+          <label class="item item-input address-input">
+            <input type="text" placeholder="Drop Off">
+          </label>
+          <label class="item" style="background:transparent; border:0px solid white;">
+            <button class="button button button-block button-color-scheme" ng-click="">
+              Schedule Ride
             </button>
+          </label>
         </div>
-        <!--
-        <div class="main-modal">
-          <div id="estimate">Estimate Here</div>
-          <div id="lat">lat</div>
-          <div id="long">long</div>
-        </div>
--->
-        <!--This is transparent, but here for debugging-->
+      </div>
+    </div>
 
+    <div id="map" data-tap-disabled="true" ng-init="initialize(); centerOnMe()">
+    </div>
 
+    <div class="current-location-div">
+      <button class="button button-light current-location-button" ng-click="centerOnMe()">
+        <span class="icon ion-android-locate"></span>
+      </button>
+    </div>
 
-    </ion-content>
+    <!-- <div class="main-modal">
+      <div id="estimate">Estimate Here</div>
+      <div id="lat">lat</div>
+      <div id="long">long</div>
+    </div> -->
+
+  </ion-content>
 </ion-view>

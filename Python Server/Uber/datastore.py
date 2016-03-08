@@ -29,7 +29,7 @@ class Ride(ndb.Model):
     slat = ndb.FloatProperty(indexed=False)
     elong = ndb.FloatProperty(indexed=False)
     elat = ndb.FloatProperty(indexed=False)
-    time = ndb.StringProperty()
+    time = ndb.IntegerProperty()
     @classmethod
     def query_book(cls, ancestor_key):
         return cls.query(ancestor=ancestor_key).order(-cls.date)

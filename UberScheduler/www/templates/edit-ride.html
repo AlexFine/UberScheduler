@@ -1,5 +1,25 @@
 <ion-view view-title="Configure Schedule">
     <ion-content>
+        <!--START CODE FOR AUTOSUGGEST SEARCH BAR -->
+        <script type="text/ng-template" id="customTemplate.html">
+            <a>
+                <img ng-src="http://upload.wikimedia.org/wikipedia/commons/thumb/{{match.model.flag}}" width="16">
+                <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+            </a>
+        </script>
+
+        <script type="text/ng-template" id="customPopupTemplate.html">
+            <div class="custom-popup-wrapper" ng-style="{top: position().top+'px', left: position().left+'px'}" style="display: block;" ng-show="isOpen() && !moveInProgress" aria-hidden="{{!isOpen()}}">
+                <p class="message">select location from drop down.</p>
+
+                <ul class="dropdown-menu" role="listbox">
+                    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+                        <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+                    </li>
+                </ul>
+            </div>
+        </script>
+<!--END CODE FOR AUTOSUGGEST SEARCH BAR -->
 
         <div class="item item-text-wrap">
             <p class="lead" style="font-size:22px;">Schedule</p>
@@ -85,7 +105,7 @@
 
             </div>
             <button class="button button-outline button-calm button-block" ng-click="isCollapsedMap = !isCollapsedMap">
-                <span ng-if="isCollapsedMap">Open</span><span ng-if="!isCollapsedMap">Close</span> Map
+                <span ng-if="isCollapsedMap">Close</span><span ng-if="!isCollapsedMap">Open</span> Map
             </button>
             <div uib-collapse="!isCollapsedMap" style="padding:1%;">
                 <!--Options for alternate MAP SECTION -->
@@ -94,7 +114,12 @@
                         <div class="list">
                             <label class="item item-input">
                                 <i class="icon ion-search placeholder-icon"></i>
-                                <input type="text" placeholder="Search">
+                                
+                                <input type="text" ng-model="asyncSelected" placeholder="SEARCH" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control" style="">
+                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                        </div>
                             </label>
 
                         </div>
@@ -115,8 +140,8 @@
 
             <div class="card">
                 <div class="item item-text-wrap">
-                    This is a basic Card which contains an item that has wrapping text.
                     <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
+                    <!--
                     <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
                         <div class="col" ng-repeat="day in configuredRide.repeatedDays track by $index">
                             <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" ng-click="updateRepeatedDay({{rideId}}, {{$index}})">
@@ -124,9 +149,64 @@
                             </button>
                         </div>
                     </div>
+-->
+                    <div class="row">
+                        <div class="col" style="margin-left:3%;"> Mon
+                            <ion-checkbox ng-model="filter.blue"></ion-checkbox>
+                        </div>
+                        <div class="col">Tues
+                            <ion-checkbox ng-model="filter.red"></ion-checkbox>
+                        </div>
+                        <div class="col">Wed
+                            <ion-checkbox ng-model="filter.blue"></ion-checkbox>
+                        </div>
+                        <div class="col">Thur
+                            <ion-checkbox ng-model="filter.blue"></ion-checkbox>
+                        </div>
+                        <div class="col">Fri
+                            <ion-checkbox ng-model="filter.blue"></ion-checkbox>
+                        </div>
+                        <div class="col">Sat
+                            <ion-checkbox ng-model="filter.blue"></ion-checkbox>
+                        </div>
+                        <div class="col">Sun
+                            <ion-checkbox ng-model="filter.blue"></ion-checkbox>
+                        </div>
+                    </div>
                 </div>
             </div>
-                <!-- <div class="row">
+
+<!--
+            <div class="card">
+                <div class="item item-text-wrap">
+
+
+                    <div class='container-fluid typeahead-demo' ng-controller="TypeaheadCtrl">
+
+                        <h4>Static arrays</h4>
+                        <pre>Model: {{selected | json}}</pre>
+                        <input type="text" ng-model="selected" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+
+                        <h4>Asynchronous results</h4>
+                        <pre>Model: {{asyncSelected | json}}</pre>
+                        
+
+                        <h4>ngModelOptions support</h4>
+                        <pre>Model: {{ngModelOptionsSelected | json}}</pre>
+                        <input type="text" ng-model="ngModelOptionsSelected" ng-model-options="modelOptions" uib-typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control">
+
+                        <h4>Custom templates for results</h4>
+                        <pre>Model: {{customSelected | json}}</pre>
+                        <input type="text" ng-model="customSelected" placeholder="Custom template" uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" typeahead-show-hint="true" typeahead-min-length="0">
+
+                        <h4>Custom popup templates for typeahead's dropdown</h4>
+                        <pre>Model: {{customPopupSelected | json}}</pre>
+                        <input type="text" ng-model="customPopupSelected" placeholder="Custom popup template" uib-typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-popup-template-url="customPopupTemplate.html" class="form-control">
+                    </div>
+                </div>
+            </div>
+-->
+            <!-- <div class="row">
             <div class="col date-select button button-outline button-positive" ng-click="selectDate('startDate', {{$index}})">
                 Start Date:
                 <b>{{configuredRide.startDate | date : 'fullDate'}}</b>
@@ -136,11 +216,11 @@
                 <b>{{configuredRide.ndDate | date : 'fullDate'}}</b>
             </div>
         </div> -->
-                <div>
-                    Uber Type:
-                    <br>
-                    <b>{{UberTypes[configuredRide.product]}}</b>
-                </div>
+            <div>
+                Uber Type:
+                <br>
+                <b>{{UberTypes[configuredRide.product]}}</b>
             </div>
+        </div>
     </ion-content>
 </ion-view>

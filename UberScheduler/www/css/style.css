@@ -1,127 +1,165 @@
 /* Empty. Add your own CSS if you like */
+
 #map {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .scroll {
-  height: 100%;
+    height: 100%;
 }
 
 .map-ride-edit {
-  height: 50vh !important;
+    height: 50vh !important;
 }
 
 .current-location-div {
-  position: absolute;
-  left: 3%;
-  bottom: 3%;
-  z-index: 1;
-}
-.current-location-button:before {
-  /*Icon size doesn't work*/
-  font-size: 12px;
+    position: absolute;
+    left: 3%;
+    bottom: 3%;
+    z-index: 1;
 }
 
-/*Styling for home page address text boxes*/
-.main-address-div {
-  width: 98%;
-  margin: 1%;
-  border: 2px solid #ADD8E6;
-  border-radius: 5px;
-  position: absolute;
+.current-location-button:before {
+    /*Icon size doesn't work*/
+    
+    font-size: 12px;
 }
+/*Styling for home page address text boxes*/
+
+.main-address-div {
+    width: 98%;
+    margin: 1%;
+    border: 2px solid #ADD8E6;
+    border-radius: 5px;
+    position: absolute;
+}
+
 .main-address-div-ride-edit {
-  position: absolute;
-  padding: 2%;
-  padding-top: 10px;
-  left: 2%;
-  width: 96%;
+    position: absolute;
+    padding: 2%;
+    padding-top: 10px;
+    left: 2%;
+    width: 96%;
 }
 
 .main-modal {
-  /*Overlay on the bottom*/
-  position: absolute;
-  bottom: 0px;
-  z-index: 1;
-
-  /*Sizing*/
-  width: 60%;
-  margin-left: 20%;
-  margin-bottom: 5%;
-
-  /*Styling*/
-  border: 2px solid grey;
-  background-color: rgba(255, 255, 255, .8);
-  border-radius: 5px;
-  text-align: center;
-
+    /*Overlay on the bottom*/
+    
+    position: absolute;
+    bottom: 0px;
+    z-index: 1;
+    /*Sizing*/
+    
+    width: 60%;
+    margin-left: 20%;
+    margin-bottom: 5%;
+    /*Styling*/
+    
+    border: 2px solid grey;
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 5px;
+    text-align: center;
 }
 
 .address-input {
-  background-color: rgba(255, 255, 255, .95);
-  color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, .95);
+    color: rgba(255, 255, 255, 1);
 }
-
 /*Styling for scheduling dropdown*/
+
 .scheduled-options-card {
-  margin-top: 12px;
-	border:   1px solid #cccccc;
-  padding: 6px;
+    margin-top: 12px;
+    border: 1px solid #cccccc;
+    padding: 6px;
 }
 
 .scheduled-time {
-  font-size: 20px !important;
-  width: 90px !important;
+    font-size: 20px !important;
+    width: 90px !important;
 }
 
 .show-options {
-  float: right;
+    float: right;
 }
 
 .show-options-button {
-  /*color: #444;*/
+    /*color: #444;*/
 }
 
 .repeated-day-picker {
-  margin-top: 12px;
-  margin-bottom: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 .selected-day-picker {
-	background-color: #4da5ff !important; /* color when highlighted */
+    background-color: #4da5ff !important;
+    /* color when highlighted */
 }
 
 .date-select {
-  overflow: initial;
-  white-space: initial; /*For word wrap*/
-  margin: 4px;
-  border: 1px solid #ddd;
+    overflow: initial;
+    white-space: initial;
+    /*For word wrap*/
+    
+    margin: 4px;
+    border: 1px solid #ddd;
 }
 
 .scheduled-rides-configure {
-  font-size: 32px;
+    font-size: 32px;
 }
 
 .scheduled-rides-save {
-  font-size: 32px;
+    font-size: 32px;
 }
-
 /*Override ionic popup width*/
+
 .popup {
-  width: 330px !important;
+    width: 330px !important;
 }
 
 .list .item.item-accordion {
-  line-height: 38px;
-  padding-top: 0;
-  padding-bottom: 0;
-  transition: 0.09s all linear;
+    line-height: 38px;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 0.09s all linear;
 }
+
 .list .item.item-accordion.ng-hide {
-  line-height: 0px;
+    line-height: 0px;
 }
+
 .list .item.item-accordion.ng-hide-add,
 .list .item.item-accordion.ng-hide-remove {
-  display: block !important;
+    display: block !important;
 }
+
+.typeahead-demo .custom-popup-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    background-color: #f9f9f9;
+}
+
+/*
+.typeahead-demo .custom-popup-wrapper > .message {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    color: #868686;
+}
+*/
+
+/*
+.typeahead-demo .custom-popup-wrapper > .dropdown-menu {
+    position: static;
+    float: none;
+    display: block;
+    min-width: 160px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}*/

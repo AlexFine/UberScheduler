@@ -38,18 +38,6 @@ class Ride(ndb.Model):
 
 class UserRideDataBase(webapp2.RequestHandler):
 
-    #INSERT INTO DATASTORE
-    # user = User(id=1, email="swag@bomb.com", passwd="mcswag1n")
-    # user.put();
-    # ride = Ride(uid=user, slong=sslong, slat=sslat, elong=eelong, elat=eelat, time="12:00", date="012816")
-    # ride_key = ride.put()
-    # print ride_key
-
-
-
-    #RETRIEVE FROM DATASTORE
-    # qry = Ride.query(Ride.uid.id < 5)
-    # print ("query",qry.kind)
 
     def createUser(self, email, passwd, ua):
         user = User(email=email, passwd=passwd, uberauth=ua) #creates user object
@@ -62,14 +50,23 @@ class UserRideDataBase(webapp2.RequestHandler):
         ride_key = ride.put();
         print("rideKey",ride_key.id())
         return ride_key.id()
+    #Get rides based on user ID
     def returnRide(self, userId):
         # d = UserID.all()
         key= ndb.Key("User", userId)
         greetings = key.get()
         print greetings
         x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time]
-
         return x
+    #Get rides based on time
+    def returnUpcomingRides(self, time): #time = current time
+        time30 = time + 1800 #+30 mins to time (1800 secs)
+        key= ndb.Key("Ride", time30)
+        greetings = key.get()
+        print greetings
+        x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time]
+        return x
+
 
     def returnAllRides(self, userId):
         # d = UserID.all()

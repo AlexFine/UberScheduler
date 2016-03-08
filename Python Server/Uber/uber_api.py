@@ -104,7 +104,7 @@ class UberApi(remote.Service):
     def returnToken(self, request):
         uniquet = self.request.get('code')
         realtoken = auth_step_two(uniquet)
-
+        #use createUser to make a new user
 
 
 

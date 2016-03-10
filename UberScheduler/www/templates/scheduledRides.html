@@ -14,6 +14,7 @@
                         <br> {{timeUntilDate(ride.nextRide, "string")}}
                     </div>
                     <div class="col">
+                      <a href="#/app/rideEdit/:{{$index}}">Edit</a>
                         <div class="show-options">
                             <a class="show-options-button" ng-click="toggleShow({{$index}})">
                                 <spam ng-hide="ride.showOptions">

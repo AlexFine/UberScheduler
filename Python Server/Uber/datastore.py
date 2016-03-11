@@ -50,7 +50,6 @@ class UserRideDataBase(webapp2.RequestHandler):
         ride_key = ride.put();
         print("rideKey",ride_key.id())
         return ride_key.id()
-    #Get rides based on user ID
     def returnRide(self, userId):
         # d = UserID.all()
         key= ndb.Key("User", userId)
@@ -61,6 +60,8 @@ class UserRideDataBase(webapp2.RequestHandler):
     #Get rides based on time
     def returnUpcomingRides(self, time): #time = current time
         time30 = time + 1800 #+30 mins to time (1800 secs)
+        qry = Ride.query(time30-Ride.time < 30)
+        self.request.get
         key= ndb.Key("Ride", time30)
         greetings = key.get()
         print greetings

@@ -23,7 +23,7 @@ def auth_step_one():
 
     parameters = {
         'response_type': 'code',
-        'redirect_uri': 'appspoturl.com/auth_2',
+        'redirect_uri': 'uberscheduler-1184.appspot.com/auth_2',
         'scope': 'profile',
     }
 

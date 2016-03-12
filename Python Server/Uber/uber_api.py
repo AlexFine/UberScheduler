@@ -12,6 +12,7 @@ from datastore import UserRideDataBase
 import time
 from google.appengine.api import urlfetch
 # from flask import Flask
+from ride_api import *
 import unicodedata
 from auth_1 import auth_step_one
 from auth_2 import auth_step_two
@@ -56,7 +57,8 @@ class Ride(messages.Message):
     slat = messages.FloatField(3, required=True)
     elong = messages.FloatField(4, required=True)
     elat = messages.FloatField(5, required=True)
-    time = messages.StringField(6, required=True)
+    time = messages.IntegerField(6, required=True)
+    userKey = messages.IntegerField(7, variant=messages.Variant.INT32)
     # rid = messages.StringField(8, required=True) #ride ID
 
 STORED_GREETINGS = GreetingCollection(items=[
@@ -76,9 +78,7 @@ class UberApi(remote.Service):
                       path='datastore/returnRide', http_method='POST',
                       name='ride.return')  # defines url and type of request
     def returnRide(self, request):
-        ride = datastores.returnRide(request.key)
-        print ride
-        return Ride(ukey=ride[0], slong=ride[1], slat=ride[2], elong=ride[3], elat=ride[4], time=ride[5])
+        return returnRideApi(request)
         # try:
         # print datastores.returnUser(request.key)
 
@@ -92,7 +92,7 @@ class UberApi(remote.Service):
 
     @endpoints.method(rideCreate, keySearch, path='datastore/createRide', http_method='POST', name='ride.create')  # defines url and type of request
     def createRide(self, request):
-        ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time)
+        ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time, request.userKey)
         return keySearch(key=int(ride))
     noInput= endpoints.ResourceContainer(message_types.VoidMessage)
     # Authorization

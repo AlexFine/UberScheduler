@@ -25,13 +25,14 @@ eelong = dropLocation[1]
 class Ride(ndb.Model):
     """A main model for representing a Ride."""
     ukey = ndb.IntegerProperty(indexed=False)
+    userkey = ndb.IntegerProperty(indexed=True)
     slong = ndb.FloatProperty(indexed=False)
     slat = ndb.FloatProperty(indexed=False)
     elong = ndb.FloatProperty(indexed=False)
     elat = ndb.FloatProperty(indexed=False)
-    time = ndb.IntegerProperty()
+    time = ndb.IntegerProperty(indexed=True)
     @classmethod
-    def query_book(cls, ancestor_key):
+    def query_user(cls, ancestor_key):
         return cls.query(ancestor=ancestor_key).order(-cls.date)
 
      #ride ID
@@ -45,40 +46,40 @@ class UserRideDataBase(webapp2.RequestHandler):
         print("userKey",user_key)
         return user_key.id()
 
-    def createRide(self, ukey, slong, slat, elong, elat, time):
-        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time)
+    def createRide(self, ukey, slong, slat, elong, elat, time,userkey):
+        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time,userkey=userkey)
         ride_key = ride.put();
         print("rideKey",ride_key.id())
         return ride_key.id()
-    def returnRide(self, userId):
+    def returnRide(self, rideId):
         # d = UserID.all()
-        key= ndb.Key("User", userId)
+        key= ndb.Key("Ride", rideId)
         greetings = key.get()
         print greetings
         x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time]
         return x
     #Get rides based on time
-    def returnUpcomingRides(self, time): #time = current time
-        time30 = time + 1800 #+30 mins to time (1800 secs)
-        qry = Ride.query(time30-Ride.time < 30)
-        self.request.get
-        key= ndb.Key("Ride", time30)
-        greetings = key.get()
-        print greetings
-        x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time]
-        return x
+    # def returnUpcomingRides(self, time): #time = current time
+    #     time30 = time + 1800 #+30 mins to time (1800 secs)
+    #     qry = Ride.query(time30-Ride.time < 30)
+    #     self.request.get
+    #     key= ndb.Key("Ride", time30)
+    #     greetings = key.get()
+    #     print greetings
+    #     x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time]
+    #     return x
 
 
     def returnAllRides(self, userId):
         # d = UserID.all()
-        key= ndb.Key("Ride", userId)  #
-        greetings = Ride.query_book(key).fetch(20)
+        key= ndb.Key("User", userId)  #
+        greetings = Ride.query_user(key).fetch(20)
 
 
         print greetings
         x = [greetings.ukey, greetings.slong, greetings.slat, greetings.elong, greetings.elat, greetings.time]
 
-        return x
+        return greetings
 
     def returnUser(self,keys):
         # d = UserID.all()

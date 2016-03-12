@@ -102,9 +102,10 @@ class UberApi(remote.Service):
         return Greeting(message=reurl)
         self.redirect(reurl)
 
-    @endpoints.method(path='authorize/steptwo', http_method='GET', name='auth.two')
+    @endpoints.method(noInput, Greeting,path='authorize/steptwo', http_method='GET', name='auth.two')
     def returnToken(self, request):
         realtoken = auth_step_two(uniquet)
+        return Greeting(message=realtoken)
         #use createUser to make a new user
 
 

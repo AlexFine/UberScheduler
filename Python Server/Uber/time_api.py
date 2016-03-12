@@ -1,4 +1,4 @@
-"""time_api: these are small functions that relate to when an uber is coming and time differences"""
+
 from datastore import UserRideDataBase
 import endpoints
 from protorpc import messages

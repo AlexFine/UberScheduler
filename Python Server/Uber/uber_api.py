@@ -1,4 +1,7 @@
-"""Uber_APi uses google cloud endpoints
+"""Hello World API implemented using Google Cloud Endpoints.
+
+Defined here are the ProtoRPC messages needed to define Schemas for methods
+as well as those methods defined in an API.
 """
 
 import endpoints
@@ -9,11 +12,7 @@ from datastore import UserRideDataBase
 import time
 from google.appengine.api import urlfetch
 # from flask import Flask
-"""These area is for files with the api methods
-ride_api:  it also will contain all function for get rides
-in next 30 minutes
-user_api: this for interacting with the data store for users
-time_api: these are small functions that relate to when an uber is coming and time differences"""
+"""These area is for files with the api methods"""
 from ride_api import *
 from user_api import *
 from time_api import *

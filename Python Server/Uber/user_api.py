@@ -1,4 +1,4 @@
-"""user_api: this for interacting with the data store for users"""
+
 from datastore import UserRideDataBase
 import endpoints
 from protorpc import messages

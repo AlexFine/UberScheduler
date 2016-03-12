@@ -1,5 +1,4 @@
-"""ride_api:  it also will contain all function for get rides
-in next 30 minutes"""
+
 from datastore import UserRideDataBase
 import endpoints
 from protorpc import messages

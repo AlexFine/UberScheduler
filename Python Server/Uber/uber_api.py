@@ -96,24 +96,47 @@ class UberApi(remote.Service):
         return keySearch(key=int(ride))
     noInput= endpoints.ResourceContainer(message_types.VoidMessage)
     # Authorization
+    userReturn = endpoints.ResourceContainer(
+        # Greeting
+        keySearch
+    )  # defines resources in post request
+    userReturn = endpoints.ResourceContainer(
+        # Greeting
+        keySearch
+    )  # defines resources in post request
+
+    @endpoints.method(userReturn, Greeting,
+                      path='datastore/allReturnRide', http_method='POST',
+                      name='rides.returnAll')  # defines url and type of request
+
+    def allReturnRide(self, request):
+        # try:
+        # print datastores.returnUser(request.key)
+
+        users = datastores.returnAllRides(request.key)  # pings data store api
+        print users
+
+
+
+        return Greeting(str(users))  # returns in json format
+        # except:
+        # return Greeting(message="not in database")
+
     @endpoints.method(noInput, Greeting, path='authorize/stepone', http_method='GET', name='auth.one')
     def redirectUrl(self, request):
         reurl = auth_step_one()
         return Greeting(message=reurl)
         self.redirect(reurl)
 
-    @endpoints.method(path='authorize/steptwo', http_method='GET', name='auth.two')
+    @endpoints.method(noInput, Greeting,path='authorize/steptwo', http_method='GET', name='auth.two')
     def returnToken(self, request):
         realtoken = auth_step_two(uniquet)
+        return Greeting(message=realtoken)
         #use createUser to make a new user
 
 
 
 
-    userReturn = endpoints.ResourceContainer(
-        # Greeting
-        keySearch
-    )  # defines resources in post request
 
     @endpoints.method(userReturn, user,
                       path='datastore/returnUser', http_method='POST',

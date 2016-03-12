@@ -43,8 +43,3 @@ libraries:
   version: latest
 - name: endpoints
   version: 1.0
-- name: Flask
-  version: 0.10
-
-- name: rauth
-  version: 0.7.2

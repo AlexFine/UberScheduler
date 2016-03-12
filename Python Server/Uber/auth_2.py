@@ -12,8 +12,8 @@ def auth_step_two(code):
 
         parameters = {
             'redirect_uri': 'http://localhost',
-            #'code': request.args.get('code'),
-            'code': code,
+            'code': request.args.get('code'),
+            # 'code': code,
             'grant_type': 'authorization_code',
         }
 

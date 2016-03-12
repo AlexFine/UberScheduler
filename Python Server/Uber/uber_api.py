@@ -94,15 +94,16 @@ class UberApi(remote.Service):
     def createRide(self, request):
         ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time)
         return keySearch(key=int(ride))
-
+    noInput= endpoints.ResourceContainer(message_types.VoidMessage)
     # Authorization
-    @endpoints.method(path='authorize/stepone', http_method='GET', name='auth.one')
+    @endpoints.method(noInput, Greeting, path='authorize/stepone', http_method='GET', name='auth.one')
     def redirectUrl(self, request):
         reurl = auth_step_one()
+        return Greeting(message=reurl)
+        self.redirect(reurl)
 
     @endpoints.method(path='authorize/steptwo', http_method='GET', name='auth.two')
     def returnToken(self, request):
-        uniquet = self.request.get('code')
         realtoken = auth_step_two(uniquet)
         #use createUser to make a new user
 

@@ -1,10 +1,5 @@
 // console.log("Rides service file loaded")
 angular.module('ridesService', ['ionic', 'ngCordova'])
-  .factory('accessSchedule', function() {
-    var testVariable = "Kevin"
-    return testVariable;
-  })
-
   .factory('findNextRide', function() {
     return function(rideTime, daysOfWeek) { //Now using node package: 'later'
       //Doesn't incorporate start/end date of schedule

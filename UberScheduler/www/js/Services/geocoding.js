@@ -1,5 +1,5 @@
 // console.log("Geocoding service file loaded")
-angular.module('geocoding', ['ionic', 'ngCordova'])
+angular.module('geocodingService', ['ionic', 'ngCordova'])
   .factory('reverseGeocode', function() {
     return function(lat, lng) {
       var locationStr = "[" + lat + ", " + lng +"]:";

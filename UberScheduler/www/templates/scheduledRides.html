@@ -14,31 +14,21 @@
                         <br> {{timeUntilDate(ride.nextRide, "string")}}
                     </div>
                     <div class="col">
-                      <a href="#/app/rideEdit/:{{$index}}">Edit</a>
                         <div class="show-options">
-                            <a class="show-options-button" ng-click="toggleShow({{$index}})">
-                                <spam ng-hide="ride.showOptions">
-                                    <i class="icon ion-ios-settings-strong scheduled-rides-configure"></i>
-                                </spam>
-                                <spam ng-show="ride.showOptions">
-                                    <i class="icon ion-checkmark scheduled-rides-save"></i>
-                                </spam>
+                            <a class="show-options-button" href="#/app/rideEdit/:{{$index}}">
+                              <i class="icon ion-ios-settings-strong scheduled-rides-configure"></i>
                             </a>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                  Pickup: {{ride.pickupName[0]}} {{ride.pickupName[1]}}, {{ride.pickupName[2]}} {{ride.pickupName[3]}}
+                  <br>
+                  Dropoff: {{ride.dropName[0]}} {{ride.dropName[1]}}, {{ride.dropName[2]}} {{ride.dropName[3]}}
+                </div>
                 <div ng-show="ride.showOptions" class="scheduled-options-card">
                     <h2 style="font-size:22px;">Recurring Pickup Schedule</h2>
-                    <div class="list">
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Pickup:</span>
-                            {{ride.pickupName[0]}} {{ride.pickupName[1]}}, {{ride.pickupName[2]}} {{ride.pickupName[3]}}
-                        </label>
-                        <label class="item item-input item-stacked-label">
-                            <span class="input-label">Dropoff:</span>
-                            {{ride.dropName[0]}} {{ride.dropName[1]}}, {{ride.dropName[2]}} {{ride.dropName[3]}}
-                        </label>
-                    </div>
+
                     <div class="row repeated-day-picker" style="border:1px solid #cccccc; margin-left:1%; width:98%;">
                         <div class="col" ng-repeat="day in ride.repeatedDays track by $index">
                             <button class="button button-light" ng-class="{ 'selected-day-picker' : day == true }" >

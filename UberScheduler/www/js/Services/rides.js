@@ -68,3 +68,17 @@ angular.module('ridesService', ['ionic', 'ngCordova'])
       return nextRide; //Return the date and time of the next ride
     };
   })
+  .factory('startGapiClient', function() {
+  var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api';
+  gapi.client.load('uberApi', 'v1', function() {
+    doSomethingAfterLoading();
+  }, ROOT);
+
+})
+  .factory('startGapiClient', function() {
+    gapi.client.uberApi.ride.return({
+      "key": 5066549580791808
+    }).execute(function(resp) {
+      console.log(resp);
+    });
+  })

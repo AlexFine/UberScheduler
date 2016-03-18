@@ -20,6 +20,6 @@ def returnRideApi(request):
 def createRideApi(request):
         ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time, request.userKey)
         return uber_api.keySearch(key=int(ride))
-def allReturnRideApi(self, request):
+def allReturnRideApi(request):
         users = datastores.returnAllRides(request.key)  # pings data store api
         return uber_api.Greeting(str(users))

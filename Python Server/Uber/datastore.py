@@ -33,7 +33,7 @@ class Ride(ndb.Model):
     time = ndb.IntegerProperty(indexed=True)
     @classmethod
     def query_user(cls, ancestor_key):
-        return cls.query(ancestor=ancestor_key).order(-cls.date)
+        return cls.query(ancestor=ancestor_key)
 
      #ride ID
 
@@ -47,7 +47,7 @@ class UserRideDataBase(webapp2.RequestHandler):
         return user_key.id()
 
     def createRide(self, ukey, slong, slat, elong, elat, time,userkey):
-        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time,userkey=userkey)
+        ride = Ride(ukey=ukey, slong=slong, slat=slat, elong=elong, elat=elat, time=time,parent=ndb.Key('User', userkey))
         ride_key = ride.put();
         print("rideKey",ride_key.id())
         return ride_key.id()

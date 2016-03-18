@@ -12,7 +12,7 @@ import uber_api
 from ride_api import *
 import unicodedata
 datastores = UserRideDataBase()
-def returnUserApi(self, request):
+def returnUserApi( request):
         # try:
         # print datastores.returnUser(request.key)
 
@@ -25,7 +25,7 @@ def returnUserApi(self, request):
 
         return uber_api.User(email=email, pswd=pswd, code=code)  # returns in json format
 
-def userCreateApi(self, request):
+def userCreateApi(request):
         userkey = datastores.createUser(request.email, request.pswd,
                                         str(request.code))  # create user from requests object
 

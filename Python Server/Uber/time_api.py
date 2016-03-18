@@ -34,7 +34,7 @@ def compareApi(pickuptime, pickupdate):
 
         diff = dtmins - tmins
         return diff
-def getTimeApi(self, request):
+def getTimeApi(request):
         # slat = ""
         # slong = ""
 

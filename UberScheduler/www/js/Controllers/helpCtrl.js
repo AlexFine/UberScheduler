@@ -2,10 +2,19 @@ angular.module('helpCtrl', ['ui.bootstrap'])
 .controller('helpCtrl', function ($scope, $stateParams) {
   $scope.today = function () {
     $scope.dt = new Date();
+    var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api';
+    gapi.client.load('uberApi', 'v1', function() {
+      console.log("success")
+    }, ROOT);
   };
   $scope.today();
 
   $scope.clear = function () {
+    gapi.client.uberApi.ride.return({
+      "key": 5066549580791808
+    }).execute(function(resp) {
+      console.log(resp);
+    });
     $scope.dt = null;
   };
 

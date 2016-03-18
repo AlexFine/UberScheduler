@@ -15,7 +15,7 @@ angular.module('geocodingService', ['ionic', 'ngCordova'])
         // console.log("Lookup finished")
         if (status === google.maps.GeocoderStatus.OK) {
           if (results[1]) {
-            var address = results[1].formatted_address;
+            var address = results[1];
             console.log(locationStr, address)
             return address
           } else {

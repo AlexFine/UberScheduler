@@ -29,4 +29,14 @@ angular.module('scheduledRidesService', ['ionic', 'ngCordova', 'ridesService'])
       }
     ];
     return schedule;
+  })
+  .factory('addSchedule', function(findNextRide) {
+    return function(data) {
+      console.log("Adding a schedule with data:", data)
+      // ********* Pull from server here *********
+
+      // ********* Update Schedule Variable *********
+
+      // ********* Push to server here *********
+    }
   });

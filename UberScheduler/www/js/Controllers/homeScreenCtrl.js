@@ -1,5 +1,35 @@
-angular.module('homeScreenCtrl', ['ui.bootstrap'])
-.controller('homeScreenCtrl', function ($scope, $stateParams, $compile, $ionicLoading) {
+angular.module('homeScreenCtrl', ['ui.bootstrap',  'ridesService', 'geocodingService', 'timeService', 'scheduledRidesService'])
+.controller('homeScreenCtrl', function ($scope, $stateParams, $compile, $ionicLoading,
+  accessSchedule, addSchedule, timeUntilDate, findNextRide, reverseGeocode) {
+  $scope.scheduleRide = function() {
+    console.log("Scheduling new ride");
+    if ($scope.marker) {
+      // Grab variables
+      var marker = $scope.marker;
+      var position = marker.getPosition();
+      var lat = position.lat();
+      var lng = position.lng();
+      console.log(lat, lng); // Debugging
+      var prickupName = reverseGeocode(lat, lng).formatted_address;
+
+      // Set variables
+      var data = {
+        time: new Date(2016, 0, 1, 18, 32, 5, 567),
+        pickupLocation: [lat, lng],
+        pickupName: pickupName,
+        dropLocation: [34.07636433, -118.4290661],
+        dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
+        repeatedDays: [false, false, true, true, false, true, false],
+        startDate: new Date(2016, 01, 01),
+        endDate: new Date(2016, 4, 01),
+        nextRide: new Date(findNextRide(new Date(2016, 2, 3, 23, 17, 9, 567), [false, true, false, true, false, true, false])),
+        product: 2
+      }
+
+      addSchedule(data);
+    }
+  };
+
   initialize = function () {
     console.log("Initializing Google Maps")
     var myLatlng = new google.maps.LatLng(34.07636433, -118.4290661);
@@ -29,13 +59,13 @@ angular.module('homeScreenCtrl', ['ui.bootstrap'])
       content: compiled[0]
     });
 
-    var marker = new google.maps.Marker({
+    $scope.marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
       title: 'Uluru (Ayers Rock)'
     });
 
-    google.maps.event.addListener(marker, 'click', function () {
+    google.maps.event.addListener($scope.marker, 'click', function () {
       infowindow.open(map, marker);
     });
 
@@ -59,7 +89,7 @@ angular.module('homeScreenCtrl', ['ui.bootstrap'])
       console.log(alat, along);
 
       // Set marker
-      var marker = new google.maps.Marker({
+      $scope.marker = new google.maps.Marker({
         position: myLatlng,
         map: $scope.map,
         title: 'Uluru (Ayers Rock)' // Don't know what this is for

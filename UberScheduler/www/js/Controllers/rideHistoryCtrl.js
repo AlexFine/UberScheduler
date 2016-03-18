@@ -1,17 +1,48 @@
 angular.module('rideHistoryCtrl', ['ui.bootstrap'])
 .controller('rideHistoryCtrl', function ($scope, $stateParams, $http) {
 
-  // Get request
+  // Create a ride
+  // Construct URL
+  var data = [
+    { name: "elat", value: "11" },
+    { name: "elong", value: "12" },
+    { name: "slong", value: "11" },
+    { name: "slat", value: "11" },
+    { name: "ukey", value: "11" },
+    { name: "time", value: "123" }
+  ];
+  var dataStr = "?";
+  for (var i = 0; i < data.length; i++) {
+    dataStr += data[i].name + "=" + data[i].value;
+    if (i != data.length - 1) { // If not the last value
+      dataStr += "&";
+    }
+  };
+  var finalUrl = "https://uberscheduler-1203.appspot.com/_ah/api/uberApi/v1/uber/rideCreate" + dataStr;
+  console.log(finalUrl)
+
+  // Call API
   $http({
     method: 'GET',
-    url: 'https://uberscheduler-1203.appspot.com/_ah/api/uberApi/v1/uber/getTime?slat=12312&slong=12342123'
+    url: finalUrl
   }).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
+      // this callback will be called asynchronously when the response is available
       console.log(response)
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
+      // called asynchronously if an error occurs or server returns response with an error status.
+      console.log(response)
+    });
+
+  // Get request - getTime
+  console.log("Getting request")
+  $http({
+    method: 'GET',
+    url: 'https://uberscheduler-1203.appspot.com/_ah/api/uberApi/v1/uber/getTime?slat=1231289&slong=12342123'
+  }).then(function successCallback(response) {
+      // this callback will be called asynchronously when the response is available
+      console.log(response)
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs or server returns response with an error status.
       console.log(response)
     });
 

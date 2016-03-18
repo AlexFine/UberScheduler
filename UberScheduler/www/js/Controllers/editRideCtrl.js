@@ -1,5 +1,5 @@
-angular.module('editRideCtrl', ['ui.bootstrap'])
-    .controller('editRideCtrl', function ($scope, $stateParams, $ionicPopup, $timeout, $compile, $ionicLoading, $http) {
+angular.module('editRideCtrl', ['ui.bootstrap', 'ridesService'])
+    .controller('editRideCtrl', function ($scope, $stateParams, $ionicPopup, $timeout, $compile, $ionicLoading, $http, findNextRide) {
         //Need to change rideEdit to editRide
 
         //WE BE STARTING THE CODE TO HAVE IT AUTO SUGGEST WHICH LOCATION TO CHOOSE

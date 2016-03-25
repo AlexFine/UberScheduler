@@ -37,6 +37,14 @@
 
     <!-- Google App Engine -->
     <script src="https://apis.google.com/js/client.js?onload=init"></script>
+    <script>
+      var init = function() {
+        var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api/';
+        // var ROOT = 'http://localhost:8080/_ah/api'
+        gapi.client.load('uberApi', 'v1', function () {
+        }, ROOT);
+      }
+    </script>
 
     <!-- Non-Angular Javascript Files -->
     <script src="js/gettimefromadam.js"></script>

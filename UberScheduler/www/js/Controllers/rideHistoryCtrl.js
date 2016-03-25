@@ -14,10 +14,6 @@ angular.module('rideHistoryCtrl', ['ui.bootstrap', 'ridesService'])
   }
 
 
-  var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api/';
-  // var ROOT = 'http://localhost:8080/_ah/api'
-  gapi.client.load('uberApi', 'v1', function () {
-  }, ROOT);
 
       console.log("success")
       gapi.client.uberApi.ride.creates(

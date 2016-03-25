@@ -96,8 +96,9 @@ class UberApi(remote.Service):
     def returnRide(self, request):
         return returnRideApi(request)
 
-    @endpoints.method(rideCreate, keySearch, path='datastore/createRide', http_method='POST', name='ride.create')  # defines url and type of request
+    @endpoints.method(rideCreate, keySearch, path='datastore/createRide', http_method='POST', name='ride.creates')  # defines url and type of request
     def createRide(self, request):
+        # return createRideApi()
         return createRideApi(request)
     @endpoints.method(userReturn, Greeting,
                         path='datastore/allReturnRide', http_method='POST',
@@ -134,7 +135,7 @@ class UberApi(remote.Service):
 
     @endpoints.method(createUser, keySearch,
                       path='datastore/usercreate', http_method='POST',
-                      name='user.create')
+                      name='user.creates')
     def userCreate(self, request):
         return userCreateApi(request)
     """time Api area"""

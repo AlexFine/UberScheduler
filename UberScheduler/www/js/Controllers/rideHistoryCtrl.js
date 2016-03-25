@@ -6,22 +6,28 @@ angular.module('rideHistoryCtrl', ['ui.bootstrap', 'ridesService'])
     "elat": 11,
     "elong": 12,
     "slong": 21,
-    "slat": 123,
-    "ukey": 12,
-    "time": "123"
+    "slat": 12,
+    "ukey": 5066549580791808,
+    "date": "21",
+    "time": "12",
+    "userKey":5066549580791808
   }
 
 
   var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api/';
+  // var ROOT = 'http://localhost:8080/_ah/api'
   gapi.client.load('uberApi', 'v1', function () {
-      console.log("success")
-      gapi.client.uberApi.ride.return({
-          data
-      }).execute(function (resp) {
+  }, ROOT);
 
+      console.log("success")
+      gapi.client.uberApi.ride.creates(
+          data
+
+      ).execute(function (resp) {
+        console.log("success")
           console.log(resp);
       });
-  }, ROOT);
+
 
 
   // Google App Engine

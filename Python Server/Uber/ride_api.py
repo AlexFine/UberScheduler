@@ -19,6 +19,7 @@ def returnRideApi(request):
         return uber_api.Ride(ukey=ride[0], slong=ride[1], slat=ride[2], elong=ride[3], elat=ride[4], time=ride[5])
 def createRideApi(request):
         ride = datastores.createRide(request.ukey, request.slong, request.slat, request.elong, request.elat, request.time, request.userKey)
+        print ride
         return uber_api.keySearch(key=int(ride))
 def allReturnRideApi(request):
         users = datastores.returnAllRides(request.key)  # pings data store api

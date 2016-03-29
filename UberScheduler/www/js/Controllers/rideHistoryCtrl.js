@@ -14,17 +14,17 @@ angular.module('rideHistoryCtrl', ['ui.bootstrap', 'ridesService'])
   }
 
 
+$scope.testapi = function() {
+  
+  console.log("success")
+  gapi.client.uberApi.ride.creates(
+    data
+  ).execute(function (resp) {
+    console.log("success")
+    console.log(resp);
+  });
 
-      console.log("success")
-      gapi.client.uberApi.ride.creates(
-          data
-
-      ).execute(function (resp) {
-        console.log("success")
-          console.log(resp);
-      });
-
-
+}
 
   // Google App Engine
   // var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api';

@@ -8,11 +8,11 @@ angular.module('geocodingService', ['ionic', 'ngCordova'])
         lat: parseFloat(lat),
         lng: parseFloat(lng)
       }
-      // console.log(locationStr, "Geocode lookup started");
+      console.log(locationStr, "Geocode lookup started");
       geocoder.geocode({
         'location': latlng
       }, function (results, status) {
-        // console.log("Lookup finished")
+        console.log("Lookup finished")
         if (status === google.maps.GeocoderStatus.OK) {
           if (results[1]) {
             var address = results[1];

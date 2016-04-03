@@ -38,5 +38,25 @@ angular.module('scheduledRidesService', ['ionic', 'ngCordova', 'ridesService'])
       // ********* Update Schedule Variable *********
 
       // ********* Push to server here *********
+      var data = { // Data
+        "elat": data.dropLocation[0],
+        "elong": data.dropLocation[1],
+        "slong": data.pickupLocation[0],
+        "slat": data.pickupLocation[1],
+        "ukey": 5066549580791808,
+        "date": data.nextRide,
+        "time": data.time,
+        "userKey": 5066549580791808
+      }
+
+      $scope.testapi = function() {
+        console.log("success")
+        gapi.client.uberApi.ride.creates(
+          data
+        ).execute(function (resp) {
+          console.log("success")
+          console.log(resp);
+        });
+      }
     }
   });

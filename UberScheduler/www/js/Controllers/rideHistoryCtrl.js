@@ -1,57 +1,20 @@
-angular.module('rideHistoryCtrl', ['ui.bootstrap', 'ridesService'])
-.controller('rideHistoryCtrl', function ($scope, $stateParams, $http) {
+angular.module('rideHistoryCtrl', ['ui.bootstrap', 'ridesService', 'scheduledRidesService', 'ridesService', 'geocodingService'])
+.controller('rideHistoryCtrl', function ($scope, $stateParams, $http, addSchedule, findNextRide, reverseGeocode) {
 
-  // Data
-  data = {
-    "elat": 11,
-    "elong": 12,
-    "slong": 21,
-    "slat": 12,
-    "ukey": 5066549580791808,
-    "date": "21",
-    "time": "12",
-    "userKey":5066549580791808
-  }
+    var lat = 34.07636433;
+    var lng = -118.4290661;
 
-
-$scope.testapi = function() {
-  
-  console.log("success")
-  gapi.client.uberApi.ride.creates(
-    data
-  ).execute(function (resp) {
-    console.log("success")
-    console.log(resp);
-  });
-
-}
-
-  // Google App Engine
-  // var ROOT = 'https://uberscheduler-1203.appspot.com/_ah/api';
-  // gapi.client.load('uberApi', 'v1', function() {
-  //   console.log("Loaded Google App Engine API")
-  // }, ROOT);
-  //
-  // gapi.client.uberApi.ride.create.insert({'outcome': 'WON'}).execute(function(resp) {
-  //   console.log(resp);
-  // });
-
-  // Post request
-  //
-  // var passingVar = {
-  //   "date": "112312",
-  //   "elong": 213,
-  //   "elat": 2131,
-  //   "time": "12231",
-  //   "slong": 21312,
-  //   "ukey": "asd",
-  //   "slat": 21312
-  // };
-  // var url = "https://uberscheduler-1203.appspot.com/_ah/api/uberApi/v1/datastore/createRide";
-  //
-  // // For creating a ride
-  // $.post(url, passingVar, function(data, status) {
-  //     alert("Data: " + data + "\nStatus: " + status);
-  //   }
-  // );
+    var data = {
+      time: new Date(2016, 0, 1, 18, 32, 5, 567),
+      pickupLocation: [lat, lng],
+      pickupName: reverseGeocode(lat, lng).formatted_address,
+      dropLocation: [34.07636433, -118.4290661],
+      dropName: ["10236 Charing Cross Rd", "Los Angeles", "CA", "90024"],
+      repeatedDays: [false, false, true, true, false, true, false],
+      startDate: new Date(2016, 01, 01),
+      endDate: new Date(2016, 4, 01),
+      nextRide: new Date(findNextRide(new Date(2016, 2, 3, 23, 17, 9, 567), [false, true, false, true, false, true, false])),
+      product: 2
+    }
+    addSchedule(data)
 })
